@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "install": "^0.13.0",
     "sequelize": "^6.37.8"
   }
 }

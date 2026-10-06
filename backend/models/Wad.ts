@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes, UUIDV4 } from "sequelize";
-//npm i install sequelize  
+//npm i sequelize
 
 export default function WadModel(
     sequelize: Sequelize,

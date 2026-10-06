@@ -1,31 +1,33 @@
 import { Sequelize, DataTypes } from 'sequelize';
 
-export default function WadModel(
+export default function CommentModel(
     sequelize: Sequelize,
     dataTypes: typeof DataTypes
 ) {
-    const Users = sequelize.define(
-        "User", {
+    const Comments = sequelize.define(
+        "Comment", {
             CommentID: { 
                 type: dataTypes.UUIDV4 
             },
             CommentContent: {
-                type: dataTypes.STRING
+                type: dataTypes.STRING,
+                allowNull: false
             },
             CommentListID: {
-                type: dataTypes.STRING
+                type: dataTypes.UUIDV4
             },
             CommentDate: {
-                type: dataTypes.DATEONLY
+                type: dataTypes.DATEONLY,
+                allowNull: false
             },
             CommentRepliesID: {
-                type: dataTypes.STRING
+                type: dataTypes.UUIDV4
             },
             WadID: {
-                type: dataTypes.STRING
+                type: dataTypes.UUIDV4
             },
             UserID: {
-                type: dataTypes.STRING
+                type: dataTypes.UUIDV4
             }
         }
     )
