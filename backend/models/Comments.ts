@@ -6,7 +6,27 @@ export default function WadModel(
 ) {
     const Users = sequelize.define(
         "User", {
-            id: dataTypes.UUIDV4
+            CommentID: { 
+                type: dataTypes.UUIDV4 
+            },
+            CommentContent: {
+                type: dataTypes.STRING
+            },
+            CommentListID: {
+                type: dataTypes.STRING
+            },
+            CommentDate: {
+                type: dataTypes.DATEONLY
+            },
+            CommentRepliesID: {
+                type: dataTypes.STRING
+            },
+            WadID: {
+                type: dataTypes.STRING
+            },
+            UserID: {
+                type: dataTypes.STRING
+            }
         }
     )
 }
