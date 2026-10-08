@@ -1,6 +1,9 @@
 {
   "dependencies": {
-    "express": "^5.2.1",
-    "sequelize": "^6.37.8"
+    "drizzle-orm": "^0.45.3"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.11",
+    "tsx": "^4.23.15"
   }
 }
