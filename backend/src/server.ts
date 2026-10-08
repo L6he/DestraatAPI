@@ -2,8 +2,19 @@ import express, { type Request, type Response, type NextFunction } from "express
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const wads = [
+    { id: 1, name: "Valley.wad", rating:4},
+    { id: 2, name: "Eviternity.wad", rating:5},
+    { id: 3, name: "LostCivilisation.wad", rating:5}
+]
+
 app.get("/", (req:Request, res: Response) => {
     res.send("Töötab. Jah töötab.");
+});
+
+app.get("/wads", (req:Request, res: Response) => {
+    const result = wads.map(wad => ({ id: wad.id, name: wad.name }));
+    res.send(result);
 });
 
 app.listen(PORT, () => {
