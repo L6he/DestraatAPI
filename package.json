@@ -1,9 +1,29 @@
 {
   "dependencies": {
-    "drizzle-orm": "^0.45.3"
+    "drizzle-orm": "^0.45.3",
+    "express": "^5.2.1",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "drizzle-kit": "^0.31.11",
     "tsx": "^4.23.15"
-  }
+  },
+  "name": "destraatapi",
+  "version": "1.0.0",
+  "description": "HTML/CSS/JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L6he/DestraatAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/L6he/DestraatAPI/issues"
+  },
+  "homepage": "https://github.com/L6he/DestraatAPI#readme"
 }
