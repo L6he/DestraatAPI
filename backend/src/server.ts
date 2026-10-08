@@ -1,9 +1,9 @@
-import express, { type Request, type Response, type NextFunction } from "express";
+import express, { type Request, type Response, type NextFunction } from "express"; //"3 high severity vulnerabilities" oops...
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req:Request, res: Response) => {
-    res.send("Töötab?");
+    res.send("Töötab. Jah töötab.");
 });
 
 app.listen(PORT, () => {
