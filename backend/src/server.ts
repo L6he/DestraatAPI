@@ -1,5 +1,4 @@
 import express, { type Request, type Response, type NextFunction } from "express";
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
