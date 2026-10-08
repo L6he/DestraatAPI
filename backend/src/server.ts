@@ -23,15 +23,18 @@ app.get("/wads", (req:Request, res: Response) => {
 
 app.get("/wads/:id", (req:Request, res: Response) => {
     if (!req.params.id) { //allegedly obsolete
-        return res.status(400).send({error: "ID required"});
+        res.status(400).send({error: "ID required"});
+        return
     }
     const wadId = req.params.id ? 
         typeof req.params.id === "string" ?
-        parseInt(req.params.id) : parseInt(req.params.id[0]!)
+            parseInt(req.params.id) 
+            : parseInt(req.params.id[0]!)
         : null;
-    const result = wads.filter(wad => wad.id === wadId);
-    if (typeof result[0] === 'undefined') {
-        return res.status(404).send({error: "WAD not found" });
+    const result = wads.filter(wad => wad.id === wadId)[0];
+    if (result === undefined) {
+        res.status(404).send({error: "WAD not found" });
+        return 
     }
     res.send(result);
 });
@@ -40,7 +43,7 @@ app.post("/wads", (req:Request, res: Response) => {
     const name = req.body?.name as string;
     const rating = req.body?.rating !== undefined ? parseInt(req.body.rating): undefined;
     if (!name) {
-        res.status(400).send({ error: 'Missing required parameter: name' });
+        res.status(400).send({ error: "Missing required parameter: 'name'" });
         console.log("name:", name);
         return
     }
@@ -56,8 +59,8 @@ app.post("/wads", (req:Request, res: Response) => {
     }
     wads.push(newWad);
     res.status(201)
-    .location(`http://localhost:${PORT}/wads/` + (newWad.id))
-    .send(newWad);
+        .location(`http://localhost:${PORT}/wads/` + (newWad.id))
+        .send(newWad);
 });
 
 app.listen(PORT, () => {
