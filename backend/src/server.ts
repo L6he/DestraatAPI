@@ -1,12 +1,15 @@
 import express, { type Request, type Response, type NextFunction } from "express"; //"3 high severity vulnerabilities" oops...
 import { error } from "node:console";
+import type { InspectColor } from "node:util";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const wads = [
-    { id: 1, name: "Valley.wad", rating:4},
-    { id: 5, name: "Eviternity.wad", rating:5},
-    { id: 10, name: "LostCivilisation.wad", rating:5}
+let nextWadId = 0;
+const wads: {id: number, name: string, rating?:number|undefined}[] = [
+    { id: nextWadId++, name: "Valley.wad"},
+    { id: nextWadId++, name: "Eviternity.wad", rating:5},
+    { id: nextWadId++, name: "LostCivilisation.wad", rating:5},
+    { id: nextWadId++, name: "btsx.wad", rating:5},
 ]
 
 app.get("/", (req:Request, res: Response) => {
@@ -31,6 +34,30 @@ app.get("/wads/:id", (req:Request, res: Response) => {
         return res.status(404).send({error: "WAD not found" });
     }
     res.send(result);
+});
+
+app.post("/wads", (req:Request, res: Response) => {
+    const name = req.body?.name as string;
+    const rating = req.body?.rating !== undefined ? parseInt(req.body.rating): undefined;
+    if (!name) {
+        res.status(400).send({ error: 'Missing required parameter: name' });
+        console.log("name:", name);
+        return
+    }
+    if (Number.isNaN(rating)) {
+        res.status(400).send({ error: "Parameter 'rating' must be a number" });
+        return;
+    }
+
+    const newWad = {
+        id: nextWadId++,
+        name: name,
+        rating: rating
+    }
+    wads.push(newWad);
+    res.status(201)
+    .location(`http://localhost:${PORT}/wads/` + (newWad.id))
+    .send(newWad);
 });
 
 app.listen(PORT, () => {
