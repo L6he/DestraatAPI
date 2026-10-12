@@ -44,6 +44,6 @@
     "skipLibCheck": true,
   },
   "include": ["src/**/*"],
-  "include": ["..."]
+  "include": ["..."],
   "exclude": ["node_modules"]
 }
