@@ -25,6 +25,9 @@ export default function WadModel(
             ImageURL: {
                 type: dataTypes.STRING
             },
+            Downloads: {
+                type: dataTypes.INTEGER
+            },
             Comments: {
                 type: dataTypes.ARRAY(dataTypes.STRING)
             },
