@@ -32,6 +32,17 @@ const WadsController = {
         return res
         .location(`${Utilities.getBaseURL(req)}/wads/
         ${createdWad.id}`).sendStatus(201);
+    },
+    async getAll(req: Request, res: Response) {
+        const wads = await db.wads.findAll();
+        console.log("getAll: " + wads);
+        return res
+        .status(200)
+        .send(
+            wads.map(
+                ({Id, WadName}) => {return {Id, WadName}}
+            )
+        )
     }
 }
 
