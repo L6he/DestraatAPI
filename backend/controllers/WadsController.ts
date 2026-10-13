@@ -88,6 +88,19 @@ const WadsController = {
         ${wadToBeModified.id}`)
         .status(201)
         .send(wadToBeModified);
+    },
+    async deleteByID(req: Request, res: Response) {
+        const wadToBeDeleted = await this.getByID(req, res);
+        if (!wadToBeDeleted) {
+            return;
+        }
+        await wadToBeDeleted.destroy(); //sequelize-i orm-i käsud
+        return res.status(204)
+        .send(
+            {
+                error: "No content."
+            }
+        );
     }
 }
 
