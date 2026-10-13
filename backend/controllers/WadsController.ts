@@ -45,7 +45,7 @@ const WadsController = {
         )
     },
     async getByID(req: Request, res: Response) {
-        const wadID: string = req.params.Id;
+        let wadID: String = req.params.Id as String;
         console.log(wadID);
         const wad = await db.wads.findByPk(wadID);
         if (!wad) {
@@ -57,6 +57,37 @@ const WadsController = {
             return null;
         }
         return wad;
+    },
+    async modifyByID(req: Request, res: Response) {
+        const wadToBeModified = await this.getByID(req, res);
+        if (!wadToBeModified) {
+            return;
+        }
+        if (!req.body.WadName || 
+            !req.body.WadDescription ||
+            !req.body.ReleaseDate ||
+            !req.body.CategoryID ||
+            !req.body.ImageURL ||
+            !req.body.Comments
+        ) {
+            return res.status(400).send(
+                {
+                    error: "Missing parameters, please review data"
+                }
+            );
+        }
+        wadToBeModified.WadName = req.body.WadName;
+        wadToBeModified.WadDescription = req.body.WadDescription;
+        wadToBeModified.ReleaseDate = req.body.ReleaseDate;
+        wadToBeModified.CategoryID = req.body.CategoryID;
+        wadToBeModified.ImageURL = req.body.ImageURL;
+        wadToBeModified.Comments = req.body.Comments;
+
+        await wadToBeModified.save();
+        return res.location(`${Utilities.getBaseURL(req)}/wads/
+        ${wadToBeModified.id}`)
+        .status(201)
+        .send(wadToBeModified);
     }
 }
 
