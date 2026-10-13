@@ -18,7 +18,7 @@ export default (app: Express): void => {
     .get(UsersController.getAll)
     .post(UsersController.create);
 
-    app.route("/wads:id")
+    app.route("/users:id")
     .get(UsersController.getByID)
     .delete(UsersController.deleteByID)
     .put(UsersController.modifyByID);
