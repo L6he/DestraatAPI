@@ -43,6 +43,20 @@ const WadsController = {
                 ({Id, WadName}) => {return {Id, WadName}}
             )
         )
+    },
+    async getByID(req: Request, res: Response) {
+        const wadID: string = req.params.Id;
+        console.log(wadID);
+        const wad = await db.wads.findByPk(wadID);
+        if (!wad) {
+            res.status(400).send(
+                {
+                    error: `Wad with ID ${wadID} not found.`
+                }
+            )
+            return null;
+        }
+        return wad;
     }
 }
 
