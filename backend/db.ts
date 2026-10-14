@@ -2,6 +2,7 @@ import {Sequelize, DataTypes} from 'sequelize';
 
 //modelite pathid
 import WadModel from "../backend/models/Wad.ts";
+import UserModel from "../backend/models/User.ts";
 
 //sequelizei andmebaasi ühendusanddmed
 const sequelize = new Sequelize(
@@ -30,7 +31,8 @@ const connect = async (): Promise<void> => {
 const db = {
     Sequelize, 
     sequelize,
-    wads: require("../backend/models/Wad.ts")(sequelize, DataTypes)
+    wads: require("../backend/models/Wad.ts")(sequelize, DataTypes),
+    users: require("../backend/models/User.ts")(sequelize, DataTypes)
 };
 
 //sünkroonmeetod
