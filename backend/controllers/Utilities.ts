@@ -7,7 +7,14 @@ const Utilities = {
         return `${req.protocol}://${req.get("host")}`;
     },
     async gimmePassword(password: string): Promise<string>  {
-        return null; //hetkel
+        const saltRounds = 10;
+        return await bcrypt.hash(password, saltRounds);
+    },
+    async letMeIn(
+        givenPassword: string,
+        givenHash: string
+    ): Promise<boolean> {
+        return await bcrypt.compare(givenPassword, givenHash);
     }
 }
 
