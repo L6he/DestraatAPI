@@ -21,6 +21,33 @@ const CommentsController = {
         }
     },
 
+    async getById(req: Request, res: Response) {
+        const commentId = req.params.id;
+
+        if (!commentId) {
+            return res.status(400).send({
+                error: "Missing comment ID."
+            });
+        }
+
+        try {
+            const comment = await db.comments.findByPk(commentId);
+
+            if (!comment) {
+                return res.status(404).send({
+                    error: "Comment not found."
+                });
+            }
+
+            return res.status(200).json(comment);
+        } catch (error) {
+            console.error("Error fetching comment details:", error);
+            return res.status(500).send({
+                error: "An error occurred while fetching comment details."
+            });
+        }
+    },
+
     async create(req: Request, res: Response) {
         if (
             !req.body.CommentTitle ||
@@ -59,7 +86,6 @@ const CommentsController = {
         }
     },
 
-    // Probleemid branchidega kadus ara aga siin on remove funktsioon, mis kustutab kommentaari andmebaasist
     async remove(req: Request, res: Response) {
         const commentId = req.params.id;
 
