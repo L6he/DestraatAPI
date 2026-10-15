@@ -87,6 +87,39 @@ const CommentsController = {
                 error: "An error occurred while deleting the comment."
             });
         }
+    },
+
+    async hide(req: Request, res: Response) {
+        const commentId = req.params.id;
+
+        if (!commentId) {
+            return res.status(400).send({
+                error: "Missing comment ID."
+            });
+        }
+
+        try {
+            const comment = await db.comments.findByPk(commentId);
+
+            if (!comment) {
+                return res.status(404).send({
+                    error: "Comment not found."
+                });
+            }
+
+            comment.CommentStatus = "hidden";
+            await comment.save();
+
+            return res.status(201).send({
+                message: "Comment hidden successfully",
+                data: comment
+            });
+        } catch (error) {
+            console.error("Error hiding comment:", error);
+            return res.status(500).send({
+                error: "An error occurred while hiding the comment."
+            });
+        }
     }
 };
 
