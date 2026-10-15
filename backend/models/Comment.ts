@@ -4,31 +4,46 @@ export default function CommentModel(
     sequelize: Sequelize,
     dataTypes: typeof DataTypes
 ) {
-    const Comments = sequelize.define(
+    return sequelize.define(
         "Comment", {
             CommentID: { 
-                type: dataTypes.UUIDV4 
+                type: dataTypes.UUID,
+                primaryKey: true,
+                defaultValue: dataTypes.UUIDV4
             },
-            CommentContent: {
+            CommentTitle: {
                 type: dataTypes.STRING,
                 allowNull: false
             },
-            CommentListID: {
-                type: dataTypes.UUIDV4
+            CommentContent: {
+                type: dataTypes.TEXT,
+                allowNull: false
+            },
+            Author: {
+                type: dataTypes.STRING,
+                allowNull: false
             },
             CommentDate: {
                 type: dataTypes.DATEONLY,
                 allowNull: false
             },
-            CommentRepliesID: {
-                type: dataTypes.UUIDV4
+            CommentListID: {
+                type: dataTypes.STRING
             },
-            WadID: {
-                type: dataTypes.UUIDV4
+            CommentsID: {
+                type: dataTypes.STRING
             },
-            UserID: {
-                type: dataTypes.UUIDV4
+            CommentLikes: {
+                type: dataTypes.INTEGER,
+                defaultValue: 0
+            },
+            CommentStatus: {
+                type: dataTypes.STRING,
+                defaultValue: "active"
+            },
+            CommentedWAD: {
+                type: dataTypes.STRING
             }
         }
-    )
+    );
 }
