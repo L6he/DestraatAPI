@@ -59,6 +59,7 @@ const CommentsController = {
         }
     },
 
+    // Probleemid branchidega kadus ara aga siin on remove funktsioon, mis kustutab kommentaari andmebaasist
     async remove(req: Request, res: Response) {
         const commentId = req.params.id;
 
