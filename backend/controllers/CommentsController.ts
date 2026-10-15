@@ -3,7 +3,25 @@ import { db } from "../db.ts";
 import { v7 as uuidv7 } from "uuid";
 
 const CommentsController = {
-   async create(req: Request, res: Response) {
+    async getAll(req: Request, res: Response) {
+        try {
+            const comments = await db.comments.findAll();
+            
+            const formattedComments = comments.map((comment: any) => ({
+                name: comment.Author,
+                txt: comment.CommentContent
+            }));
+
+            return res.status(200).json(formattedComments);
+        } catch (error) {
+            console.error("Error fetching comments:", error);
+            return res.status(500).send({
+                error: "An error occurred while fetching comments."
+            });
+        }
+    },
+
+    async create(req: Request, res: Response) {
         if (
             !req.body.CommentTitle ||
             !req.body.Author ||
@@ -14,7 +32,7 @@ const CommentsController = {
                 error: "Missing parameters, please review data."
             });
         }
-            
+
         try {
             const newComment = await db.comments.create({ 
                 CommentID: uuidv7(),
@@ -37,6 +55,35 @@ const CommentsController = {
             console.error("Error creating comment:", error);
             return res.status(500).send({
                 error: "An error occurred while creating the comment."
+            });
+        }
+    },
+
+    async remove(req: Request, res: Response) {
+        const commentId = req.params.id;
+
+        if (!commentId) {
+            return res.status(404).send({
+                error: "Missing comment ID."
+            });
+        }        
+
+        try {
+            const comment = await db.comments.findByPk(commentId);
+
+            if (!comment) {
+                return res.status(404).send({
+                    error: "Comment not found."
+                });
+            }
+
+            await comment.destroy();
+
+            return res.status(204).send(comment);
+        } catch (error) {
+            console.error("Error deleting comment:", error);
+            return res.status(500).send({
+                error: "An error occurred while deleting the comment."
             });
         }
     }
