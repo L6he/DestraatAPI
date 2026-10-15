@@ -11,7 +11,7 @@ const CommentsController = {
         }
             
         try {
-            const newComment = await db.Comment.create({
+            const newComment = await db.comments.create({ 
                 CommentID: uuidv7(),
                 CommentContent: req.body.CommentContent,
                 CommentListID: req.body.CommentListID || null,

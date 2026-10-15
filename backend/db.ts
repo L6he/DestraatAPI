@@ -32,7 +32,8 @@ const db = {
     Sequelize, 
     sequelize,
     wads: require("../backend/models/Wad.ts")(sequelize, DataTypes),
-    users: require("../backend/models/User.ts")(sequelize, DataTypes)
+    users: require("../backend/models/User.ts")(sequelize, DataTypes),
+    comments: require("../backend/models/Comment.ts")(sequelize, DataTypes)
 };
 
 //sünkroonmeetod
