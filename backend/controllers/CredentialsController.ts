@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, response, Response } from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
@@ -45,7 +45,16 @@ const CredentialsController = {
         return credential;
     },
 
-    
+    async getAll(req: Request, res: Response) {
+        const credentials = await db.credentials.findAll();
+        console.log("getAll: " + credentials);
+        return res.status(200)
+        .send(
+            credentials.map(
+                ({Id, UserType}) => {return {Id, UserType}} //Id or id?
+            )
+        );
+    },
 }
 
 export default CredentialsController;
