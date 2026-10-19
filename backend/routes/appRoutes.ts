@@ -3,6 +3,7 @@
 import { Express } from "express";
 import WadsController from "../controllers/WadsController.ts";
 import UsersController from "../controllers/UsersController.ts";
+import CredentialsController from "../controllers/CredentialsController.ts";
 
 export default (app: Express): void => {
     app.route("/wads")
