@@ -28,7 +28,22 @@ const CredentialsController = {
         return res
         .location(`${Utilities.getBaseURL(req)}/credentials/
         ${addedCredential.id}`).sendStatus(201);
-    }
+    },
+    
+    async getByID(req: Request, res: Response) {
+        let credentialID: String = req.params.id as String //lack of capitalisation here on id may be problematic
+        console.log(credentialID); //VERY SECURE
+        const credential = await db.credentials.findByPk(credentialID);
+        if (!credential) {
+            res.status(404).send(
+                {
+                    error: `Credential with id ${credentialID} not found.`
+                }
+            )
+            return null;
+        }
+        return credential;
+    },
 }
 
 export default CredentialsController;
