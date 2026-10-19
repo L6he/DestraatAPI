@@ -26,7 +26,7 @@ export default (app: Express): void => {
 
     //Credentials
     app.route("/credentials")
-    .get(CredentialsController.getByID)
+    .get(CredentialsController.getAll)
     .post(CredentialsController.create);
 
     app.route("/credentials:id")

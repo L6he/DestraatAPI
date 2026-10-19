@@ -44,6 +44,8 @@ const CredentialsController = {
         }
         return credential;
     },
+
+    
 }
 
 export default CredentialsController;
