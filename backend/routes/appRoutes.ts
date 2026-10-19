@@ -22,4 +22,14 @@ export default (app: Express): void => {
     .get(UsersController.getByID)
     .delete(UsersController.deleteByID)
     .put(UsersController.modifyByID);
+
+    //Credentials
+    app.route("/credentials")
+    .get(CredentialsController.getByID)
+    .post(CredentialsController.create);
+
+    app.route("/credentials:id")
+    .get(CredentialsController.getByID)
+    .delete(CredentialsController.deleteByID)
+    .put(CredentialsController.modifyByID);
 }
