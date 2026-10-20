@@ -85,6 +85,17 @@ const CredentialsController = {
         .status(201)
         .send(credentialToBeModified);
     },
+
+    async deleteByID(req: Request, res: Response) {
+        const credentialToBeDeleted = await this.getByID(req, res);
+        if (!credentialToBeDeleted) {
+            return res.status(404).send(
+                {
+                    error: "Credential with this ID not found"
+                }
+            );
+        }
+    }
 }
 
 export default CredentialsController;
