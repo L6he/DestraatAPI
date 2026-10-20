@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid"; //npm install uuid@latest
-import { error } from "console";
 
 const WadsController = {
     async create(req: Request, res: Response) {
