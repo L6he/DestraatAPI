@@ -55,6 +55,36 @@ const CredentialsController = {
             )
         );
     },
+
+    async modifyByID(req: Request, res: Response) {
+        const credentialToBeModified = await this.getByID(req, res);
+        if (!credentialToBeModified) {
+            return res.status(404).send(
+                {
+                    error: "Credential with this ID not found"
+                }
+            );
+        }
+        if (!req.body.UserID || 
+            !req.body.Credentials ||
+            !req.body.UserType
+        ) {
+            return res.status(400).send(
+                {
+                    error: "Missing parameters, please review data"
+                }
+            );
+        }
+        credentialToBeModified.UserID = req.body.UserID;
+        credentialToBeModified.Credentials = req.body.Credentials;
+        credentialToBeModified.UserType = req.body.UserType;
+
+        await credentialToBeModified.save();
+        return res.location(`${Utilities.getBaseURL(req)}/credentials/
+        ${credentialToBeModified.id}`)
+        .status(201)
+        .send(credentialToBeModified);
+    },
 }
 
 export default CredentialsController;
