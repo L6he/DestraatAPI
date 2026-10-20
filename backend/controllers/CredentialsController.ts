@@ -91,11 +91,17 @@ const CredentialsController = {
         if (!credentialToBeDeleted) {
             return res.status(404).send(
                 {
-                    error: "Credential with this ID not found"
+                    error: "Credential with this ID not found."
                 }
             );
         }
-    }
+        await credentialToBeDeleted.destroy();
+        return res.status(204).send(
+            {
+                error: "No content."
+            }
+        );
+    },
 }
 
 export default CredentialsController;
