@@ -4,6 +4,8 @@ import {Sequelize, DataTypes} from 'sequelize';
 import WadModel from "../backend/models/Wad.ts";
 import UserModel from "../backend/models/User.ts";
 import CredentialModel from "../backend/models/Credential.ts";
+import OwnershipModel from "../backend/models/Ownership.ts";
+import { foreignKey } from 'drizzle-orm/gel-core';
 
 //sequelizei andmebaasi ühendusanddmed
 const sequelize = new Sequelize(
@@ -35,8 +37,16 @@ const db = {
     wads: require("../backend/models/Wad.ts")(sequelize, DataTypes),
     users: require("../backend/models/User.ts")(sequelize, DataTypes),
     comments: require("../backend/models/Comment.ts")(sequelize, DataTypes),
-    credentials: require("../backend/models/Credential.ts")(sequelize, DataTypes)
-};
+    credentials: require("../backend/models/Credential.ts")(sequelize, DataTypes),
+    ownerships: require("../backend/models/Ownership.ts")(sequelize, DataTypes)
+}; 
+//trying to implement foreign keys
+db.ownerships = require("../backend/models/Ownership.ts")(sequelize, DataTypes, db.wads, db.users)
+db.wads.belongsToMany(db.users, {through: db.ownerships as "UserID"}); //possibly UserId or userId etc.
+db.users.belongsTo(db.wads, {through: db.ownerships as "WadID"}); //possibly GameId or gameId etc.
+
+db.users.hasMany(db.ownerships, {foreignKey: "UserID" as "WadID"});
+db.ownerships.belongsTo(db.users, {foreignKey: "UserID" as "WadID"});
 
 //sünkroonmeetod
 const sync = async(): Promise<void> => {
