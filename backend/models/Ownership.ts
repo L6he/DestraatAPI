@@ -6,15 +6,29 @@ export default function OwnershipModel(
 ) {
     const Ownership = sequelize.define(
         "Ownership", {
-            OwnershipID: { 
+            id: { 
                 type: dataTypes.UUIDV4 
             },
-            WadID: {
-                type: dataTypes.UUIDV4
+            OwnershipName: {
+                type: dataTypes.STRING,
+                allowNull: false
+            },
+            OwnershipDescription: {
+                type: dataTypes.STRING,
+                allowNull: true
+            },
+            //foreign keys, not yet implemented
+            Wads: {
+                type: dataTypes.ARRAY(dataTypes.STRING)
+            },
+            WadID: { //not yet in the erd, TODO: either remove this or update the erd to include it
+                type: dataTypes.ARRAY(dataTypes.UUID),
+                allowNull: false
             },
             UserID: {
-                type: dataTypes.UUIDV4
-            }
+                type: dataTypes.UUID,
+                allowNull: false
+            },
         }
     )
 }
