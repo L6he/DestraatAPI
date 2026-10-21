@@ -4,6 +4,7 @@ import { Express } from "express";
 import WadsController from "../controllers/WadsController.ts";
 import UsersController from "../controllers/UsersController.ts";
 import CredentialsController from "../controllers/CredentialsController.ts";
+import WadCommentsController from "../controllers/WadCommentsController.ts";
 
 export default (app: Express): void => {
     app.route("/wads")
@@ -33,4 +34,8 @@ export default (app: Express): void => {
     .get(CredentialsController.getByID)
     .delete(CredentialsController.deleteByID)
     .put(CredentialsController.modifyByID);
+
+    app.route("/wadcomments/")
+    //get all
+    .post(WadCommentsController.create)
 }

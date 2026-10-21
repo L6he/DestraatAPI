@@ -6,6 +6,9 @@ export default function WadCommentsModel(
 ) {
     const WadComments = sequelize.define(
         "WadComments", {
+            id: {
+                type: dataTypes.UUIDV4
+            },
             WadID: {
                 type: dataTypes.UUIDV4
             },
@@ -25,4 +28,5 @@ export default function WadCommentsModel(
         }
     )
     console.log(WadComments === sequelize.models.WadComments);
+    return WadComments
 }

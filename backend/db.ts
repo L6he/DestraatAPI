@@ -4,6 +4,10 @@ import {Sequelize, DataTypes} from 'sequelize';
 import WadModel from "../backend/models/Wad.ts";
 import UserModel from "../backend/models/User.ts";
 import CredentialModel from "../backend/models/Credential.ts";
+import WadCommentsModel from "../backend/models/WadComments.ts";
+import { foreignKey } from 'drizzle-orm/gel-core';
+import CommentModel from './models/Comment.ts';
+
 
 //sequelizei andmebaasi ühendusanddmed
 const sequelize = new Sequelize(
@@ -28,15 +32,37 @@ const connect = async (): Promise<void> => {
         console.error("db connection error", error)
     }
 }
+const _Wad = WadModel(sequelize, DataTypes)
+const _User = UserModel(sequelize, DataTypes)
+const _WadComments = WadCommentsModel(sequelize, DataTypes)
+const _Comments = CommentModel(sequelize, DataTypes)
+const _Credentials = CredentialModel(sequelize, DataTypes)
+
+
+
 //andmebaasi instants ja seostused
+_User.hasMany(_WadComments, {foreignKey: "WadId" as "WadCommentsId"})
+_WadComments.belongsTo(_User ,{foreignKey: "WadId" as "Wad"})
+
 const db = {
     Sequelize, 
     sequelize,
-    wads: require("../backend/models/Wad.ts")(sequelize, DataTypes),
-    users: require("../backend/models/User.ts")(sequelize, DataTypes),
-    comments: require("../backend/models/Comment.ts")(sequelize, DataTypes),
-    credentials: require("../backend/models/Credential.ts")(sequelize, DataTypes)
+    wads: _Wad,
+    users: _User,
+    // comments: require("../backend/models/Comment.ts")(sequelize, DataTypes),
+    // credentials: require("../backend/models/Credential.ts")(sequelize, DataTypes),
+    comments: _Comments,
+    credentials: _Credentials, 
+    wadComments: _WadComments
 };
+
+
+// db.wadComments = require("../backend/models/WadComments.ts")(sequelize, DataTypes, db.wads, db.comments)
+// db.wads.belongsToMany(db.comments,{through: db.wadComments, as: "CommentId"});
+// db.users.belongsTo(db.wads, {through: db.wadComments, as: "WadId"});
+
+// db.users.hasMany(db.wadComments, {foreignKey: "WadId" as "WadComments"});
+// db.wadComments.BelongsTo(db.users, {foreignKey:"WadId" as "CommentListId"});
 
 //sünkroonmeetod
 const sync = async(): Promise<void> => {
