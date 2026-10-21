@@ -12,8 +12,10 @@ HTML/CSS/TS
 [M-TARpe24-Destraat](https://github.com/users/L6he/projects/1)
 
 ### Andmebaasimudel
-<img width="1206" height="932" alt="{0E242138-5142-4DC1-959F-5FC05765074E}" src="https://github.com/user-attachments/assets/ca5fc2e8-9edf-4d70-abd2-f705368dd69d" />
+<img width="1176" height="925" alt="{A38F1615-50A4-477E-AF05-60F079C3548E}" src="https://github.com/user-attachments/assets/2819e59b-ec06-443f-abb2-1aa90d1d5cd9" />
 
+
+[ERD link](https://drive.google.com/file/d/1kwO28o6z54kG1w-VY6iaT8l_ycmZKAjX/view?usp=sharing)
 
 ### Backend-i seadistamine
 
