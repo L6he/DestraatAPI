@@ -30,23 +30,23 @@ const connect = async (): Promise<void> => {
         console.error("db connection error", error)
     }
 }
+
+const _Wad = WadModel(sequelize, DataTypes);
+const _User = UserModel(sequelize, DataTypes);
+const _Ownership = OwnershipModel(sequelize, DataTypes);
 //andmebaasi instants ja seostused
+_User.hasMany(_Ownership, {foreignKey: "UserID" as "Ownership"});
+_Ownership.belongsTo(_User, {foreignKey: "UserID" as "User"});
 const db = {
     Sequelize, 
     sequelize,
-    wads: require("../backend/models/Wad.ts")(sequelize, DataTypes),
-    users: require("../backend/models/User.ts")(sequelize, DataTypes),
-    comments: require("../backend/models/Comment.ts")(sequelize, DataTypes),
-    credentials: require("../backend/models/Credential.ts")(sequelize, DataTypes),
-    ownerships: require("../backend/models/Ownership.ts")(sequelize, DataTypes)
-}; 
+    wads: _Wad,
+    users: _User,
+    ownerships: _Ownership
+}; //compile with npx tsx db.ts
 //trying to implement foreign keys
-db.ownerships = require("../backend/models/Ownership.ts")(sequelize, DataTypes, db.wads, db.users)
-db.wads.belongsToMany(db.users, {through: db.ownerships as "UserID"}); //possibly UserId or userId etc.
-db.users.belongsTo(db.wads, {through: db.ownerships as "WadID"}); //possibly GameId or gameId etc.
-
-db.users.hasMany(db.ownerships, {foreignKey: "UserID" as "WadID"});
-db.ownerships.belongsTo(db.users, {foreignKey: "UserID" as "WadID"});
+// db.wads.belongsToMany(db.users, {through: db.ownerships as "UserID"}); //possibly UserId or userId etc.
+// db.users.belongsTo(db.wads, {through: db.ownerships as "WadID"}); //possibly GameId or gameId etc.
 
 //sünkroonmeetod
 const sync = async(): Promise<void> => {

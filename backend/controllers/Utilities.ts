@@ -1,9 +1,9 @@
-import { Request } from "express";
+import express from "express";
 import bcrypt from "bcrypt";
 //installi bcrypt hiljem, siia tuleb hashing ka
 
 const Utilities = {
-    getBaseURL(req: Request): string {
+    getBaseURL(req: express.Request): string {
         return `${req.protocol}://${req.get("host")}`;
     },
     async gimmePassword(password: string): Promise<string>  {

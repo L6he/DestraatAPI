@@ -7,7 +7,8 @@ export default function OwnershipModel(
     const Ownership = sequelize.define(
         "Ownership", {
             id: { 
-                type: dataTypes.UUIDV4 
+                type: dataTypes.UUIDV4,
+                primaryKey: true
             },
             OwnershipName: {
                 type: dataTypes.STRING,
@@ -31,4 +32,6 @@ export default function OwnershipModel(
             },
         }
     )
+    console.log(Ownership === sequelize.models.Ownership);
+    return Ownership;
 }

@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid"; //npm install uuid@latest
 
 const WadsController = {
-    async create(req: Request, res: Response) {
+    async create(req: express.Request, res: express.Response) {
         if (!req.body.WadName || 
             !req.body.WadDescription ||
             !req.body.ReleaseDate ||
@@ -32,7 +32,7 @@ const WadsController = {
         .location(`${Utilities.getBaseURL(req)}/wads/
         ${createdWad.id}`).sendStatus(201);
     },
-    async getAll(req: Request, res: Response) {
+    async getAll(req: express.Request, res: express.Response) {
         const wads = await db.wads.findAll();
         console.log("getAll: " + wads);
         return res
@@ -43,7 +43,7 @@ const WadsController = {
             )
         )
     },
-    async getByID(req: Request, res: Response) {
+    async getByID(req: express.Request, res: express.Response) {
         let wadID: String = req.params.Id as String;
         console.log(wadID);
         const wad = await db.wads.findByPk(wadID);
@@ -57,7 +57,7 @@ const WadsController = {
         }
         return wad;
     },
-    async modifyByID(req: Request, res: Response) {
+    async modifyByID(req: express.Request, res: express.Response) {
         const wadToBeModified = await this.getByID(req, res);
         if (!wadToBeModified) {
             return;
@@ -88,7 +88,7 @@ const WadsController = {
         .status(201)
         .send(wadToBeModified);
     },
-    async deleteByID(req: Request, res: Response) {
+    async deleteByID(req: express.Request, res: express.Response) {
         const wadToBeDeleted = await this.getByID(req, res);
         if (!wadToBeDeleted) {
             return;

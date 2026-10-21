@@ -1,8 +1,11 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
+    // Express
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     // File Layout
-    "rootDir": "./src",
+    "rootDir": "../backend",
     "outDir": "./dist",
 
     // Environment Settings

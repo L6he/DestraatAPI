@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors"; //npm install cors
 import { sync } from "../db.ts"; // Getting weirder by the second!!
+
 import appRoutes from "../routes/appRoutes.ts";
 
 dotenv.config();

@@ -1,12 +1,12 @@
 //"meil on need tegevused ja seal controller-is"?
 //nimetus võiks vastata tema funktsioonile
-import { Express } from "express";
+import express from "express";
 import WadsController from "../controllers/WadsController.ts";
 import UsersController from "../controllers/UsersController.ts";
 import CredentialsController from "../controllers/CredentialsController.ts";
 import OwnershipsController from "../controllers/OwnershipsController.ts";
 
-export default (app: Express): void => {
+export default (app: express.Express): void => {
     app.route("/wads")
     .get(WadsController.getAll)
     .post(WadsController.create);

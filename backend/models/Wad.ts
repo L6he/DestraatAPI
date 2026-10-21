@@ -8,7 +8,8 @@ export default function WadModel(
     const Wad = sequelize.define(
         "Wad", {
             id: {
-                type: dataTypes.UUIDV4
+                type: dataTypes.UUIDV4,
+                primaryKey: true
             },
             WadName: {
                 type: dataTypes.STRING,

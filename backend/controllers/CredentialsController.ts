@@ -1,10 +1,10 @@
-import { Request, response, Response } from "express";
+import express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
 
 const CredentialsController = {
-    async create(req: Request, res: Response) {
+    async create(req: express.Request, res: express.Response) {
         if (!req.body.UserID || 
             !req.body.Credentials ||
             !req.body.UserType
@@ -30,7 +30,7 @@ const CredentialsController = {
         ${addedCredential.id}`).sendStatus(201);
     },
     
-    async getByID(req: Request, res: Response) {
+    async getByID(req: express.Request, res: express.Response) {
         let credentialID: String = req.params.id as String //lack of capitalisation here on id may be problematic
         console.log(credentialID); //VERY SECURE
         const credential = await db.credentials.findByPk(credentialID);
@@ -45,7 +45,7 @@ const CredentialsController = {
         return credential;
     },
 
-    async getAll(req: Request, res: Response) {
+    async getAll(req: express.Request, res: express.Response) {
         const credentials = await db.credentials.findAll();
         console.log("getAll: " + credentials);
         return res.status(200)
@@ -56,7 +56,7 @@ const CredentialsController = {
         );
     },
 
-    async modifyByID(req: Request, res: Response) {
+    async modifyByID(req: express.Request, res: express.Response) {
         const credentialToBeModified = await this.getByID(req, res);
         if (!credentialToBeModified) {
             return res.status(404).send(
@@ -86,7 +86,7 @@ const CredentialsController = {
         .send(credentialToBeModified);
     },
 
-    async deleteByID(req: Request, res: Response) {
+    async deleteByID(req: express.Request, res: express.Response) {
         const credentialToBeDeleted = await this.getByID(req, res);
         if (!credentialToBeDeleted) {
             return res.status(404).send(

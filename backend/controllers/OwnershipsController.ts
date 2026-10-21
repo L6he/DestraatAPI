@@ -1,10 +1,11 @@
-import { Request, Response } from "express";
+import express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
+import * as UUID from "node:crypto";
 
 const OwnershipsController = {
-    async create(req: Request, res: Response) {
+    async create(req: express.Request, res: express.Response) {
         const userWhoUploaded = "UserID";
         const wadIdToBeAddedToOwnership = [ "WadID" ];
         /*check if req body has a user id

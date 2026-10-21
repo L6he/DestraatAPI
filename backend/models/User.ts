@@ -7,7 +7,7 @@ export default function UserModel(
 {
     const User = sequelize.define(
         "User", {
-            id: {type: dataTypes.UUIDV4},
+            id: {type: dataTypes.UUIDV4, primaryKey: true},
             UserName: {type: dataTypes.STRING, allowNull: false},
             PasswordHASH: {type: dataTypes.STRING, allowNull: false},
             SignupDate: {type: dataTypes.DATEONLY, defaultValue: Date.now()},
