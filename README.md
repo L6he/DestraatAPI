@@ -1,5 +1,5 @@
 # Destraat
-HTML/CSS/JS
+HTML/CSS/TS
 
 <i>DoomWorld</i>-ile sarnane foorumsait <i>DooM</i>-i <i>WAD</i> failide jagamiseks, arutlemiseks, hindamiseks.
 
@@ -12,7 +12,8 @@ HTML/CSS/JS
 [M-TARpe24-Destraat](https://github.com/users/L6he/projects/1)
 
 ### Andmebaasimudel
-<img width="1207" height="936" alt="Maripuu ERD-mudel" src="https://github.com/user-attachments/assets/b571a731-1e9f-4996-bb64-dc33f6a4fd07" />
+<img width="1206" height="932" alt="{0E242138-5142-4DC1-959F-5FC05765074E}" src="https://github.com/user-attachments/assets/ca5fc2e8-9edf-4d70-abd2-f705368dd69d" />
+
 
 ### Backend-i seadistamine
 
