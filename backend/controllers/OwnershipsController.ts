@@ -31,3 +31,5 @@ const OwnershipsController = {
         return res.location(`${Utilities.getBaseURL(req)}/ownerships/${addedOwnership.id}`).sendStatus(201);
     }
 }
+
+export default OwnershipsController;

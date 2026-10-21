@@ -4,6 +4,7 @@ import { Express } from "express";
 import WadsController from "../controllers/WadsController.ts";
 import UsersController from "../controllers/UsersController.ts";
 import CredentialsController from "../controllers/CredentialsController.ts";
+import OwnershipsController from "../controllers/OwnershipsController.ts";
 
 export default (app: Express): void => {
     app.route("/wads")
@@ -33,4 +34,14 @@ export default (app: Express): void => {
     .get(CredentialsController.getByID)
     .delete(CredentialsController.deleteByID)
     .put(CredentialsController.modifyByID);
+
+    //Ownerships
+    app.route("/ownerships")
+    .get(OwnershipsController.getAll)
+    .post(OwnershipsController.create);
+
+    app.route("/ownerships:id")
+    .get(OwnershipsController.getByID)
+    .delete(OwnershipsController.deleteByID)
+    .put(OwnershipsController.modifyByID);
 }
