@@ -1,43 +1,59 @@
-import { Sequelize, DataTypes, UUIDV4 } from "sequelize";
-//npm install sequelize        //i on shorthand install-iks, allegedly
+import { DataTypes, Model } from "sequelize";
+//npm install sequelize        //i on shorthand install-iks
+import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize, IntegerDataType } from "sequelize";
 
-export default function WadModel(
-    sequelize: Sequelize,
-    dataTypes: typeof DataTypes
-) {
-    const Wad = sequelize.define(
-        "Wad", {
+export class Wad extends Model<InferAttributes<Wad>, InferCreationAttributes<Wad>> {
+    // Kohustuslikud väljad uue WAD-i loomisel:
+    declare WadName: string;
+    declare WadDescription: string;
+    declare ReleaseDate: Date;
+    declare CategoryID: string;
+
+    // Valikulised väljad uue WAD-i loomisel (kuna neil on vaikeväärtus või nad on nullitavad):
+    declare id: CreationOptional<string>;
+    declare ImageURL: CreationOptional<string>;
+    declare Downloads: CreationOptional<number>;
+    declare Comments: CreationOptional<string>;
+}
+export default function initWadModel(sequelize: Sequelize) {
+    Wad.init(
+        {
             id: {
-                type: dataTypes.UUIDV4,
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
             WadName: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             WadDescription: {
-                type: dataTypes.TEXT,
+                type: DataTypes.TEXT,
                 allowNull: false
             },
             ReleaseDate: {
-                type: dataTypes.DATEONLY,
+                type: DataTypes.DATEONLY,
                 allowNull: false
             },
             ImageURL: {
-                type: dataTypes.STRING
+                type: DataTypes.STRING
             },
             Downloads: {
-                type: dataTypes.INTEGER
+                type: DataTypes.INTEGER
             },
             Comments: {
-                type: dataTypes.ARRAY(dataTypes.STRING)
+                type: DataTypes.JSON //list
             },
             CategoryID: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false
-            }
+            },
+        },
+        {
+            sequelize,
+            modelName: "Wad",
         }
-    )
-    console.log(Wad === sequelize.models.Wad);
+    );
+    
     return Wad;
 }

@@ -11,7 +11,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
     declare id: CreationOptional<string>; // Kui andmebaas/Sequelize genereerib UUID ise
     declare SignupDate: CreationOptional<string>; 
     declare UserStatus: CreationOptional<string>;
-    //declare UserCollectionID: CreationOptional<string | null>;
+    declare OwnershipID: CreationOptional<string | null>;
     declare CommentListID: CreationOptional<string | null>;
     declare ProfileID: CreationOptional<string | null>;
     declare CredentialID: CreationOptional<string | null>;
@@ -21,7 +21,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
     declare updatedAt: CreationOptional<Date>;
   }
 
-export default function UserModel(sequelize: Sequelize) {
+export default function initUserModel(sequelize: Sequelize) {
     User.init(
         {
             id: {
@@ -33,7 +33,7 @@ export default function UserModel(sequelize: Sequelize) {
                 type: DataTypes.STRING, 
                 allowNull: false
             },
-            PasswordHASH: {
+            PasswordHash: {
                 type: DataTypes.STRING, 
                 allowNull: false
             },
@@ -74,6 +74,6 @@ export default function UserModel(sequelize: Sequelize) {
             modelName: "User",
         }
     );
-    
+
     return User;
 }
