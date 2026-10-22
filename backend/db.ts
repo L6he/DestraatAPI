@@ -36,16 +36,18 @@ const _Wad = WadModel(sequelize, DataTypes);
 const _User = UserModel(sequelize, DataTypes);
 const _Ownership = OwnershipModel(sequelize, DataTypes);
 const _Comment = CommentModel(sequelize, DataTypes);
+const _Credential = CredentialModel(sequelize, DataTypes);
 //andmebaasi instants ja seostused
 _User.hasMany(_Ownership, {foreignKey: "UserID" as "Ownership"});
 _Ownership.belongsTo(_User, {foreignKey: "UserID" as "User"});
 const db = {
     Sequelize, 
     sequelize,
-    wads: _Wad,
-    users: _User,
+    comments: _Comment,
+    credentials: _Credential,
     ownerships: _Ownership,
-    comments: _Comment
+    users: _User,
+    wads: _Wad,
 }; //compile with npx tsx db.ts
 //trying to implement foreign keys
 // db.wads.belongsToMany(db.users, {through: db.ownerships as "UserID"}); //possibly UserId or userId etc.
