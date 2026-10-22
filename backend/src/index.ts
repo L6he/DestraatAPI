@@ -1,13 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
-import cors from "cors"; //npm install cors
+import cors from "cors"; //npm i --save-dev @types/cors
 import { sync } from "../db.ts"; // Getting weirder by the second!!
 
 import appRoutes from "../routes/appRoutes.ts";
 
 dotenv.config();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 const host = "localhost";
 
 const app = express();
