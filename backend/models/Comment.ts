@@ -46,4 +46,6 @@ export default function CommentModel(
             }
         }
     );
+    console.log(Comment === sequelize.models.Comment);
+    return Comment;
 }
