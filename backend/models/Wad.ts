@@ -1,6 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 //npm install sequelize        //i on shorthand install-iks
 import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize, IntegerDataType } from "sequelize";
+import type { Json } from "sequelize/lib/utils";
 
 export class Wad extends Model<InferAttributes<Wad>, InferCreationAttributes<Wad>> {
     // Kohustuslikud väljad uue WAD-i loomisel:
@@ -13,7 +14,11 @@ export class Wad extends Model<InferAttributes<Wad>, InferCreationAttributes<Wad
     declare id: CreationOptional<string>;
     declare ImageURL: CreationOptional<string>;
     declare Downloads: CreationOptional<number>;
-    declare Comments: CreationOptional<string>;
+    declare Comments: CreationOptional<Json | null>;
+
+    // Süsteemsed väljad, mis tekivad automaatselt
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
 }
 export default function initWadModel(sequelize: Sequelize) {
     Wad.init(
@@ -48,6 +53,8 @@ export default function initWadModel(sequelize: Sequelize) {
                 type: DataTypes.STRING,
                 allowNull: false
             },
+            createdAt: DataTypes.DATE,
+            updatedAt: DataTypes.DATE,
         },
         {
             sequelize,
