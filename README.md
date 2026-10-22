@@ -3,6 +3,8 @@ HTML/CSS/TS
 
 <i>DoomWorld</i>-ile sarnane foorumsait <i>DooM</i>-i <i>WAD</i> failide jagamiseks, arutlemiseks, hindamiseks.
 
+Momendil on projekt katkine, uusim <i>branch</i> on praegu 40.
+
 ### Meeskond
 - George Teemus
 - Christofer Krabbi
@@ -24,8 +26,8 @@ HTML/CSS/TS
 3. Menüüribalt vali `Terminal` > `New Terminal`
 4. Avanud terminalilt vali paremalt <i>PowerShell</i>-i asemel rippmenüüst `Command Prompt`
 5. Veendu et terminali failitee on <i>backend</i> kaustas, kui ei ole, kirjuta `cd backend`
-6. Kui backend kaustas on express puudu, kirjuta `npm install express`
-7. Kui backend kaustas on nodemon puudu, kirjuta `npm install nodemon -D`
+6. Kui <i>backend</i> kaustas on express puudu, kirjuta `npm install express`
+7. Kui <i>backend</i> kaustas on nodemon puudu, kirjuta `npm install nodemon -D`
 
 ### Produktsiooni käivitamine
 Eelmiste sammude põhjal:
