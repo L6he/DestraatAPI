@@ -5,6 +5,7 @@ import WadModel from "../backend/models/Wad.ts";
 import UserModel from "../backend/models/User.ts";
 import CredentialModel from "../backend/models/Credential.ts";
 import OwnershipModel from "../backend/models/Ownership.ts";
+import CommentModel from "../backend/models/Comment.ts";
 import { foreignKey } from 'drizzle-orm/gel-core';
 
 //sequelizei andmebaasi ühendusanddmed
@@ -34,6 +35,7 @@ const connect = async (): Promise<void> => {
 const _Wad = WadModel(sequelize, DataTypes);
 const _User = UserModel(sequelize, DataTypes);
 const _Ownership = OwnershipModel(sequelize, DataTypes);
+const _Comment = CommentModel(sequelize, DataTypes);
 //andmebaasi instants ja seostused
 _User.hasMany(_Ownership, {foreignKey: "UserID" as "Ownership"});
 _Ownership.belongsTo(_User, {foreignKey: "UserID" as "User"});
@@ -42,7 +44,8 @@ const db = {
     sequelize,
     wads: _Wad,
     users: _User,
-    ownerships: _Ownership
+    ownerships: _Ownership,
+    comments: _Comment
 }; //compile with npx tsx db.ts
 //trying to implement foreign keys
 // db.wads.belongsToMany(db.users, {through: db.ownerships as "UserID"}); //possibly UserId or userId etc.
