@@ -18,13 +18,13 @@ export default (app: express.Express): void => {
     .put(WadsController.modifyByID);
 
     app.route("/users")
-    .get(UsersController.getAll)
+    //.get(UsersController.getAll)
     .post(UsersController.create);
 
     app.route("/users:id")
-    .get(UsersController.getByID)
-    .delete(UsersController.deleteByID)
-    .put(UsersController.modifyByID);
+    //.get(UsersController.getByID)
+    //.delete(UsersController.deleteByID)
+    //.put(UsersController.modifyByID);
 
     //Credentials
     app.route("/credentials")
@@ -38,13 +38,13 @@ export default (app: express.Express): void => {
 
     //Ownerships
     app.route("/ownerships")
-    .get(OwnershipsController.getAll)
+    //.get(OwnershipsController.getAll)
     .post(OwnershipsController.create);
 
     app.route("/ownerships:id")
-    .get(OwnershipsController.getByID)
-    .delete(OwnershipsController.deleteByID)
-    .put(OwnershipsController.modifyByID);
+    //.get(OwnershipsController.getByID)
+    //.delete(OwnershipsController.deleteByID)
+    //.put(OwnershipsController.modifyByID);
 
     //Comments
     app.route("/comments")
