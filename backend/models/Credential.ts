@@ -22,4 +22,5 @@ export default function CredentialModel(
         }
     )
     console.log(Credential === sequelize.models.Credential);
+    return Credential;
 }
