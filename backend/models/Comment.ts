@@ -6,10 +6,9 @@ export default function CommentModel(
 ) {
     const Comment = sequelize.define(
         "Comment", {
-            CommentID: { 
-                type: dataTypes.UUID,
-                primaryKey: true,
-                defaultValue: dataTypes.UUIDV4
+            id: { 
+                type: dataTypes.UUIDV4,
+                primaryKey: true
             },
             CommentTitle: {
                 type: dataTypes.STRING,
