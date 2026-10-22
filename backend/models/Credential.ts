@@ -1,3 +1,4 @@
+import { primaryKey } from "drizzle-orm/mysql-core";
 import { Sequelize, DataTypes, UUIDV4 } from "sequelize";
 
 export default function CredentialModel(
@@ -7,7 +8,8 @@ export default function CredentialModel(
     const Credential = sequelize.define(
         "Credential", {
             id: {
-                type: dataTypes.UUIDV4
+                type: dataTypes.UUIDV4,
+                primaryKey: true
             },
             UserID: {
                 type: dataTypes.STRING,
