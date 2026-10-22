@@ -39,4 +39,5 @@ export default function WadModel(
         }
     )
     console.log(Wad === sequelize.models.Wad);
+    return Wad;
 }
