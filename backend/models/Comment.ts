@@ -4,7 +4,7 @@ export default function CommentModel(
     sequelize: Sequelize,
     dataTypes: typeof DataTypes
 ) {
-    return sequelize.define(
+    const Comment = sequelize.define(
         "Comment", {
             CommentID: { 
                 type: dataTypes.UUID,
