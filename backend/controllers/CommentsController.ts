@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import express from "express";
 import { db } from "../db.ts";
 import { v7 as uuidv7 } from "uuid";
 
 const CommentsController = {
-    async getAll(req: Request, res: Response) {
+    async getAll(req: express.Request, res: express.Response) {
         try {
             const comments = await db.comments.findAll();
             
@@ -21,7 +21,7 @@ const CommentsController = {
         }
     },
 
-    async getById(req: Request, res: Response) {
+    async getById(req: express.Request, res: express.Response) {
         const commentId = req.params.id;
 
         if (!commentId) {
@@ -48,7 +48,7 @@ const CommentsController = {
         }
     },
 
-    async create(req: Request, res: Response) {
+    async create(req: express.Request, res: express.Response) {
         if (
             !req.body.CommentTitle ||
             !req.body.Author ||
@@ -86,7 +86,7 @@ const CommentsController = {
         }
     },
 
-    async remove(req: Request, res: Response) {
+    async remove(req: express.Request, res: express.Response) {
         const commentId = req.params.id;
 
         if (!commentId) {
@@ -115,7 +115,7 @@ const CommentsController = {
         }
     },
 
-    async hide(req: Request, res: Response) {
+    async hide(req: express.Request, res: express.Response) {
         const commentId = req.params.id;
 
         if (!commentId) {
