@@ -1,5 +1,5 @@
-import { DataTypes, Model } from "sequelize";
-import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize, IntegerDataType } from "sequelize";
+import { DataTypes, Model } from "@sequelize/core";
+import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize } from "@sequelize/core";
 
 export class Comment extends Model<InferAttributes<Comment>, InferCreationAttributes<Comment>> {
     // musthave

@@ -1,5 +1,5 @@
-import { DataTypes, Model } from "sequelize";
-import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize } from "sequelize";
+import { DataTypes, Model } from "@sequelize/core";
+import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize } from "@sequelize/core";
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     // Kohustuslikud väljad uue kasutaja loomisel:

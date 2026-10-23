@@ -1,5 +1,5 @@
-import { DataTypes, Model } from "sequelize";
-import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize, IntegerDataType } from "sequelize";
+import { DataTypes, Model } from "@sequelize/core";
+import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize } from "@sequelize/core";
 import type { Json } from "sequelize/lib/utils";
 
 export class Ownership extends Model<InferAttributes<Ownership>, InferCreationAttributes<Ownership>> {

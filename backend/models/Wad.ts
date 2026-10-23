@@ -1,6 +1,6 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model } from "@sequelize/core";
 //npm install sequelize        //i on shorthand install-iks
-import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize, IntegerDataType } from "sequelize";
+import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize } from "@sequelize/core";
 import type { Json } from "sequelize/lib/utils";
 
 export class Wad extends Model<InferAttributes<Wad>, InferCreationAttributes<Wad>> {

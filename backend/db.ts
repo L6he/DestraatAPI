@@ -36,8 +36,8 @@ const _Ownership = OwnershipModel(sequelize);
 const _Comment = CommentModel(sequelize);
 const _Credential = CredentialModel(sequelize);
 //andmebaasi instants ja seostused
-_User.hasMany(_Ownership, {foreignKey: "UserID" as "Ownership"});
-_Ownership.belongsTo(_User, {foreignKey: "UserID" as "User"});
+//_User.hasMany(_Ownership, {foreignKey: "UserID" as "Ownership"});
+//_Ownership.belongsTo(_User, {foreignKey: "UserID" as "User"});  yeahh... ignore these for now don't you worrrrry
 const db = {
     Sequelize, 
     sequelize,
