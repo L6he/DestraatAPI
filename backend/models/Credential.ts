@@ -1,28 +1,46 @@
-import { primaryKey } from "drizzle-orm/mysql-core";
-import { Sequelize, DataTypes, UUIDV4 } from "sequelize";
+import { DataTypes, Model } from "sequelize";
+import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize, IntegerDataType } from "sequelize";
+import type { Json } from "sequelize/lib/utils";
 
-export default function CredentialModel(
-    sequelize: Sequelize,
-    dataTypes: typeof DataTypes
-) {
-    const Credential = sequelize.define(
-        "Credential", {
+export class Credential extends Model<InferAttributes<Credential>, InferCreationAttributes<Credential>> {
+    //musthave
+    declare UserID: string;
+    
+    //canhave
+    declare id: CreationOptional<string>;
+    declare Credentials: CreationOptional<Json>; //CreationOptional<string[]>; is also an option?
+    declare UserType: CreationOptional<string>;
+
+    //dbhave
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
+}
+export default function initCredentialModel(sequelize: Sequelize) {
+    Credential.init(
+        {
             id: {
-                type: dataTypes.UUIDV4,
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
             UserID: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             Credentials: {
-                type: dataTypes.ARRAY(dataTypes.STRING)
+                type: DataTypes.JSON
             },
             UserType: {
-                type: dataTypes.STRING
-            }
+                type: DataTypes.STRING
+            },
+            createdAt: DataTypes.DATE,
+            updatedAt: DataTypes.DATE,
+        },
+        {
+            sequelize,
+            modelName: "Credential",
         }
-    )
-    console.log(Credential === sequelize.models.Credential);
+    );
+    
     return Credential;
 }
