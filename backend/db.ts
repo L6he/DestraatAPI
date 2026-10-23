@@ -1,4 +1,5 @@
-import {Sequelize, DataTypes} from 'sequelize';
+import { Sequelize } from '@sequelize/core';
+import { MariaDbDialect } from '@sequelize/mariadb';
 
 //modelite pathid
 import WadModel from "../backend/models/Wad.ts";
@@ -8,16 +9,14 @@ import OwnershipModel from "../backend/models/Ownership.ts";
 import CommentModel from "../backend/models/Comment.ts";
 
 //sequelizei andmebaasi ühendusanddmed
-const sequelize = new Sequelize(
-    process.env.DB_NAME!,
-    process.env.DB_USERNAME!,
-    process.env.DB_PASSWORD!,
-    {
-        host: process.env.DB_HOSTNAME!,
-        dialect: "mariadb",
-        logging: console.log,
-    }
-);
+const sequelize = new Sequelize({
+    dialect: MariaDbDialect,
+    database: process.env.DB_NAME!,
+    user: process.env.DB_USERNAME!,
+    password: process.env.DB_PASSWORD!,
+    host: process.env.DB_HOSTNAME!,
+    logging: console.log,
+});
 
 //ühendusmeetod
 const connect = async (): Promise<void> => {
