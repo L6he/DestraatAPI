@@ -43,7 +43,7 @@ const WadsController = {
         )
     },
     async getByID(req: express.Request, res: express.Response) {
-        let wadID: String = req.params.id as string;
+        let wadID: string = req.params.id as string;
         console.log(wadID);
         const wad = await db.wads.findByPk(wadID);
         if (!wad) {
