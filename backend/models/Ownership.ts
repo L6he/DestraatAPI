@@ -1,37 +1,57 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import { DataTypes, Model } from "sequelize";
+import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize, IntegerDataType } from "sequelize";
+import type { Json } from "sequelize/lib/utils";
 
-export default function OwnershipModel(
-    sequelize: Sequelize,
-    dataTypes: typeof DataTypes
-) {
-    const Ownership = sequelize.define(
-        "Ownership", {
+export class Ownership extends Model<InferAttributes<Ownership>, InferCreationAttributes<Ownership>> {
+    // musthave
+    declare OwnershipName: string;
+    declare WadID: string;
+    declare UserID: string;
+
+    // canhave
+    declare id: CreationOptional<string>;
+    declare OwnershipDescription: CreationOptional<string | null>;
+    declare Wads: CreationOptional<Json | null>;
+
+    // dbhave
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
+}
+export default function initOwnershipModel(sequelize: Sequelize) {
+    Ownership.init(
+        {
             id: { 
-                type: dataTypes.UUIDV4,
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
             OwnershipName: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             OwnershipDescription: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: true
             },
-            //foreign keys, not yet implemented
             Wads: {
-                type: dataTypes.ARRAY(dataTypes.STRING)
+                type: DataTypes.JSON,
             },
-            WadID: { //not yet in the erd, TODO: either remove this or update the erd to include it
-                type: dataTypes.ARRAY(dataTypes.UUID),
+            WadID: {
+                type: DataTypes.UUID, //maybe these ids should be strings
                 allowNull: false
             },
             UserID: {
-                type: dataTypes.UUID,
+                type: DataTypes.UUID,
                 allowNull: false
             },
+            createdAt: DataTypes.DATE,
+            updatedAt: DataTypes.DATE,
+        },
+        {
+            sequelize,
+            modelName: "Ownership",
         }
-    )
-    console.log(Ownership === sequelize.models.Ownership);
+    );
+    
     return Ownership;
 }
