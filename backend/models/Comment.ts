@@ -1,50 +1,74 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import { DataTypes, Model } from "sequelize";
+import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize, IntegerDataType } from "sequelize";
 
-export default function CommentModel(
-    sequelize: Sequelize,
-    dataTypes: typeof DataTypes
-) {
-    const Comment = sequelize.define(
-        "Comment", {
+export class Comment extends Model<InferAttributes<Comment>, InferCreationAttributes<Comment>> {
+    // musthave
+    declare CommentTitle: string;
+    declare CommentContent: string;
+    declare Author: string;
+    declare CommentDate: Date;
+
+    // canhave
+    declare id: CreationOptional<string>;
+    declare CommentListID: CreationOptional<string>;
+    declare CommentsID: CreationOptional<string>;
+    declare CommentLikes: CreationOptional<number>;
+    declare CommentStatus: CreationOptional<string>;
+    declare CommentedWAD: CreationOptional<string>;
+
+    // dbhave
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
+}
+export default function initCommentModel(sequelize: Sequelize) {
+    Comment.init(
+        {
             id: { 
-                type: dataTypes.UUIDV4,
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
             CommentTitle: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             CommentContent: {
-                type: dataTypes.TEXT,
+                type: DataTypes.TEXT,
                 allowNull: false
             },
             Author: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             CommentDate: {
-                type: dataTypes.DATEONLY,
+                type: DataTypes.DATEONLY,
                 allowNull: false
             },
             CommentListID: {
-                type: dataTypes.STRING
+                type: DataTypes.STRING
             },
             CommentsID: {
-                type: dataTypes.STRING
+                type: DataTypes.STRING
             },
             CommentLikes: {
-                type: dataTypes.INTEGER,
+                type: DataTypes.INTEGER,
                 defaultValue: 0
             },
             CommentStatus: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 defaultValue: "active"
             },
             CommentedWAD: {
-                type: dataTypes.STRING
-            }
+                type: DataTypes.STRING
+            },
+            createdAt: DataTypes.DATE,
+            updatedAt: DataTypes.DATE,
+        },
+        {
+            sequelize,
+            modelName: "Comment",
         }
     );
-    console.log(Comment === sequelize.models.Comment);
+    
     return Comment;
 }
