@@ -14,8 +14,7 @@ Momendil on projekt katkine, käesolevad parandused, refaktoreerimised.
 [M-TARpe24-Destraat](https://github.com/users/L6he/projects/1)
 
 ### Andmebaasimudel
-<img width="1176" height="925" alt="{A38F1615-50A4-477E-AF05-60F079C3548E}" src="https://github.com/user-attachments/assets/2819e59b-ec06-443f-abb2-1aa90d1d5cd9" />
-
+<img width="937" height="746" alt="image" src="https://github.com/user-attachments/assets/5d9bd52f-e224-44d2-8d49-422ea80e3015" />
 
 [ERD link](https://drive.google.com/file/d/1kwO28o6z54kG1w-VY6iaT8l_ycmZKAjX/view?usp=sharing)
 
