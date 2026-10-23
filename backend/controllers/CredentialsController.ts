@@ -16,18 +16,16 @@ const CredentialsController = {
             );
         }
 
-        const newCredential = {
+        const result = await db.credentials.create({
             id: uuidv7(),
             UserID: req.body.UserID,
             Credentials: req.body.Credentials,
             UserType: req.body.UserType
-        }
-
-        const addedCredential = await db.credentials.create(newCredential);
+        });
 
         return res
         .location(`${Utilities.getBaseURL(req)}/credentials/
-        ${addedCredential.id}`).sendStatus(201);
+        ${result.id}`).sendStatus(201);
     },
     
     async getByID(req: express.Request, res: express.Response) {
@@ -51,7 +49,7 @@ const CredentialsController = {
         return res.status(200)
         .send(
             credentials.map(
-                ({Id, UserType}) => {return {Id, UserType}} //Id or id?
+                ({id, UserType}) => {return {id, UserType}} //Id or id?
             )
         );
     },
