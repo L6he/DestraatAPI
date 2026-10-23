@@ -54,5 +54,5 @@ export default (app: express.Express): void => {
     app.route("/comments:id")
     .delete(CommentsController.remove)
     .patch(CommentsController.hide) //varem "/comments/:id/hide"
-    .get(CommentsController.getById);
+    .get(CommentsController.getByID);
 }
