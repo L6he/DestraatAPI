@@ -2,7 +2,6 @@ import express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid"; //npm install uuid@latest
-import { error } from "console";
 
 const UsersController = {
     async create(req: express.Request, res: express.Response) {
@@ -25,17 +24,15 @@ const UsersController = {
                 }
             );
         }
-        const newUser = {
+        const passwordHash = await Utilities.gimmePassword(req.body.Password);
+
+        const result = await db.users.create({
             id: uuidv7(),
             UserName: req.body.UserName,
             EmailAddress: req.body.EmailAddress,
-            SignupDate: Date.now(),
             UserStatus: "unverified",
-            PasswordHASH: "",
-        }
-        newUser.PasswordHASH = await Utilities.gimmePassword(req.body.Password); //cast?
-
-        const result = await db.users.create(newUser);
+            PasswordHash: passwordHash
+        });
 
         return res.location(`${Utilities.getBaseURL(req)}/users/${result.id}`)
         .sendStatus(201);
