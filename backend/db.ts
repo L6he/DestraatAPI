@@ -6,7 +6,6 @@ import UserModel from "../backend/models/User.ts";
 import CredentialModel from "../backend/models/Credential.ts";
 import OwnershipModel from "../backend/models/Ownership.ts";
 import CommentModel from "../backend/models/Comment.ts";
-import { foreignKey } from 'drizzle-orm/gel-core';
 
 //sequelizei andmebaasi ühendusanddmed
 const sequelize = new Sequelize(
@@ -32,11 +31,11 @@ const connect = async (): Promise<void> => {
     }
 }
 
-const _Wad = WadModel(sequelize, DataTypes);
-const _User = UserModel(sequelize, DataTypes);
-const _Ownership = OwnershipModel(sequelize, DataTypes);
-const _Comment = CommentModel(sequelize, DataTypes);
-const _Credential = CredentialModel(sequelize, DataTypes);
+const _Wad = WadModel(sequelize); // the rename is still valid, because it's the default export, methinks
+const _User = UserModel(sequelize);
+const _Ownership = OwnershipModel(sequelize);
+const _Comment = CommentModel(sequelize);
+const _Credential = CredentialModel(sequelize);
 //andmebaasi instants ja seostused
 _User.hasMany(_Ownership, {foreignKey: "UserID" as "Ownership"});
 _Ownership.belongsTo(_User, {foreignKey: "UserID" as "User"});
