@@ -16,7 +16,7 @@ const WadsController = {
                 }
             );
         }
-        const newWad = {
+        const result = await db.wads.create({
             id: uuidv7(),
             WadName: req.body.WadName,
             WadDescription: req.body.WadDescription,
@@ -25,12 +25,11 @@ const WadsController = {
             ImageURL: req.body.ImageURL,
             Downloads: 0,
             Comments: req.body.Comments
-        }
-        const createdWad = await db.wads.create(newWad);
+        });
         
         return res
         .location(`${Utilities.getBaseURL(req)}/wads/
-        ${createdWad.id}`).sendStatus(201);
+        ${result.id}`).sendStatus(201);
     },
     async getAll(req: express.Request, res: express.Response) {
         const wads = await db.wads.findAll();
@@ -39,12 +38,12 @@ const WadsController = {
         .status(200)
         .send(
             wads.map(
-                ({Id, WadName}) => {return {Id, WadName}}
+                ({id, WadName}) => {return {id, WadName}}
             )
         )
     },
     async getByID(req: express.Request, res: express.Response) {
-        let wadID: String = req.params.Id as String;
+        let wadID: String = req.params.id as string;
         console.log(wadID);
         const wad = await db.wads.findByPk(wadID);
         if (!wad) {
