@@ -29,7 +29,7 @@ const CredentialsController = {
     },
     
     async getByID(req: express.Request, res: express.Response) {
-        let credentialID: String = req.params.id as String //lack of capitalisation here on id may be problematic
+        let credentialID: string = req.params.id as string
         console.log(credentialID); //VERY SECURE
         const credential = await db.credentials.findByPk(credentialID);
         if (!credential) {
