@@ -22,7 +22,7 @@ const CommentsController = {
     },
 
     async getByID(req: express.Request, res: express.Response) {
-        const commentId = req.params.id;
+        let commentId: string = req.params.id as string;
 
         if (!commentId) {
             return res.status(400).send({
@@ -102,7 +102,7 @@ const CommentsController = {
     },
 
     async hide(req: express.Request, res: express.Response) {
-        const commentId = req.params.id;
+        let commentId: string = req.params.id as string;
 
         if (!commentId) {
             return res.status(400).send({
