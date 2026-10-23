@@ -16,7 +16,7 @@ const UsersController = {
                 }
             );
         }
-        if (!req.body.Password != req.body.PasswordConfirmation) {
+        if (req.body.Password !== req.body.PasswordConfirmation) {
             return res.status(406)
             .send(
                 {
