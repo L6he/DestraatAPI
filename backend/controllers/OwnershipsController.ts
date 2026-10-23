@@ -7,7 +7,7 @@ import * as UUID from "node:crypto";
 const OwnershipsController = {
     async create(req: express.Request, res: express.Response) {
         const userWhoUploaded = "UserID";
-        const wadIdToBeAddedToOwnership = [ "WadID" ];
+        const wadIdToBeAddedToOwnership = "WadID";
         /*check if req body has a user id
         if not, use status code 403 Unauthorized
         else, add into object to be created*/
@@ -20,16 +20,15 @@ const OwnershipsController = {
                 }
             );
         }
-        const newOwnership = {
+        const result = await db.ownerships.create({
             id: uuidv7(),
             OwnershipName: req.body.OwnershipName,
             OwnershipDescription: req.body.OwnershipDescription,
             WadID: wadIdToBeAddedToOwnership,
             UserID: userWhoUploaded,
-        }
-        const addedOwnership = await db.ownerships.create(newOwnership);
+        });
 
-        return res.location(`${Utilities.getBaseURL(req)}/ownerships/${addedOwnership.id}`).sendStatus(201);
+        return res.location(`${Utilities.getBaseURL(req)}/ownerships/${result.id}`).sendStatus(201);
     }
 }
 
