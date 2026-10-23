@@ -21,7 +21,7 @@ const CommentsController = {
         }
     },
 
-    async getById(req: express.Request, res: express.Response) {
+    async getByID(req: express.Request, res: express.Response) {
         const commentId = req.params.id;
 
         if (!commentId) {
@@ -62,7 +62,7 @@ const CommentsController = {
 
         try {
             const newComment = await db.comments.create({ 
-                CommentID: uuidv7(),
+                id: uuidv7(),
                 CommentTitle: req.body.CommentTitle,
                 Author: req.body.Author,
                 CommentContent: req.body.CommentContent,
@@ -87,32 +87,18 @@ const CommentsController = {
     },
 
     async remove(req: express.Request, res: express.Response) {
-        const commentId = req.params.id;
-
-        if (!commentId) {
-            return res.status(404).send({
-                error: "Missing comment ID."
-            });
-        }        
-
-        try {
-            const comment = await db.comments.findByPk(commentId);
-
-            if (!comment) {
-                return res.status(404).send({
-                    error: "Comment not found."
-                });
-            }
-
-            await comment.destroy();
-
-            return res.status(204).send(comment);
-        } catch (error) {
-            console.error("Error deleting comment:", error);
-            return res.status(500).send({
-                error: "An error occurred while deleting the comment."
-            });
+        const commentToBeDeleted = await this.getByID(req, res);
+        if (!commentToBeDeleted) {
+            return;
         }
+
+            await commentToBeDeleted.destroy();
+
+            return res.status(204).send(
+                {
+                error: "No content."
+                }
+            );
     },
 
     async hide(req: express.Request, res: express.Response) {
