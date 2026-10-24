@@ -26,7 +26,8 @@ const connect = async (): Promise<void> => {
     }
     catch (error)
     {
-        console.log("db connection error", error)
+        console.log("db connection error", error);
+        throw error;
     }
 }
 
