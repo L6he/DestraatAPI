@@ -47,9 +47,6 @@ const db = {
     users: _User,
     wads: _Wad,
 }; //compile with npx tsx db.ts
-//trying to implement foreign keys
-// db.wads.belongsToMany(db.users, {through: db.ownerships as "UserID"}); //possibly UserId or userId etc.
-// db.users.belongsTo(db.wads, {through: db.ownerships as "WadID"}); //possibly GameId or gameId etc.
 
 //sünkroonmeetod
 const sync = async(): Promise<void> => {
