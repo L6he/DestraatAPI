@@ -57,7 +57,7 @@ export default (app: express.Express): void => {
     .patch(CommentsController.hide) //varem "/comments/:id/hide"
     .get(CommentsController.getByID);
 
-    //Ownerships
+    //WadComments
     app.route("/wadcomments")
     //.get(WadCommentsController.getAll)
     .post(WadCommentsController.create)

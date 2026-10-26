@@ -43,7 +43,22 @@ const WadCommentsController = {
                 ({id, WadCommentsTitle}) => {return {id, WadCommentsTitle}}
             )
         )
-    }
+    },
+
+    async getByID(req: express.Request, res: express.Response) {
+            let wadcommentsID: string = req.params.id as string;
+            console.log(wadcommentsID);
+            const wadcomment = await db.wadcomments.findByPk(wadcommentsID);
+            if (!wadcomment) {
+                res.status(400).send(
+                    {
+                        error: `Wad comment with ID ${wadcommentsID} not found.`
+                    }
+                )
+                return null;
+            }
+            return wadcomment;
+        }
 }
 export default WadCommentsController;
 
