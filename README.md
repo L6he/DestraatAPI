@@ -32,4 +32,5 @@ Momendil on projekt katkine, käesolevad parandused, refaktoreerimised.
 Eelmiste sammude põhjal:
 1. Konstrueeri produktsiooni kood käsuga `npm run build`
 2. Käivita toodangu kood käsuga `npm run dev`, kui see ei toimi, proovi `npm run start`
-3. Koodi peatamiseks tee `CTRL`+`C`
+3. Veendu, et <i>Zone</i>-i serveril oleks sinu IP lubatud nimekirjas
+4. Koodi peatamiseks tee `CTRL`+`C`
