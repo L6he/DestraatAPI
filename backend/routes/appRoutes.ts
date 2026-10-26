@@ -6,6 +6,7 @@ import UsersController from "../controllers/UsersController.ts";
 import CredentialsController from "../controllers/CredentialsController.ts";
 import OwnershipsController from "../controllers/OwnershipsController.ts";
 import CommentsController from "../controllers/CommentsController.ts";
+import WadCommentsController from "../controllers/WadCommentsController.ts";
 
 export default (app: express.Express): void => {
     app.route("/wads")
@@ -55,4 +56,13 @@ export default (app: express.Express): void => {
     .delete(CommentsController.remove)
     .patch(CommentsController.hide) //varem "/comments/:id/hide"
     .get(CommentsController.getByID);
+
+    //Ownerships
+    app.route("/wadcomments")
+    //.get(WadCommentsController.getAll)
+    .post(WadCommentsController.create);
+
+    app.route("/wadcomments:id")
+    
+
 }
