@@ -64,8 +64,8 @@ export default (app: express.Express): void => {
 
     app.route("/wadcomments/:id")
     .get(WadCommentsController.getByID)
-    .put(WadCommentsController.modifyByID);
-    
+    .put(WadCommentsController.modifyByID)
+    .delete(WadCommentsController.deleteByID);
 
 }
 

@@ -89,7 +89,22 @@ const WadCommentsController = {
         ${wadCommentToBeModified.id}`)
         .status(201)
         .send(wadCommentToBeModified);
-    }           
+    },
+    
+    async deleteByID(req: express.Request, res: express.Response) {
+        const wadCommentToBeDeleted = await this.getByID(req, res);
+        if (!wadCommentToBeDeleted) {
+            return;
+        }
+        await wadCommentToBeDeleted.destroy();
+        return res.status(204)
+        .send(
+            {
+                error: "No content."
+            }
+        );
+    }
+            
 }
 export default WadCommentsController;
 
