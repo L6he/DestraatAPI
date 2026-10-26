@@ -7,6 +7,7 @@ import UserModel from "../backend/models/User.ts";
 import CredentialModel from "../backend/models/Credential.ts";
 import OwnershipModel from "../backend/models/Ownership.ts";
 import CommentModel from "../backend/models/Comment.ts";
+import WadCommentsModel from "../backend/models/WadComments.ts";
 
 //sequelizei andmebaasi ühendusanddmed
 const sequelize = new Sequelize({
@@ -36,6 +37,8 @@ const _User = UserModel(sequelize);
 const _Ownership = OwnershipModel(sequelize);
 const _Comment = CommentModel(sequelize);
 const _Credential = CredentialModel(sequelize);
+const _WadComments = WadCommentsModel(sequelize);
+
 //andmebaasi instants ja seostused
 _User.hasMany(_Ownership, {foreignKey: "UserID"});
 _Ownership.belongsTo(_User, {foreignKey: "UserID"});
@@ -47,6 +50,7 @@ const db = {
     ownerships: _Ownership,
     users: _User,
     wads: _Wad,
+    wadcomments: _WadComments,
 }; //compile with npx tsx db.ts
 
 //sünkroonmeetod
