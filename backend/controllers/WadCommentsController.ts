@@ -28,10 +28,22 @@ const WadCommentsController = {
             UserID: userWhoUploaded, //later  get real user id
             WadID: wadIdThatTheCommentisUploadedTo,
         });
-    
-        return res.location(`${Utilities.getBaseURL(req)}/wadcomments/${result.id}`).sendStatus(201);
+        return res
+        .location(`${Utilities.getBaseURL(req)}/wadcomments/
+        ${result.id}`).sendStatus(201);
+    },
+
+    async getAll(req: express.Request, res: express.Response) {
+        const wadcomments = await db.wadcomments.findAll();
+        console.log("getAll: " + wadcomments);
+        return res
+        .status(200)
+        .send(
+            wadcomments.map(
+                ({id, WadCommentsTitle}) => {return {id, WadCommentsTitle}}
+            )
+        )
     }
 }
-
 export default WadCommentsController;
 

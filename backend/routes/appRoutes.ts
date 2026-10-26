@@ -60,7 +60,8 @@ export default (app: express.Express): void => {
     //Ownerships
     app.route("/wadcomments")
     //.get(WadCommentsController.getAll)
-    .post(WadCommentsController.create);
+    .post(WadCommentsController.create)
+    .get(WadCommentsController.getAll);
 
     app.route("/wadcomments:id")
     
