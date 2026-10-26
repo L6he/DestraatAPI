@@ -13,7 +13,7 @@ export default (app: express.Express): void => {
     .get(WadsController.getAll)
     .post(WadsController.create);
 
-    app.route("/wads:id")
+    app.route("/wads/:id")
     .get(WadsController.getByID)
     .delete(WadsController.deleteByID)
     .put(WadsController.modifyByID);
@@ -22,7 +22,7 @@ export default (app: express.Express): void => {
     //.get(UsersController.getAll)
     .post(UsersController.create);
 
-    app.route("/users:id")
+    app.route("/users/:id")
     //.get(UsersController.getByID)
     //.delete(UsersController.deleteByID)
     //.put(UsersController.modifyByID);
@@ -32,7 +32,7 @@ export default (app: express.Express): void => {
     .get(CredentialsController.getAll)
     .post(CredentialsController.create);
 
-    app.route("/credentials:id")
+    app.route("/credentials/:id")
     .get(CredentialsController.getByID)
     .delete(CredentialsController.deleteByID)
     .put(CredentialsController.modifyByID);
@@ -42,7 +42,7 @@ export default (app: express.Express): void => {
     //.get(OwnershipsController.getAll)
     .post(OwnershipsController.create);
 
-    app.route("/ownerships:id")
+    app.route("/ownerships/:id")
     //.get(OwnershipsController.getByID)
     //.delete(OwnershipsController.deleteByID)
     //.put(OwnershipsController.modifyByID);
@@ -52,7 +52,7 @@ export default (app: express.Express): void => {
     .get(CommentsController.getAll)
     .post(CommentsController.create);
 
-    app.route("/comments:id")
+    app.route("/comments/:id")
     .delete(CommentsController.remove)
     .patch(CommentsController.hide) //varem "/comments/:id/hide"
     .get(CommentsController.getByID);
