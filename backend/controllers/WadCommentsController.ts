@@ -46,19 +46,50 @@ const WadCommentsController = {
     },
 
     async getByID(req: express.Request, res: express.Response) {
-            let wadcommentsID: string = req.params.id as string;
-            console.log(wadcommentsID);
-            const wadcomment = await db.wadcomments.findByPk(wadcommentsID);
-            if (!wadcomment) {
-                res.status(400).send(
-                    {
-                        error: `Wad comment with ID ${wadcommentsID} not found.`
-                    }
-                )
-                return null;
-            }
-            return wadcomment;
+        let wadcommentsID: string = req.params.id as string;
+        console.log(wadcommentsID);
+        const wadcomment = await db.wadcomments.findByPk(wadcommentsID);
+        if (!wadcomment) {
+            res.status(400).send(
+                {
+                    error: `Wad comment with ID ${wadcommentsID} not found.`
+                }
+            )
+            return null;
         }
+        return wadcomment;
+    },
+
+    async modifyByID(req: express.Request, res: express.Response) {
+        const wadCommentToBeModified = await this.getByID(req, res);
+        if (!wadCommentToBeModified) {
+            return;
+        }
+        if 
+            (
+                !req.body.WadCommentsTitle || 
+                !req.body.WadCommentsContent ||
+                !req.body.WadID ||
+                !req.body.UserID
+            ) 
+        {
+            return res.status(400).send(
+                {
+                    error: "Missing parameters, please review data"
+                }
+            );
+        }
+        wadCommentToBeModified.WadCommentsTitle = req.body.WadCommentsTitle;
+        wadCommentToBeModified.WadCommentsContent = req.body.WadCommentsContent;
+        wadCommentToBeModified.WadID = req.body.WadID;
+        wadCommentToBeModified.UserID = req.body.UserID;
+
+        await wadCommentToBeModified.save();
+        return res.location(`${Utilities.getBaseURL(req)}/wadcomments/
+        ${wadCommentToBeModified.id}`)
+        .status(201)
+        .send(wadCommentToBeModified);
+    }           
 }
 export default WadCommentsController;
 

@@ -59,11 +59,13 @@ export default (app: express.Express): void => {
 
     //WadComments
     app.route("/wadcomments")
-    //.get(WadCommentsController.getAll)
     .post(WadCommentsController.create)
     .get(WadCommentsController.getAll);
 
-    app.route("/wadcomments:id")
+    app.route("/wadcomments/:id")
+    .get(WadCommentsController.getByID)
+    .put(WadCommentsController.modifyByID);
     
 
 }
+
