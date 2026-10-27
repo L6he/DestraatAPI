@@ -2,6 +2,7 @@ import express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid"; //npm install uuid@latest
+import type { Wad } from "../models/Wad.ts";
 
 const WadsController = {
     async create(req: express.Request, res: express.Response) {
@@ -43,54 +44,65 @@ const WadsController = {
         )
     },
     async getByID(req: express.Request, res: express.Response) {
-        let wadID: string = req.params.id as string;
-        console.log(wadID);
-        const wad = await db.wads.findByPk(wadID);
+        const wad = await WadsController.getWad(req, res);
         if (!wad) {
             console.log("Wad not found");
-            res.status(400).send(
-                {
-                    error: `Wad with ID ${wadID} not found.`
-                }
-            )
-            return null;
+            return;
         }
-        console.log("Wad found");
+        console.log("Wad found")
         return res.status(200).send(wad);
     },
     async modifyByID(req: express.Request, res: express.Response) {
-        const wadToBeModified = await this.getByID(req, res);
+        if (!req.params.id) {
+            console.log(req.params.id);
+            return res.status(400).send({"error":"Missing parameters, please review data"});
+        }
+        console.log(req.params.id);
+        const wadToBeModified = await WadsController.getWad(req, res);
+        console.log(wadToBeModified);
         if (!wadToBeModified) {
-            return;
+            console.log("Wad not found");
+            return res.status(404).send(
+                {
+                    error: "Wad not found of id" + wadToBeModified
+                }
+            );
         }
         if (!req.body.WadName || 
             !req.body.WadDescription ||
             !req.body.ReleaseDate ||
-            !req.body.CategoryID ||
-            !req.body.ImageURL ||
-            !req.body.Comments
+            !req.body.CategoryID
         ) {
+            console.log(req.body.WadName+" "+req.body.WadDescription+" "+req.body.ReleaseDate+" "+req.body.CategoryID)
             return res.status(400).send(
                 {
                     error: "Missing parameters, please review data"
                 }
             );
         }
-        wadToBeModified.WadName = req.body.WadName;
-        wadToBeModified.WadDescription = req.body.WadDescription;
-        wadToBeModified.ReleaseDate = req.body.ReleaseDate;
-        wadToBeModified.CategoryID = req.body.CategoryID;
-        wadToBeModified.ImageURL = req.body.ImageURL;
-        wadToBeModified.Comments = req.body.Comments;
+        const modifiedWad = {
+            WadName: req.body.WadName,
+            WadDescription: req.body.WadDescription,
+            ReleaseDate: req.body.ReleaseDate,
+            CategoryID: req.body.CategoryID,
+            ImageURL: req.body.ImageURL || null,
+            Comments: req.body.Comments || null,
+            updatedAt: new Date(),
+        }
 
-        await wadToBeModified.save();
+        console.log("---");
+        console.log(modifiedWad);
+        console.log("---");
+
+        await db.wads.update(modifiedWad, { where: {id: req.params.id}});
+
         return res.location(`${Utilities.getBaseURL(req)}/wads/
-        ${wadToBeModified.id}`)
+        ${wadToBeModified}`)
         .status(201)
-        .send(wadToBeModified);
+        .send(modifiedWad);
     },
     async deleteByID(req: express.Request, res: express.Response) {
-        const wadToBeDeleted = await this.getByID(req, res);
+        const wadToBeDeleted = await WadsController.getWad(req, res);
         if (!wadToBeDeleted) {
             return;
         }
@@ -101,6 +113,19 @@ const WadsController = {
                 error: "No content."
             }
         );
+    },
+    async getWad(req: express.Request, res: express.Response) {
+        let wadID: string = req.params.id as string;
+        console.log(wadID);
+        const wad = await db.wads.findByPk(wadID);
+        if (!wad) {
+            console.log("Wad not found");
+            res.status(404).send({
+                error: `Wad not found with this ID: ${wadID}` 
+            });
+            return null;
+        }
+        return wad;
     }
 }
 
