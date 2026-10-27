@@ -19,7 +19,7 @@ export default (app: express.Express): void => {
     .put(WadsController.modifyByID);
 
     app.route("/users")
-    //.get(UsersController.getAll)
+    .get(UsersController.getAll)
     .post(UsersController.create);
 
     app.route("/users/:id")
