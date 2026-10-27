@@ -47,6 +47,7 @@ const WadsController = {
         console.log(wadID);
         const wad = await db.wads.findByPk(wadID);
         if (!wad) {
+            console.log("Wad not found");
             res.status(400).send(
                 {
                     error: `Wad with ID ${wadID} not found.`
@@ -54,7 +55,8 @@ const WadsController = {
             )
             return null;
         }
-        return wad;
+        console.log("Wad found");
+        return res.status(200).send(wad);
     },
     async modifyByID(req: express.Request, res: express.Response) {
         const wadToBeModified = await this.getByID(req, res);
