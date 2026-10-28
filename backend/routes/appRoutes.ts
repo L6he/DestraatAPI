@@ -25,7 +25,7 @@ export default (app: express.Express): void => {
     app.route("/users/:id")
     .get(UsersController.getByID)
     //.delete(UsersController.deleteByID)
-    //.put(UsersController.modifyByID);
+    .put(UsersController.modifyByID);
 
     //Credentials
     app.route("/credentials")
