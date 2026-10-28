@@ -39,7 +39,7 @@ export default (app: express.Express): void => {
 
     //Ownerships
     app.route("/ownerships")
-    //.get(OwnershipsController.getAll)
+    .get(OwnershipsController.getAll)
     .post(OwnershipsController.create);
 
     app.route("/ownerships/:id")
