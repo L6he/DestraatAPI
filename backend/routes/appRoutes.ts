@@ -43,7 +43,7 @@ export default (app: express.Express): void => {
     .post(OwnershipsController.create);
 
     app.route("/ownerships/:id")
-    //.get(OwnershipsController.getByID)
+    .get(OwnershipsController.getByID)
     //.delete(OwnershipsController.deleteByID)
     //.put(OwnershipsController.modifyByID);
 
