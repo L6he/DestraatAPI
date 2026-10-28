@@ -3,6 +3,7 @@ import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
 import * as UUID from "node:crypto";
+import type { Ownership } from "../models/Ownership.ts";
 
 const OwnershipsController = {
     async create(req: express.Request, res: express.Response) {
@@ -36,6 +37,47 @@ const OwnershipsController = {
         });
 
         return res.location(`${Utilities.getBaseURL(req)}/ownerships/${result.id}`).sendStatus(201);
+    },
+    async modifyByID(req: express.Request, res: express.Response) {
+        if (!req.params.id) {
+            console.log(req.params.id)
+            return res.status(400).send(
+                {
+                    error:"Missing parameters, please review data."
+                });
+        }
+        if (!req.body) {
+            return res.status(400).send(
+                {
+                    error:"Missing parameters, please review data."
+                });
+        }
+
+        const ownershipToBeModified = await OwnershipsController.getOwnership(req, res)
+
+        if (!ownershipToBeModified) {
+            return res.status(404).send(
+                {
+                    error:"Ownership not found with ID "+req.params.id
+                });
+        }
+
+        const modifiedOwnership = {
+            OwnershipName: req.body.OwnershipName,
+            OwnershipDescription: req.body.OwnershipDescription,
+            WadIDs: req.body.WadIDs,
+            UserID: req.body.UserID,
+            createdAt: req.body.createdAt,
+        } as Ownership
+        modifiedOwnership.updatedAt = new Date()
+
+        await db.ownerships.update(modifiedOwnership, {
+            where:{
+                id: req.params.id
+            }
+        })
+        return res.location(`${Utilities.getBaseURL(req)}/ownerships/${ownershipToBeModified}`)
+        .status(201).send(modifiedOwnership);
     },
     async getAll(req: express.Request, res: express.Response) {
         const ownerships = await db.ownerships.findAll();
