@@ -29,6 +29,14 @@ const OwnershipsController = {
         });
 
         return res.location(`${Utilities.getBaseURL(req)}/ownerships/${result.id}`).sendStatus(201);
+    },
+    async getAll(req: express.Request, res: express.Response) {
+        const ownerships = await db.ownerships.findAll();
+        console.log("getAll: " + ownerships);
+        return res.status(200)
+            .send(ownerships.map(
+                ({id, OwnershipName}) => {return {id, OwnershipName}}
+            ));
     }
 }
 
