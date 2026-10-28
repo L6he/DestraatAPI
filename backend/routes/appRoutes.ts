@@ -71,7 +71,7 @@ export default (app: express.Express): void => {
     //Categories
     app.route("/categories")
     //.get(CategoriesController.getAll)
-    //.post(CategoriesController.create);
+    .post(CategoriesController.create);
 
     app.route("/categories/:id")
     //.get(CategoriesController.getByID)
