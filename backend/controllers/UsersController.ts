@@ -45,6 +45,13 @@ const UsersController = {
             ({id, UserName, UserStatus, EmailAddress }) => {return {id, UserName, UserStatus, EmailAddress}}
         ));
     },
+    async getByID(req: express.Request, res: express.Response) {
+        const user = await UsersController.getUser(req, res);
+        if (!user) {
+            return;
+        }
+        return res.status(200).send(user);
+    },
     async getUser(req: express.Request, res: express.Response) {
         let userID: string = req.params.id as string;
         console.log(userID);

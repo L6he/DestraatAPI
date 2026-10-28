@@ -23,7 +23,7 @@ export default (app: express.Express): void => {
     .post(UsersController.create);
 
     app.route("/users/:id")
-    //.get(UsersController.getByID)
+    .get(UsersController.getByID)
     //.delete(UsersController.deleteByID)
     //.put(UsersController.modifyByID);
 
