@@ -118,6 +118,18 @@ const UsersController = {
         }
         return res.status(200).send(user);
     },
+    async deleteByID(req: express.Request, res: express.Response) {
+        const userToBeDeleted = await UsersController.getUser(req, res);
+        if (!userToBeDeleted) {
+            return;     
+        }
+        await userToBeDeleted.destroy();
+        return res.status(204).send(
+            {
+                error: "No Content"
+            }
+        );
+    },
     async getUser(req: express.Request, res: express.Response) {
         let userID: string = req.params.id as string;
         console.log(userID);
