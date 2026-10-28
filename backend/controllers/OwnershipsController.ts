@@ -94,6 +94,16 @@ const OwnershipsController = {
         }
         return res.status(200).send(ownership);
     },
+    async deleteByID(req: express.Request, res: express.Response) {
+        const ownershipToBeDeleted = await OwnershipsController.getOwnership(req, res);
+        if (!ownershipToBeDeleted) {
+            return;
+        }
+        await ownershipToBeDeleted.destroy();
+        return res.status(204).send({
+            error: "No content."
+        });
+    },
     async getOwnership(req: express.Request, res: express.Response) {
         let ownershipID: string = req.params.id as string
         const ownership = await db.ownerships.findByPk(ownershipID)

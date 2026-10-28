@@ -44,7 +44,7 @@ export default (app: express.Express): void => {
 
     app.route("/ownerships/:id")
     .get(OwnershipsController.getByID)
-    //.delete(OwnershipsController.deleteByID)
+    .delete(OwnershipsController.deleteByID)
     .put(OwnershipsController.modifyByID);
 
     //Comments
