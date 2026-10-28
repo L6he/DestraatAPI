@@ -7,6 +7,7 @@ import CredentialsController from "../controllers/CredentialsController.ts";
 import OwnershipsController from "../controllers/OwnershipsController.ts";
 import CommentsController from "../controllers/CommentsController.ts";
 import WadCommentsController from "../controllers/WadCommentsController.ts";
+import CategoriesController from "../controllers/CategoriesController.ts";
 
 export default (app: express.Express): void => {
     app.route("/wads")
@@ -67,5 +68,14 @@ export default (app: express.Express): void => {
     .put(WadCommentsController.modifyByID)
     .delete(WadCommentsController.deleteByID);
 
+    //Categories
+    app.route("/categories")
+    //.get(CategoriesController.getAll)
+    //.post(CategoriesController.create);
+
+    app.route("/categories/:id")
+    //.get(CategoriesController.getByID)
+    //.delete(CategoriesController.deleteByID)
+    //.put(CategoriesController.modifyByID);
 }
 
