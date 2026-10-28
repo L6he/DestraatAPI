@@ -28,10 +28,83 @@ const WadCommentsController = {
             UserID: userWhoUploaded, //later  get real user id
             WadID: wadIdThatTheCommentisUploadedTo,
         });
-    
-        return res.location(`${Utilities.getBaseURL(req)}/wadcomments/${result.id}`).sendStatus(201);
-    }
-}
+        return res
+        .location(`${Utilities.getBaseURL(req)}/wadcomments/
+        ${result.id}`).sendStatus(201);
+    },
 
+    async getAll(req: express.Request, res: express.Response) {
+        const wadcomments = await db.wadcomments.findAll();
+        console.log("getAll: " + wadcomments);
+        return res
+        .status(200)
+        .send(
+            wadcomments.map(
+                ({id, WadCommentsTitle}) => {return {id, WadCommentsTitle}}
+            )
+        )
+    },
+
+    async getByID(req: express.Request, res: express.Response) {
+        let wadcommentsID: string = req.params.id as string;
+        console.log(wadcommentsID);
+        const wadcomment = await db.wadcomments.findByPk(wadcommentsID);
+        if (!wadcomment) {
+            res.status(400).send(
+                {
+                    error: `Wad comment with ID ${wadcommentsID} not found.`
+                }
+            )
+            return null;
+        }
+        return wadcomment;
+    },
+
+    async modifyByID(req: express.Request, res: express.Response) {
+        const wadCommentToBeModified = await this.getByID(req, res);
+        if (!wadCommentToBeModified) {
+            return;
+        }
+        if 
+            (
+                !req.body.WadCommentsTitle || 
+                !req.body.WadCommentsContent ||
+                !req.body.WadID ||
+                !req.body.UserID
+            ) 
+        {
+            return res.status(400).send(
+                {
+                    error: "Missing parameters, please review data"
+                }
+            );
+        }
+        wadCommentToBeModified.WadCommentsTitle = req.body.WadCommentsTitle;
+        wadCommentToBeModified.WadCommentsContent = req.body.WadCommentsContent;
+        wadCommentToBeModified.WadID = req.body.WadID;
+        wadCommentToBeModified.UserID = req.body.UserID;
+
+        await wadCommentToBeModified.save();
+        return res.location(`${Utilities.getBaseURL(req)}/wadcomments/
+        ${wadCommentToBeModified.id}`)
+        .status(201)
+        .send(wadCommentToBeModified);
+    },
+    
+    async deleteByID(req: express.Request, res: express.Response) {
+        const wadCommentToBeDeleted = await this.getByID(req, res);
+        if (!wadCommentToBeDeleted) {
+            return;
+        }
+        await wadCommentToBeDeleted.destroy();
+        return res.status(204)
+        .send(
+            {
+                error: "No content."
+            }
+        );
+    }
+            
+}
 export default WadCommentsController;
 

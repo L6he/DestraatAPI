@@ -29,6 +29,30 @@ const OwnershipsController = {
         });
 
         return res.location(`${Utilities.getBaseURL(req)}/ownerships/${result.id}`).sendStatus(201);
+    },
+    async getAll(req: express.Request, res: express.Response) {
+        const ownerships = await db.ownerships.findAll();
+        console.log("getAll: " + ownerships);
+        return res.status(200)
+            .send(ownerships.map(
+                ({id, UserID}) => {return {id, UserID}}
+            ));
+    },
+    async getByID(req: express.Request, res: express.Response) {
+        const ownership = await OwnershipsController.getOwnership(req, res)
+        if (!ownership) {
+            return;        
+        }
+        return res.status(200).send(ownership);
+    },
+    async getOwnership(req: express.Request, res: express.Response) {
+        let ownershipID: string = req.params.id as string
+        const ownership = await db.ownerships.findByPk(ownershipID)
+        if (!ownership) {
+            res.status(404).send({error:"Ownership not found with ID "+ownershipID})
+            return null;
+        }
+        return ownership;
     }
 }
 

@@ -19,13 +19,13 @@ export default (app: express.Express): void => {
     .put(WadsController.modifyByID);
 
     app.route("/users")
-    //.get(UsersController.getAll)
+    .get(UsersController.getAll)
     .post(UsersController.create);
 
     app.route("/users/:id")
-    //.get(UsersController.getByID)
-    //.delete(UsersController.deleteByID)
-    //.put(UsersController.modifyByID);
+    .get(UsersController.getByID)
+    .delete(UsersController.deleteByID)
+    .put(UsersController.modifyByID);
 
     //Credentials
     app.route("/credentials")
@@ -39,11 +39,11 @@ export default (app: express.Express): void => {
 
     //Ownerships
     app.route("/ownerships")
-    //.get(OwnershipsController.getAll)
+    .get(OwnershipsController.getAll)
     .post(OwnershipsController.create);
 
     app.route("/ownerships/:id")
-    //.get(OwnershipsController.getByID)
+    .get(OwnershipsController.getByID)
     //.delete(OwnershipsController.deleteByID)
     //.put(OwnershipsController.modifyByID);
 
@@ -57,12 +57,15 @@ export default (app: express.Express): void => {
     .patch(CommentsController.hide) //varem "/comments/:id/hide"
     .get(CommentsController.getByID);
 
-    //Ownerships
+    //WadComments
     app.route("/wadcomments")
-    //.get(WadCommentsController.getAll)
-    .post(WadCommentsController.create);
+    .post(WadCommentsController.create)
+    .get(WadCommentsController.getAll);
 
-    app.route("/wadcomments:id")
-    
+    app.route("/wadcomments/:id")
+    .get(WadCommentsController.getByID)
+    .put(WadCommentsController.modifyByID)
+    .delete(WadCommentsController.deleteByID);
 
 }
+
