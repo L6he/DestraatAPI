@@ -44,6 +44,19 @@ const UsersController = {
         return res.status(200).send(users.map(
             ({id, UserName, UserStatus, EmailAddress }) => {return {id, UserName, UserStatus, EmailAddress}}
         ));
+    },
+    async getUser(req: express.Request, res: express.Response) {
+        let userID: string = req.params.id as string;
+        console.log(userID);
+        const user = await db.users.findByPk(userID);
+        if (!user) {
+            console.log("User not found");
+            res.status(404).send({
+                error: "User not found with ID " + userID
+            });
+            return null;
+        }
+        return user;
     }
 }
 
