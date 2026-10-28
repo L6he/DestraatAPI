@@ -35,7 +35,7 @@ const OwnershipsController = {
         console.log("getAll: " + ownerships);
         return res.status(200)
             .send(ownerships.map(
-                ({id, OwnershipName}) => {return {id, OwnershipName}}
+                ({id, UserID}) => {return {id, UserID}}
             ));
     }
 }
