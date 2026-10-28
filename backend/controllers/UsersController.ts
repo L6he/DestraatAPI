@@ -50,22 +50,19 @@ const UsersController = {
                 error: "Missing parameters, please review data"
             })
         }
-        const modifiedUser = new User
-
-        modifiedUser.UserName = userToBeModified.UserName
-        modifiedUser.PasswordHash = userToBeModified.PasswordHash
-        modifiedUser.SignupDate = userToBeModified.SignupDate
-        modifiedUser.UserStatus = userToBeModified.UserStatus
-        modifiedUser.EmailAddress = userToBeModified.EmailAddress
-        modifiedUser.OwnershipID = userToBeModified.OwnershipID
-        modifiedUser.CommentListID = userToBeModified.CommentListID
-        modifiedUser.ProfileID = userToBeModified.ProfileID
-        modifiedUser.CredentialID = userToBeModified.CredentialID
-        modifiedUser.createdAt = userToBeModified.createdAt
-
-        if (req.body.UserName) {
-            modifiedUser.UserName = req.body.UserName;
+        const modifiedUser = {
+            UserName: req.body.UserName,
+            PasswordHash: req.body.PasswordHash,
+            EmailAddress: req.body.EmailAddress,
+            SignupDate: req.body.SignupDate,
+            UserStatus: req.body.UserStatus,
+            OwnershipID: req.body.OwnershipID,
+            CommentListID: req.body.CommentListID,
+            ProfileID: req.body.ProfileID,
+            CredentialID: req.body.CredentialID,
+            createdAt: userToBeModified.createdAt,
         }
+
         if (req.body.Password) {
             //kontrolli olemasoleva paswordi hashide samasust
             if (req.body.Password != req.body.PasswordConfirmation) 
@@ -78,25 +75,8 @@ const UsersController = {
             //kui ok, siis proceed
             //hashi uus password
         }
-        if (req.body.UserStatus) {
-            modifiedUser.UserStatus = req.body.UserStatus;
-        }
-        if (req.body.OwnershipID) {
-            modifiedUser.OwnershipID = req.body.OwnershipID;
-        }
-        if (req.body.CommentListID) {
-            modifiedUser.CommentListID = req.body.CommentListID;
-        }
-        if (req.body.ProfileID) {
-            modifiedUser.ProfileID = req.body.ProfileID;
-        }
-        if (req.body.EmailAddress) {
-            modifiedUser.EmailAddress = req.body.EmailAddress;
-        }
-        if (req.body.CredentialID) {
-            modifiedUser.CredentialID = req.body.CredentialID;
-        }
-        modifiedUser.updatedAt = new Date();
+        
+        userToBeModified.updatedAt = new Date();
         await db.users.update(modifiedUser, { where: {id: req.params.id}});
 
         return res.location(`${Utilities.getBaseURL(req)}/users/
