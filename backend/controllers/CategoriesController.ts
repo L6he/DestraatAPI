@@ -31,6 +31,13 @@ const CategoriesController = {
                     ({id, CategoryName, CategoryDescription}) => {return {id, CategoryName, CategoryDescription}}
                 ));
     },
+    async getByID(req: express.Request, res: express.Response) {
+            const category = await CategoriesController.getCategory(req, res)
+            if (!category) {
+                return;        
+            }
+            return res.status(200).send(category);
+        },
     
 }
 
