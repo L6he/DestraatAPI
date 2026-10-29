@@ -13,7 +13,7 @@ const UsersController = {
             return res.status(400)
             .send(
                 {
-                    error: "Missing parameters, please review data."
+                    error: "Missing at least one of these parameters: UserName, EmailAddress, Password, PasswordConfirmation. Please review data."
                 }
             );
         }
@@ -45,11 +45,7 @@ const UsersController = {
             })
         }
         const userToBeModified = await UsersController.getUser(req, res) as User;
-        if (!req.body) {
-            return res.status(400).send({
-                error: "Missing parameters, please review data"
-            })
-        }
+
         const modifiedUser = {
             UserName: req.body.UserName,
             PasswordHash: req.body.PasswordHash,
