@@ -13,7 +13,7 @@ const WadsController = {
         ) {
             return res.status(400).send(
                 {
-                    error: "Missing parameters, please review data"
+                    error: "Missing at least one of these parameters: WadName, WadDescription, ReleaseDate, CategoryID. Please review data."
                 }
             );
         }
@@ -76,7 +76,7 @@ const WadsController = {
             console.log(req.body.WadName+" "+req.body.WadDescription+" "+req.body.ReleaseDate+" "+req.body.CategoryID)
             return res.status(400).send(
                 {
-                    error: "Missing parameters, please review data"
+                    error: "Missing at least one of these parameters: WadName, WadDescription, ReleaseDate, CategoryID. Please review data."
                 }
             );
         }
