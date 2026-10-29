@@ -12,7 +12,7 @@ const CredentialsController = {
         ) {
             return res.status(400).send(
                 {
-                    error: "Missing parameters, please review data"
+                    error: "Missing at least one of these parameters: UserID, Credentials, UserType, please review data."
                 }
             );
         }
