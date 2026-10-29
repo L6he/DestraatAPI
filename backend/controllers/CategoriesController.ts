@@ -22,7 +22,16 @@ const CategoriesController = {
 
         return res.location(`${Utilities.getBaseURL(req)}/categories/${result.id}`)
         .sendStatus(201);
-    }
+    },
+    async getAll(req: express.Request, res: express.Response) {
+            const categories = await db.categories.findAll();
+            console.log("getAll: " + categories);
+            return res.status(200)
+                .send(categories.map(
+                    ({id, CategoryName, CategoryDescription}) => {return {id, CategoryName, CategoryDescription}}
+                ));
+    },
+    
 }
 
 export default CategoriesController;
