@@ -18,7 +18,7 @@ export default (app: express.Express): void => {
     app.route("/wads/:id")
     .get(WadsController.getByID)
     .delete(WadsController.deleteByID)
-    .put(WadsController.modifyByID);
+    .put(checkRequestBody, WadsController.modifyByID);
 
     app.route("/users")
     .get(UsersController.getAll)
@@ -27,7 +27,7 @@ export default (app: express.Express): void => {
     app.route("/users/:id")
     .get(UsersController.getByID)
     .delete(UsersController.deleteByID)
-    .put(UsersController.modifyByID);
+    .put(checkRequestBody, UsersController.modifyByID);
 
     //Credentials
     app.route("/credentials")
@@ -37,7 +37,7 @@ export default (app: express.Express): void => {
     app.route("/credentials/:id")
     .get(CredentialsController.getByID)
     .delete(CredentialsController.deleteByID)
-    .put(CredentialsController.modifyByID);
+    .put(checkRequestBody, CredentialsController.modifyByID);
 
     //Ownerships
     app.route("/ownerships")
@@ -47,7 +47,7 @@ export default (app: express.Express): void => {
     app.route("/ownerships/:id")
     .get(OwnershipsController.getByID)
     .delete(OwnershipsController.deleteByID)
-    .put(OwnershipsController.modifyByID);
+    .put(checkRequestBody, OwnershipsController.modifyByID);
 
     //Comments
     app.route("/comments")
@@ -56,7 +56,7 @@ export default (app: express.Express): void => {
 
     app.route("/comments/:id")
     .delete(CommentsController.remove)
-    .patch(CommentsController.hide) //varem "/comments/:id/hide"
+    .patch(checkRequestBody, CommentsController.hide) //varem "/comments/:id/hide"
     .get(CommentsController.getByID);
 
     //WadComments
@@ -66,7 +66,7 @@ export default (app: express.Express): void => {
 
     app.route("/wadcomments/:id")
     .get(WadCommentsController.getByID)
-    .put(WadCommentsController.modifyByID)
+    .put(checkRequestBody, WadCommentsController.modifyByID)
     .delete(WadCommentsController.deleteByID);
 
     //Categories
@@ -77,6 +77,6 @@ export default (app: express.Express): void => {
     app.route("/categories/:id")
     //.get(CategoriesController.getByID)
     //.delete(CategoriesController.deleteByID)
-    //.put(CategoriesController.modifyByID);
+    //.put(checkRequestBody, CategoriesController.modifyByID);
 }
 
