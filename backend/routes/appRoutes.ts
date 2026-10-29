@@ -8,11 +8,12 @@ import OwnershipsController from "../controllers/OwnershipsController.ts";
 import CommentsController from "../controllers/CommentsController.ts";
 import WadCommentsController from "../controllers/WadCommentsController.ts";
 import CategoriesController from "../controllers/CategoriesController.ts";
+import checkRequestBody from "../controllers/middleware/checkRequestBody.ts";
 
 export default (app: express.Express): void => {
     app.route("/wads")
     .get(WadsController.getAll)
-    .post(WadsController.create);
+    .post(checkRequestBody, WadsController.create);
 
     app.route("/wads/:id")
     .get(WadsController.getByID)
@@ -21,7 +22,7 @@ export default (app: express.Express): void => {
 
     app.route("/users")
     .get(UsersController.getAll)
-    .post(UsersController.create);
+    .post(checkRequestBody, UsersController.create);
 
     app.route("/users/:id")
     .get(UsersController.getByID)
@@ -31,7 +32,7 @@ export default (app: express.Express): void => {
     //Credentials
     app.route("/credentials")
     .get(CredentialsController.getAll)
-    .post(CredentialsController.create);
+    .post(checkRequestBody, CredentialsController.create);
 
     app.route("/credentials/:id")
     .get(CredentialsController.getByID)
@@ -41,7 +42,7 @@ export default (app: express.Express): void => {
     //Ownerships
     app.route("/ownerships")
     .get(OwnershipsController.getAll)
-    .post(OwnershipsController.create);
+    .post(checkRequestBody, OwnershipsController.create);
 
     app.route("/ownerships/:id")
     .get(OwnershipsController.getByID)
@@ -51,7 +52,7 @@ export default (app: express.Express): void => {
     //Comments
     app.route("/comments")
     .get(CommentsController.getAll)
-    .post(CommentsController.create);
+    .post(checkRequestBody, CommentsController.create);
 
     app.route("/comments/:id")
     .delete(CommentsController.remove)
@@ -60,7 +61,7 @@ export default (app: express.Express): void => {
 
     //WadComments
     app.route("/wadcomments")
-    .post(WadCommentsController.create)
+    .post(checkRequestBody, WadCommentsController.create)
     .get(WadCommentsController.getAll);
 
     app.route("/wadcomments/:id")
@@ -71,7 +72,7 @@ export default (app: express.Express): void => {
     //Categories
     app.route("/categories")
     //.get(CategoriesController.getAll)
-    .post(CategoriesController.create);
+    .post(checkRequestBody, CategoriesController.create);
 
     app.route("/categories/:id")
     //.get(CategoriesController.getByID)
