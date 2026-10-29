@@ -89,13 +89,9 @@ const CredentialsController = {
     },
 
     async deleteByID(req: express.Request, res: express.Response) {
-        const credentialToBeDeleted = await this.getByID(req, res);
+        const credentialToBeDeleted = await CredentialsController.getCredential(req, res);
         if (!credentialToBeDeleted) {
-            return res.status(404).send(
-                {
-                    error: "Credential with this ID not found."
-                }
-            );
+            return;
         }
         await credentialToBeDeleted.destroy();
         return res.status(204).send(
@@ -109,7 +105,7 @@ const CredentialsController = {
         let credentialID: string = req.params.id as string;
         const credential = await db.credentials.findByPk(credentialID);
         if (!credential) {
-            res.status(404).send({error:"Credential not found with ID"+credentialID});
+            res.status(404).send({error:"Credential not found with ID "+credentialID});
             return null;
         }
         return credential;
