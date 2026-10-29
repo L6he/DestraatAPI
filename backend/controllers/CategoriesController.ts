@@ -2,26 +2,27 @@ import express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid"; 
+import { Category } from "../models/Category.ts";
 
 const CategoriesController = {
     async create(req: express.Request, res: express.Response) {
-        if (!req.body.CategoryName ||
-            !req.body.CategoryDescription
-        ) {
-            return res.status(400).send(
-                {
-                    error: "Missing parameters, please review data."
-                }
-            );
+        const requiredFields = ["CategoryName", "CategoryDescription"];
+        const missingFields = requiredFields.filter(field => !req.body[field]); //võiks panna ka update-i juurde
+        if (missingFields.length > 0) {
+            return res.status(400).send({
+                error: "Missing parameters, please review data.",
+                missing: missingFields
+            });
         }
-        const result = await db.categories.create({
+        const newCategory = {
             id: uuidv7(),
             CategoryName: req.body.CategoryName,
             CategoryDescription: req.body.CategoryDescription
-        });
+        }
 
-        return res.location(`${Utilities.getBaseURL(req)}/categories/${result.id}`)
-        .sendStatus(201);
+        const result = await db.categories.create(newCategory);
+
+        return res.location(`${Utilities.getBaseURL(req)}/categories/${result.id}`).sendStatus(201);
     },
     async getAll(req: express.Request, res: express.Response) {
             const categories = await db.categories.findAll();

@@ -71,7 +71,7 @@ export default (app: express.Express): void => {
 
     //Categories
     app.route("/categories")
-    //.get(CategoriesController.getAll)
+    .get(CategoriesController.getAll)
     .post(checkRequestBody, CategoriesController.create);
 
     app.route("/categories/:id")
