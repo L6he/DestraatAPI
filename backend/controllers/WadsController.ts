@@ -2,7 +2,6 @@ import express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid"; //npm install uuid@latest
-import type { Wad } from "../models/Wad.ts";
 
 const WadsController = {
     async create(req: express.Request, res: express.Response) {
@@ -64,7 +63,7 @@ const WadsController = {
             console.log("Wad not found");
             return res.status(404).send(
                 {
-                    error: "Wad not found of id" + wadToBeModified
+                    error: "Wad not found with ID " + wadToBeModified
                 }
             );
         }
