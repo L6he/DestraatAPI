@@ -2,6 +2,7 @@ import express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
+import type { Credential } from "../models/Credential.ts";
 
 const CredentialsController = {
     async create(req: express.Request, res: express.Response) {
@@ -48,33 +49,43 @@ const CredentialsController = {
     },
 
     async modifyByID(req: express.Request, res: express.Response) {
-        const credentialToBeModified = await this.getByID(req, res);
+        if (!req.params.id) {
+            return res.status(400).send(
+                {
+                    error:"Missing parameters, please review data."
+                });
+        }
+        if (!req.body) {
+            return res.status(400).send(
+                {
+                    error:"Missing parameters, please review data."
+                });
+        }
+
+        const credentialToBeModified = await CredentialsController.getCredential(req, res);
+
         if (!credentialToBeModified) {
             return res.status(404).send(
                 {
-                    error: "Credential with this ID not found"
-                }
-            );
+                    error:"Credential not found with ID"+req.params.id
+                });
         }
-        if (!req.body.UserID || 
-            !req.body.Credentials ||
-            !req.body.UserType
-        ) {
-            return res.status(400).send(
-                {
-                    error: "Missing parameters, please review data"
-                }
-            );
-        }
-        credentialToBeModified.UserID = req.body.UserID;
-        credentialToBeModified.Credentials = req.body.Credentials;
-        credentialToBeModified.UserType = req.body.UserType;
 
-        await credentialToBeModified.save();
-        return res.location(`${Utilities.getBaseURL(req)}/credentials/
-        ${credentialToBeModified.id}`)
-        .status(201)
-        .send(credentialToBeModified);
+        const modifiedCredential = {
+            UserType: req.body.UserType,
+            UserID: req.body.UserID,
+            Credentials: req.body.Credentials,
+            createdAt: req.body.createdAt
+        } as Credential;
+        modifiedCredential.updatedAt = new Date();
+
+        await db.credentials.update(modifiedCredential, {
+            where:{
+                id: req.params.id
+            }
+        });
+        return res.location(`${Utilities.getBaseURL(req)}/credentials/${credentialToBeModified}`)
+        .status(201).send(modifiedCredential);
     },
 
     async deleteByID(req: express.Request, res: express.Response) {
