@@ -32,13 +32,21 @@ const CategoriesController = {
                 ));
     },
     async getByID(req: express.Request, res: express.Response) {
-            const category = await CategoriesController.getCategory(req, res)
-            if (!category) {
-                return;        
-            }
-            return res.status(200).send(category);
-        },
-    
+        const category = await CategoriesController.getCategory(req, res);
+        if (!category) {
+            return;        
+        }
+        return res.status(200).send(category);
+    },
+    async getCategory(req: express.Request, res: express.Response) {
+        let categoryID: string = req.params.id as string;
+        const category = await db.categories.findByPk(categoryID);
+        if (!category) {
+            res.status(404).send({ error: "Category not found with ID "+categoryID});
+            return null;
+        }
+        return category;
+    }
 }
 
 export default CategoriesController;
