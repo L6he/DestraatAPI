@@ -19,12 +19,12 @@ const OwnershipsController = {
             }
             return res.status(400).send(
                 {
-                    error: "Missing parameters, please review data."
+                    error: "Missing at least one of these parameters: OwnershipName, WadIDs, UserID. Please review data."
                 }
             );
         }
-        const starterJson = `{"WadIDs":"${req.body.WadIDs}"}`
-        const wadIdToBeAddedToOwnership = JSON.parse(starterJson)
+        const starterJson = `{"WadIDs":"${req.body.WadIDs}"}`;
+        const wadIdToBeAddedToOwnership = JSON.parse(starterJson);
 
         const result = await db.ownerships.create({
             id: uuidv7(),
@@ -67,7 +67,6 @@ const OwnershipsController = {
             OwnershipDescription: req.body.OwnershipDescription,
             WadIDs: req.body.WadIDs,
             UserID: req.body.UserID,
-            createdAt: req.body.createdAt,
         } as Ownership
         modifiedOwnership.updatedAt = new Date()
 
