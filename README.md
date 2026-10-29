@@ -55,9 +55,15 @@ Hiljem läheb projekt <i>live</i>-is ühe andmebaasi peale
 20. `DB_NAME`-i jutumärkide vahele lisa andmebaasinimi, `DB_USERNAME`-ile andmebaasikasutaja kasutajanimi, `DB_PASSWORD`-i andmebaasikasutaja salasõna, `DB_HOSTNAME`-i serveri aadressi
 21. Salvesta fail ja veendu, et failinimi oleks teiste failidega võrreldes värvusest hallim
 
+### <i>Development</i>-i käivitamine
+1. Lae <i>backend</i>-i sõltuvused alla: `npm i`
+2. Veendu et terminali failitee on <i>backend</i> kaustas, kui ei ole, kirjuta `cd backend`
+3. Koodi käivitamiseks on käsk `npm run dev`
+4. Koodi peatamiseks tee `CTRL`+`C`
+
 ### Produktsiooni käivitamine
 Eelmiste sammude põhjal:
 1. Konstrueeri produktsiooni kood käsuga `npm run build`
-2. Käivita toodangu kood käsuga `npm run dev`, kui see ei toimi, proovi `npm run start`
+2. Käivita toodangu kood käsuga `npm run start`
 3. Veendu, et <i>Zone</i>-i serveril oleks sinu IP lubatud nimekirjas (`Välised hostid:`)
 4. Koodi peatamiseks tee `CTRL`+`C`
