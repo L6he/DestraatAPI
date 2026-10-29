@@ -24,6 +24,23 @@ const CategoriesController = {
 
         return res.location(`${Utilities.getBaseURL(req)}/categories/${result.id}`).sendStatus(201);
     },
+    
+    async getAll(req: express.Request, res: express.Response) {
+            const categories = await db.categories.findAll();
+            console.log("getAll: " + categories);
+            return res.status(200)
+                .send(categories.map(
+                    ({id, CategoryName, CategoryDescription}) => {return {id, CategoryName, CategoryDescription}}
+                ));
+    },
+
+    async getByID(req: express.Request, res: express.Response) {
+        const category = await CategoriesController.getCategory(req, res);
+        if (!category) {
+            return;        
+        }
+        return res.status(200).send(category);
+    },
 
     async modifyById(req: express.Request, res: express.Response) {
         const requiredFields = ["CategoryName","CategoryDescription"]
@@ -51,27 +68,16 @@ const CategoriesController = {
         .status(201)
         .send(modifiedCategory)
     },
-    
-    async getAll(req: express.Request, res: express.Response) {
-            const categories = await db.categories.findAll();
-            console.log("getAll: " + categories);
-            return res.status(200)
-                .send(categories.map(
-                    ({id, CategoryName, CategoryDescription}) => {return {id, CategoryName, CategoryDescription}}
-                ));
-    },
-    async getByID(req: express.Request, res: express.Response) {
-            const category = await CategoriesController.getCategory(req, res)
-            if (!category) {
-                return;        
-            }
-            return res.status(200).send(category);
-        },
 
-    async modifyById(req: express.Request, res: express.Response) {
-
+    async getCategory(req: express.Request, res: express.Response) {
+        let categoryID: string = req.params.id as string;
+        const category = await db.categories.findByPk(categoryID);
+        if (!category) {
+            res.status(404).send({ error: "Category not found with ID "+categoryID});
+            return null;
+        }
+        return category;
     }
-    
 }
 
 export default CategoriesController;
