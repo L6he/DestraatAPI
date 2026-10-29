@@ -29,18 +29,11 @@ const CredentialsController = {
     },
     
     async getByID(req: express.Request, res: express.Response) {
-        let credentialID: string = req.params.id as string
-        console.log(credentialID); //VERY SECURE
-        const credential = await db.credentials.findByPk(credentialID);
+        const credential = await CredentialsController.getCredential(req, res);
         if (!credential) {
-            res.status(404).send(
-                {
-                    error: `Credential with id ${credentialID} not found.`
-                }
-            )
-            return null;
+            return;
         }
-        return credential;
+        return res.status(200).send(credential);
     },
 
     async getAll(req: express.Request, res: express.Response) {
@@ -100,6 +93,16 @@ const CredentialsController = {
             }
         );
     },
+
+    async getCredential(req: express.Request, res: express.Response) {
+        let credentialID: string = req.params.id as string;
+        const credential = await db.credentials.findByPk(credentialID);
+        if (!credential) {
+            res.status(404).send({error:"Credential not found with ID"+credentialID});
+            return null;
+        }
+        return credential;
+    }
 }
 
 export default CredentialsController;
