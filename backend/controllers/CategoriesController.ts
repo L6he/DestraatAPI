@@ -69,6 +69,13 @@ const CategoriesController = {
         .send(modifiedCategory)
     },
 
+    async deleteByID (req: express.Request, res: express.Response) {
+        const categoryToBeDeleted = await CategoriesController.getCategory(req, res)
+        if (!categoryToBeDeleted) {return}
+        await categoryToBeDeleted.destroy();
+        return res.status(204).send({error: "No Content"})
+    },
+
     async getCategory(req: express.Request, res: express.Response) {
         let id: string = req.params.id as string
         const category = await db.categories.findByPk(id);
@@ -78,10 +85,10 @@ const CategoriesController = {
                     error: `Category with this ID is not found. ${id}`
                 }
             )
-            return null
+            return null;
         } 
-        return category
+        return category;
     }
 }
 
-export default CategoriesController
+export default CategoriesController;
