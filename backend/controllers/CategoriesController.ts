@@ -29,14 +29,14 @@ const CategoriesController = {
             const categories = await db.categories.findAll();
             console.log("getAll: " + categories);
             return res.status(200)
-                .send(categories.map(
-                    ({id, CategoryName, CategoryDescription}) => {return {id, CategoryName, CategoryDescription}}
-                ));
+            .send(categories.map(
+                ({id, CategoryName, CategoryDescription}) => {return {id, CategoryName, CategoryDescription}}
+            ));
     },
     async getByID(req: express.Request, res: express.Response) {
         const category = await CategoriesController.getCategory(req, res);
         if (!category) {
-            return;        
+            return;
         }
         return res.status(200).send(category);
     },
@@ -44,10 +44,10 @@ const CategoriesController = {
         let categoryID: string = req.params.id as string;
         const category = await db.categories.findByPk(categoryID);
         if (!category) {
-            res.status(404).send({ error: "Category not found with ID "+categoryID});
+            res.status(404).send({error:"Category not found with ID "+categoryID});
             return null;
         }
-        return category;
+        return category; 
     }
 }
     
