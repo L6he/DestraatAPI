@@ -90,3 +90,10 @@ async modifyByID(req: express.Request, res: express.Response) {
         return res.location(`${Utilities.getBaseURL(req)}/ownerships/${req.params.id}`)
             .status(201).send(modifiedOwnership);
     },
+async getAll(req: express.Request, res: express.Response) {
+        const ownerships = await db.ownerships.findAll();
+        return res.status(200)
+            .send(ownerships.map(
+                ({ id, UserID }: any) => ({ id, UserID })
+            ));
+    },
