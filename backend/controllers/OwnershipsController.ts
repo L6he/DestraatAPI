@@ -13,12 +13,9 @@ const OwnershipsController = {
             return null;
         }
         return ownership;
-    }
-};
+    },
 
-export default OwnershipsController;
-
-async create(req: express.Request, res: express.Response) {
+    async create(req: express.Request, res: express.Response) {
         if (
             !req.body.OwnershipName ||
             !req.body.WadIDs ||
@@ -47,8 +44,8 @@ async create(req: express.Request, res: express.Response) {
 
         return res.location(`${Utilities.getBaseURL(req)}/ownerships/${result.id}`).sendStatus(201);
     },
-    
-async deleteByID(req: express.Request, res: express.Response) {
+
+    async deleteByID(req: express.Request, res: express.Response) {
         const ownershipToBeDeleted = await OwnershipsController.getOwnership(req, res);
         if (!ownershipToBeDeleted) {
             return;
@@ -58,7 +55,8 @@ async deleteByID(req: express.Request, res: express.Response) {
             error: "No content."
         });
     },
-async modifyByID(req: express.Request, res: express.Response) {
+
+    async modifyByID(req: express.Request, res: express.Response) {
         if (!req.params.id || !req.body) {
             return res.status(400).send({
                 error: "Missing parameters, please review data."
@@ -90,3 +88,22 @@ async modifyByID(req: express.Request, res: express.Response) {
         return res.location(`${Utilities.getBaseURL(req)}/ownerships/${req.params.id}`)
             .status(201).send(modifiedOwnership);
     },
+
+    async getAll(req: express.Request, res: express.Response) {
+        const ownerships = await db.ownerships.findAll();
+        return res.status(200)
+            .send(ownerships.map(
+                ({ id, UserID }: any) => ({ id, UserID })
+            ));
+    },
+
+    async getByID(req: express.Request, res: express.Response) {
+        const ownership = await OwnershipsController.getOwnership(req, res);
+        if (!ownership) {
+            return;        
+        }
+        return res.status(200).send(ownership);
+    }
+};
+
+export default OwnershipsController;
