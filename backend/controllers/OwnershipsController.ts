@@ -17,3 +17,33 @@ const OwnershipsController = {
 };
 
 export default OwnershipsController;
+
+async create(req: express.Request, res: express.Response) {
+        if (
+            !req.body.OwnershipName ||
+            !req.body.WadIDs ||
+            !req.body.UserID
+        ) {
+            if (!req.body.UserID) {
+                return res.status(403).send({ error: "Unauthorized" });
+            }
+            return res.status(400).send({
+                error: "Missing parameters, please review data."
+            });
+        }
+        
+        const starterJson = `{"WadIDs":"${req.body.WadIDs}"}`;
+        const wadIdToBeAddedToOwnership = JSON.parse(starterJson);
+
+        const result = await db.ownerships.create({
+            id: uuidv7(),
+            OwnershipName: req.body.OwnershipName,
+            OwnershipDescription: req.body.OwnershipDescription,
+            WadIDs: wadIdToBeAddedToOwnership,
+            UserID: req.body.UserID,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        });
+
+        return res.location(`${Utilities.getBaseURL(req)}/ownerships/${result.id}`).sendStatus(201);
+    },
