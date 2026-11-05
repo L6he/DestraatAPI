@@ -47,3 +47,14 @@ async create(req: express.Request, res: express.Response) {
 
         return res.location(`${Utilities.getBaseURL(req)}/ownerships/${result.id}`).sendStatus(201);
     },
+    
+async deleteByID(req: express.Request, res: express.Response) {
+        const ownershipToBeDeleted = await OwnershipsController.getOwnership(req, res);
+        if (!ownershipToBeDeleted) {
+            return;
+        }
+        await ownershipToBeDeleted.destroy();
+        return res.status(204).send({
+            error: "No content."
+        });
+    },
