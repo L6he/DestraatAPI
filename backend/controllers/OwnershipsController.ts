@@ -58,3 +58,35 @@ async deleteByID(req: express.Request, res: express.Response) {
             error: "No content."
         });
     },
+async modifyByID(req: express.Request, res: express.Response) {
+        if (!req.params.id || !req.body) {
+            return res.status(400).send({
+                error: "Missing parameters, please review data."
+            });
+        }
+
+        const ownershipToBeModified = await OwnershipsController.getOwnership(req, res);
+
+        if (!ownershipToBeModified) {
+            return;
+        }
+
+        const modifiedOwnership = {
+            OwnershipName: req.body.OwnershipName,
+            OwnershipDescription: req.body.OwnershipDescription,
+            WadIDs: req.body.WadIDs,
+            UserID: req.body.UserID,
+            createdAt: req.body.createdAt,
+        } as Ownership;
+        
+        modifiedOwnership.updatedAt = new Date();
+
+        await db.ownerships.update(modifiedOwnership, {
+            where: {
+                id: req.params.id
+            }
+        });
+
+        return res.location(`${Utilities.getBaseURL(req)}/ownerships/${req.params.id}`)
+            .status(201).send(modifiedOwnership);
+    },
