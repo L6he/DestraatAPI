@@ -1,8 +1,8 @@
 import express from "express";
-import { db } from "../src/db.ts";
+import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
-import type { Credential } from "../src/models/Credential.ts";
+import type { Credential } from "../models/Credential.ts";
 
 const CredentialsController = {
     async create(req: express.Request, res: express.Response) {

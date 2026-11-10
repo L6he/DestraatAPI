@@ -1,5 +1,5 @@
 import express from "express";
-import { db } from "../src/db.ts";
+import { db } from "../db.ts";
 import { v7 as uuidv7 } from "uuid";
 
 const CommentsController = {

@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors"; //npm i --save-dev @types/cors
 import { sync, connect } from "./db.ts"; // Getting weirder by the second!!
 
-import appRoutes from "../routes/appRoutes.ts";
+import appRoutes from "./routes/appRoutes.ts";
 
 const port = process.env.PORT || 8080;
 const host = "localhost";

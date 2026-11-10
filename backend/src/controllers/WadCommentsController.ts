@@ -1,9 +1,9 @@
 import express from "express";
-import { db } from "../src/db.ts";
+import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
 import * as UUID from "node:crypto";
-import type { WadComments } from "../src/models/WadComments.ts";
+import type { WadComments } from "../models/WadComments.ts";
 
 const WadCommentsController = {
     async create(req: express.Request, res: express.Response) 

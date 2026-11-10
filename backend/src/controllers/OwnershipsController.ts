@@ -1,8 +1,8 @@
 import express from "express";
-import { db } from "../src/db.ts";
+import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
-import type { Ownership } from "../src/models/Ownership.ts";
+import type { Ownership } from "../models/Ownership.ts";
 
 const OwnershipsController = {
     async getOwnership(req: express.Request, res: express.Response) {
