@@ -2,13 +2,13 @@ import { Sequelize } from '@sequelize/core';
 import { MariaDbDialect } from '@sequelize/mariadb';
 
 //modelite pathid
-import WadModel from "#/models/Wad.js";
-import UserModel from "#/models/User.js";
-import CredentialModel from "#/models/Credential.js";
-import OwnershipModel from "#/models/Ownership.js";
-import CommentModel from "#/models/Comment.js";
-import WadCommentsModel from "#/models/WadComments.js";
-import CategoryModel from "#/models/Category.js";
+import WadModel from "./models/Wad.ts";
+import UserModel from "./models/User.ts";
+import CredentialModel from "./models/Credential.ts";
+import OwnershipModel from "./models/Ownership.ts";
+import CommentModel from "./models/Comment.ts";
+import WadCommentsModel from "./models/WadComments.ts";
+import CategoryModel from "./models/Category.ts";
 
 //sequelizei andmebaasi ühendusanddmed
 const sequelize = new Sequelize({
