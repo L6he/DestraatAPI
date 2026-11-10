@@ -1,8 +1,8 @@
 import express from "express";
-import { db } from "../db.ts";
+import { db } from "../src/db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid"; //npm install uuid@latest
-import { User } from "../models/User.ts";
+import { User } from "../src/models/User.ts";
 
 const UsersController = {
     async create(req: express.Request, res: express.Response) {

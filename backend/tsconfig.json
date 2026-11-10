@@ -7,6 +7,10 @@
     // File Layout
     "rootDir": "../backend",
     "outDir": "./dist",
+    // "paths": {
+    //   "@/*": ["./src/*"]
+    // },
+    "forceConsistentCasingInFileNames": true,
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
@@ -48,6 +52,5 @@
     "skipLibCheck": true,
   },
   "include": ["src/**/*"],
-  //"include": ["..."],
   "exclude": ["node_modules"]
 }

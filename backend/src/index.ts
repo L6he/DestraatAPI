@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors"; //npm i --save-dev @types/cors
-import { sync, connect } from "../db.ts"; // Getting weirder by the second!!
+import { sync, connect } from "./db.ts"; // Getting weirder by the second!!
 
 import appRoutes from "../routes/appRoutes.ts";
 
