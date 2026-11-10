@@ -1,0 +1,37 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Wads API",
+        "version":"1.0.0",
+        "description": "Hajusrakenduste meeskonnaprojekt"
+    },
+    "paths": {
+        "/wads": {
+            "get": {
+                "summary": "Päri loetelu WAD-idest",
+                "responses": {
+                    "200": {
+                        "description":"Õnnestunud päring",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "MyHouse"
+                                        },
+                                        "id": {
+                                            "type": "string",
+                                            "example": "12345-asdf-12345-dfkj"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
