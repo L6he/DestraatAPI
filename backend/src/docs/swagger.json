@@ -15,15 +15,18 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {
-                                            "type": "string",
-                                            "example": "MyHouse"
-                                        },
-                                        "id": {
-                                            "type": "string",
-                                            "example": "12345-asdf-12345-dfkj"
+                                    "type": "array",
+                                    "items": {
+                                        "type":"object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "01a177d4-b30f-72a1-8d1c-ac44b029d847"
+                                            },
+                                            "WadName": {
+                                                "type": "string",
+                                                "example": "MyHouse.pk3"
+                                            }
                                         }
                                     }
                                 }
