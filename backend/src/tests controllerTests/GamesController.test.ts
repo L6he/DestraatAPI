@@ -4,20 +4,26 @@ import {v7 as uuidv7 } from "uuid";
 
 const mocks = vi.hoisted(() => ({
     findAll: vi.fn(),
-    findByPk: vi.fn()
+    findByPk: vi.fn(),
+    create: vi.fn(),
+    update: vi.fn()
 }))
 
 vi.mock("../db.ts", () => ({
     db: {
         wads: {
             findAll: mocks.findAll,
-            findByPk: mocks.findByPk
+            findByPk: mocks.findByPk,
+            create: mocks.create,
+            update: mocks.update
         }
     }
 }))
 
 import _WadsController from "../../src/controllers/WadsController.ts"
 import { Wad } from "../models/Wad.ts";
+import WadsController from "../../src/controllers/WadsController.ts";
+import { except } from "drizzle-orm/gel-core";
 
 describe("WadsController", () => {
     beforeEach(() => {
@@ -86,5 +92,104 @@ describe("WadsController", () => {
         (wad.id)
         expect(res.status).toHaveBeenCalledWith(200)
         expect(res.send).toHaveBeenCalledWith(wad)
+    })
+
+    test("Return_CreatedGame_With201Status", async () =>{
+        const id = "f31d3f7f-f0d7-4009-a  701-ed2391d1183a"
+        mocks.create.mockResolvedValue({ id: id})
+        const req = {
+            protocol: "http",
+            get: vi.fn(()=>"localhost:8080"),
+            body: {
+                WadName:"vi-wad-test3",
+                WadDescription:"vi-wad-test3",
+                ReleaseDate: new Date(),
+                CategoryID: "lamp",
+                ImageURL: null,
+                Downloads: 0,
+                Comments: null,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            }
+        } as unknown as Request
+        const res = {
+            location: vi.fn().mockReturnThis(),
+            sendStatus: vi.fn().mockReturnThis()
+        } as unknown as Response
+
+
+
+        await _WadsController.create(req,res)
+
+        expect(mocks.create).toHaveBeenCalledOnce()
+        expect(res.location).toHaveBeenCalledWith(`http://localhost:8080/wads/${id}`)
+        expect(res.sendStatus).toHaveBeenCalledWith(201)
+    })
+
+    test("Return_ModifiedGameById_with201Status", async() => {
+        mocks.findByPk.mockResolvedValue({ id:"e893c616-f83b-48b6-8bb0-f8a80ba538f7" })
+         const wad =
+         {
+            id:"e893c616-f83b-48b6-8bb0-f8a80ba538f7",
+            WadName:"vi-wad-test1",
+            WadDescription:"vi-wad-test1",
+            ReleaseDate: new Date(),
+            CategoryID: "lamp",
+            ImageURL: null,
+            Downloads: 0,
+            Comments: null,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+         }
+        const explicitTime = new Date();
+        mocks.update.mockResolvedValue([1])
+        const req = {
+            protocol: "http",
+            get: vi.fn(()=>"localhost:8080"),
+            params: {
+                id:"e893c616-f83b-48b6-8bb0-f8a80ba538f7",
+            },
+            body: {
+                WadName:"vi-wad-test4-update",
+                WadDescription:"vi-wad-test4-update",
+                ReleaseDate: new Date(),
+                CategoryID: "laelamp",
+                ImageURL: null,
+                Downloads: 679,
+                Comments: null,
+                createdAt: wad.createdAt,
+                updatedAt: explicitTime,
+            }
+        } as unknown as Request
+
+        const res = {
+            location: vi.fn().mockReturnThis(),
+            status: vi.fn().mockReturnThis(),
+            send: vi.fn().mockReturnThis()
+        } as unknown as Response
+
+        //ökshun
+        await _WadsController.modifyByID(req, res)
+
+        expect(mocks.findByPk).toHaveBeenCalledWith(wad.id)
+        expect(mocks.update).toHaveBeenCalledOnce()
+        expect(mocks.update).toHaveBeenCalledWith(
+            expect.objectContaining({
+                id:"e893c616-f83b-48b6-8bb0-f8a80ba538f7",
+                WadName:"vi-wad-test4-update",
+                WadDescription:"vi-wad-test4-update",
+                ReleaseDate: wad.ReleaseDate,
+                CategoryID: "laelamp",
+                ImageURL: null,
+                Downloads: 679,
+                Comments: null,
+                createdAt: wad.createdAt,
+                updatedAt: expect.any(Date),
+            }),
+            {where: {
+                id: wad.id
+            }}
+        )
+        expect(res.status).toHaveBeenCalledWith(201)
     })
 })
