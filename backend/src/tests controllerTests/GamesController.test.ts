@@ -190,6 +190,26 @@ describe("WadsController", () => {
                 id: wad.id
             }}
         )
+        const updatedWad = mocks.update.mock.calls[0][0]
+        console.log("updatedWad: " *updatedWad)
+        expect(updatedWad.WadName).toBe(req.body.WadName)
+        expect(updatedWad.WadDescription).toBe(req.body.WadDescription)
+        expect(updatedWad.CategoryID).toBe(req.body.CategoryID)
+        expect(updatedWad.ReleaseDate).toBe(req.body.ReleaseDate)
+        expect(updatedWad.ImageURL).toBe(req.body.ImageURL)
+        expect(updatedWad.Downloads).toBe(req.body.Downloads)
+        expect(updatedWad.Comments).toBe(req.body.Comments)
+        expect(updatedWad.createdAt).toBe(req.body.createdAt)
+        expect(updatedWad.updatedAt).toBe(req.body.updatedAt)
         expect(res.status).toHaveBeenCalledWith(201)
     })
-})
+    test("Return_NoContentOnDelete_With204Status", async () => {
+        const destroy = vi.fn()
+        mocks.findByPk.mockResolvedValue({ id: "e893c616-f83b-48b6-8bb0-f8a80ba538f7" })
+        const req = {
+            params: {
+                id:
+                "e893c616-f83b-48b6-8bb0-f8a80ba538f7"
+        }}
+    
+    })
