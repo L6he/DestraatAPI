@@ -84,6 +84,7 @@ const WadsController = {
             WadDescription: req.body.WadDescription,
             ReleaseDate: req.body.ReleaseDate,
             CategoryID: req.body.CategoryID,
+            Downloads: req.body.Downloads || null,
             ImageURL: req.body.ImageURL || null,
             Comments: req.body.Comments || null,
             updatedAt: new Date(),
