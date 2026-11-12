@@ -5,6 +5,7 @@ import { v7 as uuidv7 } from "uuid"; //npm install uuid@latest
 
 const WadsController = {
     async create(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['WADs']
         if (!req.body.WadName || 
             !req.body.WadDescription ||
             !req.body.ReleaseDate ||
@@ -32,6 +33,7 @@ const WadsController = {
         ${result.id}`).sendStatus(201);
     },
     async getAll(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['WADs']
         const wads = await db.wads.findAll();
         console.log("getAll: " + wads);
         return res
@@ -43,6 +45,7 @@ const WadsController = {
         )
     },
     async getByID(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['WADs']
         const wad = await WadsController.getWad(req, res);
         if (!wad) {
             console.log("Wad not found");
@@ -52,6 +55,7 @@ const WadsController = {
         return res.status(200).send(wad);
     },
     async modifyByID(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['WADs']
         if (!req.params.id) {
             console.log(req.params.id);
             return res.status(400).send({"error":"Missing parameters, please review data"});
@@ -102,6 +106,7 @@ const WadsController = {
         .send(modifiedWad);
     },
     async deleteByID(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['WADs']
         const wadToBeDeleted = await WadsController.getWad(req, res);
         if (!wadToBeDeleted) {
             return;

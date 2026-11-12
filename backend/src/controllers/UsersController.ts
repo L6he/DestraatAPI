@@ -6,6 +6,7 @@ import { User } from "../models/User.ts";
 
 const UsersController = {
     async create(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['Users']
         if (!req.body.UserName || 
             !req.body.EmailAddress ||
             !req.body.Password ||
@@ -39,6 +40,7 @@ const UsersController = {
         .sendStatus(201);
     },
     async modifyByID(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['Users']
         if (!req.params.id) {
             return res.status(400).send({
                 error: "Missing parameters, please review data"
@@ -81,6 +83,7 @@ const UsersController = {
         .send(modifiedUser);
     },
     async getAll(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['Users']
         const users = await db.users.findAll();
         console.log("getAll"+users);
         return res.status(200).send(users.map(
@@ -88,6 +91,7 @@ const UsersController = {
         ));
     },
     async getByID(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['Users']
         const user = await UsersController.getUser(req, res);
         if (!user) {
             return;
@@ -95,6 +99,7 @@ const UsersController = {
         return res.status(200).send(user);
     },
     async deleteByID(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['Users']
         const userToBeDeleted = await UsersController.getUser(req, res);
         if (!userToBeDeleted) {
             return;     
