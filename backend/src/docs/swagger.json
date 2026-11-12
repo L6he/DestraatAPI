@@ -1,40 +1,341 @@
 {
-    "openapi": "3.0.3",
-    "info": {
-        "title": "Wads API",
-        "version":"1.0.0",
-        "description": "Hajusrakenduste meeskonnaprojekt"
-    },
-    "paths": {
-        "/wads": {
-            "get": {
-                "summary": "Päri loetelu WAD-idest",
-                "responses": {
-                    "200": {
-                        "description":"Õnnestunud päring",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type":"object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string",
-                                                "example": "01a177d4-b30f-72a1-8d1c-ac44b029d847"
-                                            },
-                                            "WadName": {
-                                                "type": "string",
-                                                "example": "MyHouse.pk3"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Wads API",
+    "description": "Hajusrakenduste meeskonnaprojekt",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/wads": {
+      "summary": "WADs endpoint, no id",
+      "description": "",
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "summary": "GET list of all WADs",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Õnnestunud päring",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WadsListItem"
                 }
+              }
             }
+          }
         }
+      },
+      "post": {
+        "tags": [
+          "WADs"
+        ],
+        "summary": "Create a new WAD",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WadsCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "location": {
+                "description": "URL of created WAD details endpoint",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/wads/{id}": {
+      "summary": "WADs endpoint with id",
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "summary": "getByID",
+        "description": "Get a specific WAD with id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WADs"
+        ],
+        "summary": "modifyByID",
+        "description": "Updates the WAD's data, specified by id",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WadsCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "location": {
+                "description": "",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WADs"
+        ],
+        "summary": "deleteByID",
+        "description": "Delete a WAD, specified by id",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "ID of requested WAD",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/users": {
+      "summary": "Users endpoint",
+      "description": "Endpoint for users ",
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "getAll",
+        "description": "Returns a list of all Users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersListItem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "create",
+        "description": "Adds a new User to the database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "location": {
+                "description": "URL of created User details endpoint",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "summary": "Specific Users endpoint",
+      "description": "Endpoint for Users that already exist, specified by their ids",
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "getByID",
+        "description": "Returns data for a specific User in the database",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "modifyByID",
+        "description": "Updates the data of a specific User in the database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "location": {
+                "description": "",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "deleteByID",
+        "description": "Deletes specified User from the database",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "ID of requested WAD",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
     }
+  },
+  "components": {
+    "schemas": {
+      "WadsListItem": {
+        "title": "Wads List Item",
+        "description": "{\n\"id\":\"asdfasdf-1234-1234-1234-asdfasdf\",\n\"WadName\": \"MyHouse.wad\"\n}",
+        "type": "object"
+      },
+      "WadsCreate": {
+        "title": "Wads Create",
+        "description": "{\n            \"WadName\": \"MyHouse.pk3\",\n            \"WadDescription\":  \"This is a description\",\n            \"ReleaseDate\": \"2026-11-12\",\n            \"CategoryID\":  \"lamp\",\n            \"ImageURL\": \"\",\n            \"Downloads\": 0,\n           \"Comments\": \"\"\n}",
+        "type": "object"
+      },
+      "UsersCreate": {
+        "title": "Users Create",
+        "description": "{\n  \"UserName\": \"laidlaw\",\n  \"PasswordHash\": \"asdfghjkl\",\n  \"SignupDate\": \"2026-10-27\",\n  \"UserStatus\": \"unverified\",\n  \"OwnershipID\": null,\n  \"CommentListID\": null,\n  \"ProfileID\": null,\n  \"EmailAddress\": \"a@a.a\",\n  \"CredentialID\": null\n}",
+        "type": "object"
+      },
+      "UsersListItem": {
+        "title": "Users List Item",
+        "description": "{\n    \"id\": \"01a17d83-59cc-74da-9241-360eb490ed56\",\n    \"UserName\": \"newell\",\n    \"UserStatus\": \"unverified\",\n    \"EmailAddress\": \"a@a.a\"\n  }",
+        "type": "object"
+      }
+    }
+  }
 }
