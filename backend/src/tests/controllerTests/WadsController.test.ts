@@ -1,13 +1,20 @@
 import { describe, it, expect, vi, test, beforeEach} from "vitest";
-import type {Request, Response} from "express";
-import {v7 as uuidv7 } from "uuid";
+//kopeeritud Vaitmaalt:
+//describe, organiseerib teste
+//it - on üks test case, on sama nagu test()
+//expect - on assert, "expect(10).toBe(5)", expected ja actuali analoog
+//vi - virtualiseerija millega tehakse mockobjekte, meetodeid, andmebaase jne - on kui "virtual"
+//beforeEach käivitab setupi enne igat testi
+import type { Request, Response } from "express";
+import { v7 as uuidv7 } from "uuid";
 
+//mock db
 const mocks = vi.hoisted(() => ({
     findAll: vi.fn(),
     findByPk: vi.fn()
-}))
+}));
 
-vi.mock("../db.ts", () => ({
+vi.mock("../../db.ts", () => ({
     db: {
         wads: {
             findAll: mocks.findAll,
