@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "concurrently": "^10.0.7",
     "cors": "^2.8.6",
     "dotenv": "^18.0.7",
     "drizzle-orm": "^0.45.3",
@@ -11,5 +12,25 @@
   "devDependencies": {
     "drizzle-kit": "^0.31.11",
     "tsx": "^4.23.15"
-  }
+  },
+  "name": "destraatapi",
+  "version": "1.0.0",
+  "description": "HTML/CSS/TS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"cd backend && nodemon .\" \"cd frontend && npm run dev\"",
+    "devstart": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L6he/DestraatAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/L6he/DestraatAPI/issues"
+  },
+  "homepage": "https://github.com/L6he/DestraatAPI#readme"
 }
