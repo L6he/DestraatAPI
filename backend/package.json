@@ -10,8 +10,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build": "tsc",
-    "start": "node dist/src/index.js",
+    "start": "node dist/server.js ",
     "dev": "nodemon src/index.ts",
+    "debug:router": "cross-env DEBUG=router:route nodemon src/index.ts",
     "watch": "tsc -w"
   },
   "keywords": [],

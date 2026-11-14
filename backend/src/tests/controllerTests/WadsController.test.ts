@@ -27,13 +27,15 @@ vi.mock("../../db.ts", () => ({
 
 //import controller
 import _WadsController from "../../controllers/WadsController.ts";
-import { Wad } from "../../models/Wad.ts";
+import WadsController from "../../controllers/WadsController.ts";
+import type { Wad } from "../../models/Wad.ts";
 
 //describe the test set for WadsController
 describe("WadsController", () => {
     beforeEach(() => {
         vi.clearAllMocks();
-    })
+    });
+
     test("Return_AllWads_With200Status", async () => {
         //setup
         mocks.findAll.mockResolvedValue(
