@@ -1,7 +1,7 @@
 import * as express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
-import { v7 as uuidv7 } from "uuid"; //npm install uuid@latest
+import { v7 as uuidv7, validate } from "uuid"; //npm install uuid@latest
 
 const WadsController = {
     async create(req: express.Request, res: express.Response) {
@@ -48,6 +48,7 @@ const WadsController = {
             console.log("Wad not found");
             return;
         }
+        
         console.log("Wad found")
         return res.status(200).send(wad);
     },
@@ -125,6 +126,12 @@ const WadsController = {
                 error: `Wad not found with this ID: ${wadID}` 
             });
             return null;
+        }
+        if (validate(req.params.id) === false) {
+            console.log("Invalid UUID");
+            return res.status(500).send({
+                error: `${req.params.id} is not a valid UUID` // Allikas: https://stackoverflow.com/questions/7905929/how-to-test-valid-uuid-guid
+            });
         }
         return wad;
     }
