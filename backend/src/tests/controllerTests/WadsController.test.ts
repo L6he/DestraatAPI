@@ -186,7 +186,7 @@ describe("WadsController", () => {
         expect(mocks.update).toHaveBeenCalledOnce();
 
         const updatedWad = mocks.update.mock.calls[0][0];
-        console.log("updatedWad: "+updatedWad);
+        console.log("updatedWad", updatedWad);
         expect(updatedWad.WadName).toBe(req.body.WadName);
         expect(updatedWad.WadDescription).toBe(req.body.WadDescription);
         expect(updatedWad.ReleaseDate).toBe(req.body.ReleaseDate);
