@@ -12,7 +12,8 @@ import { v7 as uuidv7 } from "uuid";
 const mocks = vi.hoisted(() => ({
     findAll: vi.fn(),
     findByPk: vi.fn(),
-    create: vi.fn()
+    create: vi.fn(),
+    update: vi.fn()
 }));
 
 vi.mock("../../db.ts", () => ({
@@ -20,7 +21,8 @@ vi.mock("../../db.ts", () => ({
         wads: {
             findAll: mocks.findAll,
             findByPk: mocks.findByPk,
-            create: mocks.create
+            create: mocks.create,
+            update: mocks.update
         }
     }
 }));
@@ -133,5 +135,72 @@ describe("WadsController", () => {
         expect(mocks.create).toHaveBeenCalledOnce();
         expect(res.location).toHaveBeenCalledWith(`http://localhost:8080/wads/${id}`);
         expect(res.sendStatus).toHaveBeenCalledWith(201);
+    });
+
+    test("Return_ModifiedWadById_With201Status", async () => {
+        mocks.findByPk.mockResolvedValue({ id: "73deb785-3471-43af-bb31-a146edb10bcc" });
+        const wad = {
+            id: "73deb785-3471-43af-bb31-a146edb10bcc",
+            WadName: "vi-wad-test5",
+            WadDescription: "vi-wad-testcription5",
+            ReleaseDate: new Date(),
+            CategoryID: "939",
+            ImageURL: null,
+            Downloads: 0,
+            Comments: null,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
+        const explicitTime = new Date();
+        mocks.update.mockResolvedValue([1]);
+        const req = {
+            protocol: "http",
+            get: vi.fn(() => "localhost:8080"),
+            params: {
+                id: "73deb785-3471-43af-bb31-a146edb10bcc"
+            },
+            body: 
+            {
+                WadName: "vi-wad-test5-updated",
+                WadDescription: "vi-wad-testcription5-updated",
+                ReleaseDate: wad.ReleaseDate,
+                CategoryID: "953",
+                ImageURL: null,
+                Downloads: 120,
+                Comments: null,
+                createdAt: wad.createdAt,
+                updatedAt: new Date()
+            }
+        } as unknown as Request;
+        const res = {
+            location: vi.fn().mockReturnThis(),
+            status: vi.fn().mockReturnThis(),
+            send: vi.fn().mockReturnThis()
+        } as unknown as Response;
+
+        //actions
+        const result = await _WadsController.modifyByID(req, res) as unknown as Wad;
+
+        //checks
+        expect(mocks.findByPk).toHaveBeenCalledWith(wad.id);
+        expect(mocks.update).toHaveBeenCalledOnce();
+
+        const updatedWad = mocks.update.mock.calls[0][0];
+        console.log("updatedWad: "+updatedWad);
+        expect(updatedWad.WadName).toBe(req.body.WadName);
+        expect(updatedWad.WadDescription).toBe(req.body.WadDescription);
+        expect(updatedWad.ReleaseDate).toBe(req.body.ReleaseDate);
+        expect(updatedWad.CategoryID).toBe(req.body.CategoryID);
+        expect(updatedWad.Downloads).toBe(req.body.Downloads);
+        expect(updatedWad.ImageURL).toBe(req.body.ImageURL);
+        expect(updatedWad.Comments).toBe(req.body.Comments);
+        expect(updatedWad.createdAt).toBe(undefined);
+        expect(updatedWad.updatedAt).toBeInstanceOf(Date);
+        expect(mocks.update.mock.calls[0][1]).toEqual({ 
+            where: { 
+                id: wad.id 
+            } 
+        });
+        expect(res.status).toHaveBeenCalledWith(201);
     });
 });
