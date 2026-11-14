@@ -13,7 +13,8 @@ const mocks = vi.hoisted(() => ({
     findAll: vi.fn(),
     findByPk: vi.fn(),
     create: vi.fn(),
-    update: vi.fn()
+    update: vi.fn(),
+    destroy: vi.fn()
 }));
 
 vi.mock("../../db.ts", () => ({
@@ -22,7 +23,8 @@ vi.mock("../../db.ts", () => ({
             findAll: mocks.findAll,
             findByPk: mocks.findByPk,
             create: mocks.create,
-            update: mocks.update
+            update: mocks.update,
+            destroy: mocks.destroy
         }
     }
 }));
@@ -185,7 +187,7 @@ describe("WadsController", () => {
         expect(mocks.findByPk).toHaveBeenCalledWith(wad.id);
         expect(mocks.update).toHaveBeenCalledOnce();
 
-        const updatedWad = mocks.update.mock.calls[0][0];
+        const updatedWad = mocks.update.mock.calls[0][0]; // if it works, it works
         console.log("updatedWad", updatedWad);
         expect(updatedWad.WadName).toBe(req.body.WadName);
         expect(updatedWad.WadDescription).toBe(req.body.WadDescription);
@@ -202,5 +204,31 @@ describe("WadsController", () => {
             } 
         });
         expect(res.status).toHaveBeenCalledWith(201);
+    });
+
+    test("Return_NoContentOnDelete_With204Status", async () => {
+        const thisId = "5f26e8c6-20e4-4e4d-a77b-4de7e77302b9";
+        const wad = {
+            id: thisId,
+            destroy: vi.fn().mockResolvedValue(undefined)
+        };
+        mocks.findByPk.mockResolvedValue(wad);
+        const req = {
+            params: {
+                id: thisId
+            }
+        } as unknown as Request;
+        const res = {
+            status: vi.fn().mockReturnThis(),
+            send: vi.fn().mockReturnThis()
+        } as unknown as Response;
+
+        //actions
+        await _WadsController.deleteByID(req, res);
+
+        //checks
+        expect(mocks.findByPk).toHaveBeenCalledWith(thisId);
+        expect(wad.destroy).toHaveBeenCalledOnce();
+        expect(res.status).toHaveBeenCalledWith(204);
     });
 });
