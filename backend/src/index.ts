@@ -6,7 +6,7 @@ import swaggerDoc from "./docs/swagger.json" with {type: "json"};
 import { sync, connect } from "./db.ts"; // Getting weirder by the second!!
 import appRoutes from "./routes/appRoutes.ts";
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT;
 const host = "localhost";
 
 const app = express();
@@ -21,4 +21,4 @@ app.listen(port, async()=> {
         await sync();
     }
     console.log(`API töötab aadressil http://${host}:${port}`);
-})
+});

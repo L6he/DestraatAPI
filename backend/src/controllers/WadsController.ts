@@ -1,22 +1,20 @@
-import express from "express";
+import * as express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid"; //npm install uuid@latest
 
 const WadsController = {
     async create(req: express.Request, res: express.Response) {
-        // #swagger.tags = ['WADs']
-        if (!req.body.WadName || 
-            !req.body.WadDescription ||
-            !req.body.ReleaseDate ||
-            !req.body.CategoryID
-        ) {
-            return res.status(400).send(
-                {
-                    error: "Missing at least one of these parameters: WadName, WadDescription, ReleaseDate, CategoryID. Please review data."
-                }
-            );
+        const requiredFields = ['WadName', 'WadDescription', 'ReleaseDate', 'CategoryID'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+
+        if (missingFields.length > 0) {
+            return res.status(400).send({
+                error: "Missing parameters, please review data",
+                missing: missingFields
+            });
         }
+
         const result = await db.wads.create({
             id: uuidv7(),
             WadName: req.body.WadName,
@@ -29,8 +27,7 @@ const WadsController = {
         });
         
         return res
-        .location(`${Utilities.getBaseURL(req)}/wads/
-        ${result.id}`).sendStatus(201);
+        .location(`${Utilities.getBaseURL(req)}/wads/${result.id}`).sendStatus(201);
     },
     async getAll(req: express.Request, res: express.Response) {
         // #swagger.tags = ['WADs']
@@ -55,11 +52,21 @@ const WadsController = {
         return res.status(200).send(wad);
     },
     async modifyByID(req: express.Request, res: express.Response) {
-        // #swagger.tags = ['WADs']
-        if (!req.params.id) {
-            console.log(req.params.id);
-            return res.status(400).send({"error":"Missing parameters, please review data"});
+        const requiredFields = ['WadName', 'WadDescription', 'ReleaseDate', 'CategoryID'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+
+        if (missingFields.length > 0) {
+            return res.status(400).send({
+                error: "Missing parameters, please review data",
+                missing: missingFields
+            });
         }
+
+        if (!req.params.id) 
+            {
+                console.log(req.params.id);
+                return res.status(400).send({"error":"No id supplied"});
+            }
         console.log(req.params.id);
         const wadToBeModified = await WadsController.getWad(req, res);
         console.log(wadToBeModified);
@@ -71,18 +78,7 @@ const WadsController = {
                 }
             );
         }
-        if (!req.body.WadName || 
-            !req.body.WadDescription ||
-            !req.body.ReleaseDate ||
-            !req.body.CategoryID
-        ) {
-            console.log(req.body.WadName+" "+req.body.WadDescription+" "+req.body.ReleaseDate+" "+req.body.CategoryID)
-            return res.status(400).send(
-                {
-                    error: "Missing at least one of these parameters: WadName, WadDescription, ReleaseDate, CategoryID. Please review data."
-                }
-            );
-        }
+        
         const modifiedWad = {
             WadName: req.body.WadName,
             WadDescription: req.body.WadDescription,

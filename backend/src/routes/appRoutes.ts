@@ -11,72 +11,75 @@ import CategoriesController from "../controllers/CategoriesController.ts";
 import checkRequestBody from "../controllers/middleware/checkRequestBody.ts";
 
 export default (app: express.Express): void => {
+    
+    //Wads
     app.route("/wads")
-    .get(WadsController.getAll)
-    .post(checkRequestBody, WadsController.create);
+        .get(WadsController.getAll)
+        .post(checkRequestBody, WadsController.create);
 
     app.route("/wads/:id")
-    .get(WadsController.getByID)
-    .delete(WadsController.deleteByID)
-    .put(checkRequestBody, WadsController.modifyByID);
+        .get(WadsController.getByID)
+        .delete(WadsController.deleteByID)
+        .put(checkRequestBody, WadsController.modifyByID);
 
+    //Users
     app.route("/users")
-    .get(UsersController.getAll)
-    .post(checkRequestBody, UsersController.create);
+        .get(UsersController.getAll)
+        .post(checkRequestBody, UsersController.create);
 
     app.route("/users/:id")
-    .get(UsersController.getByID)
-    .delete(UsersController.deleteByID)
-    .put(checkRequestBody, UsersController.modifyByID);
+        .get(UsersController.getByID)
+        .delete(UsersController.deleteByID)
+        .put(checkRequestBody, UsersController.modifyByID);
 
     //Credentials
     app.route("/credentials")
-    .get(CredentialsController.getAll)
-    .post(checkRequestBody, CredentialsController.create);
+        .get(CredentialsController.getAll)
+        .post(checkRequestBody, CredentialsController.create);
 
     app.route("/credentials/:id")
-    .get(CredentialsController.getByID)
-    .delete(CredentialsController.deleteByID)
-    .put(checkRequestBody, CredentialsController.modifyByID);
+        .get(CredentialsController.getByID)
+        .delete(CredentialsController.deleteByID)
+        .put(checkRequestBody, CredentialsController.modifyByID);
 
     //Ownerships
     app.route("/ownerships")
-    .get(OwnershipsController.getAll)
-    .post(checkRequestBody, OwnershipsController.create);
+        .get(OwnershipsController.getAll)
+        .post(checkRequestBody, OwnershipsController.create);
 
     app.route("/ownerships/:id")
-    .get(OwnershipsController.getByID)
-    .delete(OwnershipsController.deleteByID)
-    .put(checkRequestBody, OwnershipsController.modifyByID);
+        .get(OwnershipsController.getByID)
+        .delete(OwnershipsController.deleteByID)
+        .put(checkRequestBody, OwnershipsController.modifyByID);
 
     //Comments
     app.route("/comments")
-    .get(CommentsController.getAll)
-    .post(checkRequestBody, CommentsController.create);
+        .get(CommentsController.getAll)
+        .post(checkRequestBody, CommentsController.create);
 
     app.route("/comments/:id")
-    .delete(CommentsController.remove)
-    .patch(checkRequestBody, CommentsController.hide) //varem "/comments/:id/hide"
-    .get(CommentsController.getByID);
+        .delete(CommentsController.remove)
+        .patch(checkRequestBody, CommentsController.hide) //varem "/comments/:id/hide"
+        .get(CommentsController.getByID);
 
     //WadComments
     app.route("/wadcomments")
-    .post(checkRequestBody, WadCommentsController.create)
-    .get(WadCommentsController.getAll);
+        .post(checkRequestBody, WadCommentsController.create)
+        .get(WadCommentsController.getAll);
 
     app.route("/wadcomments/:id")
-    .get(WadCommentsController.getByID)
-    .put(checkRequestBody, WadCommentsController.modifyByID)
-    .delete(WadCommentsController.deleteByID);
+        .get(WadCommentsController.getByID)
+        .put(checkRequestBody, WadCommentsController.modifyByID)
+        .delete(WadCommentsController.deleteByID);
 
     //Categories
     app.route("/categories")
-    .get(CategoriesController.getAll)
-    .post(checkRequestBody, CategoriesController.create);
+        .get(CategoriesController.getAll)
+        .post(checkRequestBody, CategoriesController.create);
 
     app.route("/categories/:id")
-    .get(CategoriesController.getByID)
-    .delete(CategoriesController.deleteByID)
-    .put(checkRequestBody, CategoriesController.modifyByID);
+        .get(CategoriesController.getByID)
+        .delete(CategoriesController.deleteByID)
+        .put(checkRequestBody, CategoriesController.modifyByID);
 }
 
