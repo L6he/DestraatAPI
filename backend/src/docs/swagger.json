@@ -77,14 +77,13 @@
         "description": "Get a specific WAD with id",
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -143,6 +142,18 @@
         "responses": {
           "204": {
             "description": "No Content",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
             "content": {
               "application/json": {}
             }
@@ -234,10 +245,13 @@
         "description": "Returns data for a specific User in the database",
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {}
-            }
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -295,6 +309,18 @@
         "responses": {
           "204": {
             "description": "No Content",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
             "content": {
               "application/json": {}
             }
