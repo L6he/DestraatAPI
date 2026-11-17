@@ -5,7 +5,7 @@
     "description": "This is a description",
     "version": "1.0.0"
   },
-  "host": "undefined:undefined",
+  "host": "localhost:8080",
   "basePath": "/",
   "tags": [
     {
