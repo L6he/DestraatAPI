@@ -32,9 +32,6 @@
         }
       },
       "post": {
-        "tags": [
-          "WADs"
-        ],
         "description": "",
         "parameters": [
           {
@@ -74,6 +71,9 @@
     },
     "/wads/{id}": {
       "get": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -139,6 +139,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -157,6 +160,9 @@
     },
     "/users": {
       "get": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -165,6 +171,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -201,6 +210,9 @@
     },
     "/users/{id}": {
       "get": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -217,6 +229,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -278,6 +293,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "parameters": [
           {
