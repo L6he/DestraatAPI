@@ -34,7 +34,7 @@ const WadCommentsController = {
 
     async getAll(req: express.Request, res: express.Response) {
         const wadcomments = await db.wadcomments.findAll();
-        console.log("getAll: " + wadcomments);
+        console.log("getAll: ", wadcomments);
         return res
         .status(200)
         .send(

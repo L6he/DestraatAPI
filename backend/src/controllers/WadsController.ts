@@ -32,7 +32,7 @@ const WadsController = {
     async getAll(req: express.Request, res: express.Response) {
         // #swagger.tags = ['WADs']
         const wads = await db.wads.findAll();
-        console.log("getAll: " + wads);
+        console.log("getAll: ", wads);
         return res
         .status(200)
         .send(
