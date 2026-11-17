@@ -1,5 +1,5 @@
 import "dotenv/config";
-import express from "express";
+import express from "express"; // npm i --save-dev @types/express
 import cors from "cors"; //npm i --save-dev @types/cors
 import swaggerUI from "swagger-ui-express"; //npm i --save-dev @types/swagger-ui-express
 import swaggerDoc from "./docs/swagger.json" with {type: "json"};
