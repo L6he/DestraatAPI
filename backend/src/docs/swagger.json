@@ -338,8 +338,101 @@
           }
         }
       ]
+    },
+    "/categories": {
+      "summary": "categories, no id",
+      "get": {
+        "summary": "getAll",
+        "description": "Get a list of categories",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create",
+        "description": "Create a category",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "summary": "GetByID",
+        "description": "Get  category specified by Id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "summary": "ModifyByID",
+        "description": "Modify the Category specified by ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "DeleteByID",
+        "description": "Delete category specified by ID",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "ID of requested category",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
     }
   },
+  
+  
+  
   "components": {
     "schemas": {
       "WadsListItem": {
@@ -360,6 +453,16 @@
       "UsersListItem": {
         "title": "Users List Item",
         "description": "{\n    \"id\": \"01a17d83-59cc-74da-9241-360eb490ed56\",\n    \"UserName\": \"newell\",\n    \"UserStatus\": \"unverified\",\n    \"EmailAddress\": \"a@a.a\"\n  }",
+        "type": "object"
+      },
+      "CategoryCreate": {
+        "title": "Create category",
+        "description": "{\n            \"CategoryName\": \"This is a name\",\n            \"Categorydescription\":  \"This is a description\"\n}",
+        "type": "object"
+      },
+      "CategoryListItem": {
+        "title": "Category List Item",
+        "description": "{\n\"id\": \"01a1883a-4b43-7569-ad6f-a93b014340d6\",\n    \"CategoryName\": \"Doom 1\",\n    \"CategoryDescription\": \"Dooooooom 1\"\n}",
         "type": "object"
       }
     }
