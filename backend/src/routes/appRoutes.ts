@@ -1,7 +1,7 @@
 //"meil on need tegevused ja seal controller-is"?
 //nimetus võiks vastata tema funktsioonile
 import express from "express";
-import WadsController from "../controllers/WadsController.ts";
+import wadsRoutes from "./wadsRoutes.ts";
 import UsersController from "../controllers/UsersController.ts";
 import CredentialsController from "../controllers/CredentialsController.ts";
 import OwnershipsController from "../controllers/OwnershipsController.ts";
@@ -12,15 +12,18 @@ import checkRequestBody from "../controllers/middleware/checkRequestBody.ts";
 
 export default (app: express.Express): void => {
     
-    //Wads
-    app.route("/wads")
-        .get(WadsController.getAll)
-        .post(checkRequestBody, WadsController.create);
+    // Globaalne 500 vastus kõigile allolevatele otspunktidele
+    app.use((req, res, next) => {
+        /* #swagger.responses = { 
+            description: 'Internal Server Error' 
+        } */
+        next();
+    });
 
-    app.route("/wads/:id")
-        .get(WadsController.getByID)
-        .delete(WadsController.deleteByID)
-        .put(checkRequestBody, WadsController.modifyByID);
+    app.use("/wads", (req, res, next) => {
+        // #swagger.tags = ['WADs']
+        next();
+    }, wadsRoutes);
 
     //Users
     app.route("/users")

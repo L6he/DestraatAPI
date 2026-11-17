@@ -9,7 +9,11 @@ const doc = {
         version: "1.0.0"
     },
     host: process.env.HOST+':'+process.env.PORT,
-    tags: [{name: 'WADs'}, {name: 'Users'}]
+    tags: [
+        {name: 'WADs'}, 
+        {name: 'Users'},
+        {name: 'Categories'}
+    ]
 };
 
 const outputFile = '../docs/swagger-autogen.json';

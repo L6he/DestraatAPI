@@ -13,151 +13,15 @@
     },
     {
       "name": "Users"
+    },
+    {
+      "name": "Categories"
     }
   ],
   "schemes": [
     "http"
   ],
   "paths": {
-    "/wads": {
-      "get": {
-        "tags": [
-          "WADs"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "WadName": {
-                  "example": "any"
-                },
-                "WadDescription": {
-                  "example": "any"
-                },
-                "ReleaseDate": {
-                  "example": "any"
-                },
-                "CategoryID": {
-                  "example": "any"
-                },
-                "ImageURL": {
-                  "example": "any"
-                },
-                "Comments": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/wads/{id}": {
-      "get": {
-        "tags": [
-          "WADs"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "WadName": {
-                  "example": "any"
-                },
-                "WadDescription": {
-                  "example": "any"
-                },
-                "ReleaseDate": {
-                  "example": "any"
-                },
-                "CategoryID": {
-                  "example": "any"
-                },
-                "Downloads": {
-                  "example": "any"
-                },
-                "ImageURL": {
-                  "example": "any"
-                },
-                "Comments": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "WADs"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        }
-      }
-    },
     "/users": {
       "get": {
         "tags": [
@@ -167,6 +31,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
@@ -204,6 +71,9 @@
           },
           "406": {
             "description": "Not Acceptable"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
@@ -225,6 +95,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
@@ -289,6 +162,9 @@
           },
           "406": {
             "description": "Not Acceptable"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
@@ -308,20 +184,32 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
     },
     "/credentials": {
       "get": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "post": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -346,12 +234,18 @@
         "responses": {
           "400": {
             "description": "Bad Request"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
     },
     "/credentials/{id}": {
       "get": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -364,10 +258,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "put": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -404,10 +304,16 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "delete": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -420,20 +326,32 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
     },
     "/ownerships": {
       "get": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "post": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -464,12 +382,18 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
     },
     "/ownerships/{id}": {
       "get": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -482,10 +406,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "put": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -522,10 +452,16 @@
         "responses": {
           "400": {
             "description": "Bad Request"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "delete": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -538,12 +474,18 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
     },
     "/comments": {
       "get": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -551,10 +493,16 @@
           },
           "500": {
             "description": "Internal Server Error"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "post": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -603,12 +551,18 @@
           },
           "500": {
             "description": "Internal Server Error"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
     },
     "/comments/{id}": {
       "get": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -630,10 +584,16 @@
           },
           "500": {
             "description": "Internal Server Error"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "delete": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -646,10 +606,16 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "patch": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -671,20 +637,32 @@
           },
           "500": {
             "description": "Internal Server Error"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
     },
     "/wadcomments": {
       "get": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "post": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -712,12 +690,18 @@
         "responses": {
           "400": {
             "description": "Bad Request"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
     },
     "/wadcomments/{id}": {
       "get": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -730,10 +714,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "put": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -770,10 +760,16 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "delete": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -786,20 +782,32 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
     },
     "/categories": {
       "get": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "post": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -821,12 +829,18 @@
         "responses": {
           "400": {
             "description": "Bad Request"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
     },
     "/categories/{id}": {
       "get": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -839,10 +853,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "put": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -873,10 +893,16 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       },
       "delete": {
+        "tags": [
+          "WADs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -889,6 +915,169 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "WADs": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/wads/": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "WADs": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "WadName": {
+                  "example": "any"
+                },
+                "WadDescription": {
+                  "example": "any"
+                },
+                "ReleaseDate": {
+                  "example": "any"
+                },
+                "CategoryID": {
+                  "example": "any"
+                },
+                "ImageURL": {
+                  "example": "any"
+                },
+                "Comments": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "WADs": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/wads/{id}": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "WADs": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "WadName": {
+                  "example": "any"
+                },
+                "WadDescription": {
+                  "example": "any"
+                },
+                "ReleaseDate": {
+                  "example": "any"
+                },
+                "CategoryID": {
+                  "example": "any"
+                },
+                "Downloads": {
+                  "example": "any"
+                },
+                "ImageURL": {
+                  "example": "any"
+                },
+                "Comments": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "WADs": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "WADs": {
+            "description": ""
           }
         }
       }
