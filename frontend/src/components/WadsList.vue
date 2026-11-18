@@ -6,6 +6,9 @@ import type { WadSummary } from '../types/Wad';
 const wads = ref<WadSummary[]>([]);
 const loading = ref(false);
 const error = ref("");
+const emit = defineEmits<{
+    select: [id:string]
+}>();
 
 async function loadWads() {
     loading.value = true;
@@ -34,7 +37,7 @@ onMounted(loadWads);
          <p v-else-if="wads.length === 0">No wads found</p>
          <ul v-else> 
             <li v-for="wad in wads" :key="wad.id">
-                {{ wad.WadName }} ( {{ wad.id }} )
+                <button @click="emit('select', wad.id) ">{{ wad.WadName }}</button> ( {{ wad.id }} )
             </li>
          </ul>
     </section>

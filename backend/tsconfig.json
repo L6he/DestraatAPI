@@ -29,6 +29,7 @@
     "declarationMap": true,
     "rewriteRelativeImportExtensions": true,
     "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
