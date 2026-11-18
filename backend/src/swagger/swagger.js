@@ -65,6 +65,12 @@ const doc = {
             ProfileID: null,
             CredentialID: null
         },
+        UserListItem: {
+            id: "01a17d83-59cc-74da-9241-360eb490ed56",
+            UserName: "newell",
+            UserStatus: "unverified",
+            EmailAddress: "a@a.a"
+        },
         ErrorResponse: {
             error: "Error message"
         }

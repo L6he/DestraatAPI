@@ -2,7 +2,7 @@
 //nimetus võiks vastata tema funktsioonile
 import express from "express";
 import wadsRoutes from "./wadsRoutes.ts";
-import UsersController from "../controllers/UsersController.ts";
+import usersRoutes from "./usersRoutes.ts";
 import CredentialsController from "../controllers/CredentialsController.ts";
 import OwnershipsController from "../controllers/OwnershipsController.ts";
 import CommentsController from "../controllers/CommentsController.ts";
@@ -20,20 +20,17 @@ export default (app: express.Express): void => {
         next();
     });
 
+    //WADs
     app.use("/wads", (req, res, next) => {
         // #swagger.tags = ['WADs']
         next();
     }, wadsRoutes);
 
     //Users
-    app.route("/users")
-        .get(UsersController.getAll)
-        .post(checkRequestBody, UsersController.create);
-
-    app.route("/users/:id")
-        .get(UsersController.getByID)
-        .delete(UsersController.deleteByID)
-        .put(checkRequestBody, UsersController.modifyByID);
+    app.use("/users", (req, res, next) => {
+        // #swagger.tags = ['Users']
+        next();
+    }, usersRoutes);
 
     //Credentials
     app.route("/credentials")
