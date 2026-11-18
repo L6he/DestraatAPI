@@ -3,11 +3,11 @@
 import express from "express";
 import wadsRoutes from "./wadsRoutes.ts";
 import usersRoutes from "./usersRoutes.ts";
+import categoriesRoutes from "./categoriesRoutes.ts";
 import CredentialsController from "../controllers/CredentialsController.ts";
 import OwnershipsController from "../controllers/OwnershipsController.ts";
 import CommentsController from "../controllers/CommentsController.ts";
 import WadCommentsController from "../controllers/WadCommentsController.ts";
-import CategoriesController from "../controllers/CategoriesController.ts";
 import checkRequestBody from "../controllers/middleware/checkRequestBody.ts";
 
 export default (app: express.Express): void => {
@@ -31,6 +31,12 @@ export default (app: express.Express): void => {
         // #swagger.tags = ['Users']
         next();
     }, usersRoutes);
+
+    //Categories
+    app.use("/categories", (req, res, next) => {
+        // #swagger.tags = ['Categories']
+        next();
+    }, categoriesRoutes);
 
     //Credentials
     app.route("/credentials")
@@ -71,14 +77,4 @@ export default (app: express.Express): void => {
         .get(WadCommentsController.getByID)
         .put(checkRequestBody, WadCommentsController.modifyByID)
         .delete(WadCommentsController.deleteByID);
-
-    //Categories
-    app.route("/categories")
-        .get(CategoriesController.getAll)
-        .post(checkRequestBody, CategoriesController.create);
-
-    app.route("/categories/:id")
-        .get(CategoriesController.getByID)
-        .delete(CategoriesController.deleteByID)
-        .put(checkRequestBody, CategoriesController.modifyByID);
 }

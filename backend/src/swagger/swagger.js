@@ -71,6 +71,22 @@ const doc = {
             UserStatus: "unverified",
             EmailAddress: "a@a.a"
         },
+        Category: {
+            id: "01a1883a-4b43-7569-ad6f-a93b014340d6",
+            CategoryName: "Doom 1",
+            CategoryDescription: "Dooooooom 1",
+            createdAt: "2026-10-28 14:57:13",
+            updatedAt: "2026-10-28 14:57:13"
+        },
+        NewCategory: {
+            $CategoryName: "Doom 1",
+            $CategoryDescription: "Dooooooom 1"
+        },
+        CategoryListItem: {
+            id: "01a1883a-4b43-7569-ad6f-a93b014340d6",
+            CategoryName: "Doom 1",
+            CategoryDescription: "Dooooooom 1"
+        },
         ErrorResponse: {
             error: "Error message"
         }
