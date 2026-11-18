@@ -27,7 +27,7 @@ const WadsController = {
         });
         
         return res
-        .location(`${Utilities.getBaseURL(req)}/wads/${result.id}`).sendStatus(201);
+        .location(`${Utilities.getBaseURL(req)}/wads/${result.id}`).send({"OK":"OK"}).status(201);
     },
     async getAll(req: express.Request, res: express.Response) {
         const wads = await db.wads.findAll();
