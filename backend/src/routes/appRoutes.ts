@@ -14,7 +14,7 @@ export default (app: express.Express): void => {
     
     // Globaalne 500 vastus kõigile allolevatele otspunktidele
     app.use((req, res, next) => {
-        /* #swagger.responses = { 
+        /* #swagger.responses[500] = { 
             description: 'Internal Server Error' 
         } */
         next();
@@ -85,4 +85,3 @@ export default (app: express.Express): void => {
         .delete(CategoriesController.deleteByID)
         .put(checkRequestBody, CategoriesController.modifyByID);
 }
-
