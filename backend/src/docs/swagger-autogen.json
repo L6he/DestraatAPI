@@ -1,0 +1,1362 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "My WADs API",
+    "description": "This is a description",
+    "version": "1.0.0"
+  },
+  "host": "undefined:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "WADs"
+    },
+    {
+      "name": "Users"
+    },
+    {
+      "name": "Categories"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/credentials": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserID": {
+                  "example": "any"
+                },
+                "Credentials": {
+                  "example": "any"
+                },
+                "UserType": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/credentials/{id}": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserType": {
+                  "example": "any"
+                },
+                "UserID": {
+                  "example": "any"
+                },
+                "Credentials": {
+                  "example": "any"
+                },
+                "createdAt": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ownerships": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "OwnershipName": {
+                  "example": "any"
+                },
+                "WadIDs": {
+                  "example": "any"
+                },
+                "UserID": {
+                  "example": "any"
+                },
+                "OwnershipDescription": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ownerships/{id}": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "OwnershipName": {
+                  "example": "any"
+                },
+                "OwnershipDescription": {
+                  "example": "any"
+                },
+                "WadIDs": {
+                  "example": "any"
+                },
+                "UserID": {
+                  "example": "any"
+                },
+                "createdAt": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/comments": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "CommentTitle": {
+                  "example": "any"
+                },
+                "Author": {
+                  "example": "any"
+                },
+                "CommentContent": {
+                  "example": "any"
+                },
+                "CommentDate": {
+                  "example": "any"
+                },
+                "CommentListID": {
+                  "example": "any"
+                },
+                "CommentsID": {
+                  "example": "any"
+                },
+                "CommentLikes": {
+                  "example": "any"
+                },
+                "CommentStatus": {
+                  "example": "any"
+                },
+                "CommentedWAD": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/wadcomments": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserID": {
+                  "example": "any"
+                },
+                "WadID": {
+                  "example": "any"
+                },
+                "WadCommentsTitle": {
+                  "example": "any"
+                },
+                "WadCommentsContent": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/wadcomments/{id}": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "WadID": {
+                  "example": "any"
+                },
+                "UserID": {
+                  "example": "any"
+                },
+                "WadCommentsTitle": {
+                  "example": "any"
+                },
+                "WadCommentsContent": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/wads/": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "List of all WADs",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WadListItem"
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewWad"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Wad created",
+            "schema": {
+              "$ref": "#/definitions/Wad"
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/wads/{id}": {
+      "get": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wad details",
+            "schema": {
+              "$ref": "#/definitions/Wad"
+            }
+          },
+          "404": {
+            "description": "Wad not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewWad"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wad updated",
+            "schema": {
+              "$ref": "#/definitions/Wad"
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Wad not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WADs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Wad deleted"
+          },
+          "404": {
+            "description": "Wad not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "List of all Users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserListItem"
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewUser"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User created",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "406": {
+            "description": "Not Acceptable"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User details",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "406": {
+            "description": "Not Acceptable"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User deleted"
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/categories/": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "List of all Categories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CategoryListItem"
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewCategory"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Category created",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Category details",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "404": {
+            "description": "Category not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewCategory"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Category updated",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Category not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Category deleted"
+          },
+          "404": {
+            "description": "Category not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Wad": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "01a1da2e-742a-70c8-95a4-d93b27b117ba"
+        },
+        "WadName": {
+          "type": "string",
+          "example": "1squares.wad"
+        },
+        "WadDescription": {
+          "type": "string",
+          "example": "A one-map DOOM WAD released like 30 years ago. Slaughter map, I think?"
+        },
+        "ReleaseDate": {
+          "type": "string",
+          "example": "2026-11-14"
+        },
+        "ImageURL": {},
+        "Downloads": {
+          "type": "number",
+          "example": 0
+        },
+        "Comments": {},
+        "CategoryID": {
+          "type": "string",
+          "example": "099"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2026-11-14 13:10:39"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2026-11-14 13:10:39"
+        }
+      }
+    },
+    "NewWad": {
+      "type": "object",
+      "properties": {
+        "GameName": {
+          "type": "string",
+          "example": "1squares.wad"
+        },
+        "GameDescription": {
+          "type": "string",
+          "example": "A one-map DOOM WAD released like 30 years ago. Slaughter map, I think?"
+        },
+        "ReleaseDate": {
+          "type": "string",
+          "example": "2026-11-14"
+        },
+        "CategoryID": {
+          "type": "string",
+          "example": "099"
+        },
+        "ImageURL": {},
+        "Downloads": {
+          "type": "number",
+          "example": 0
+        },
+        "Comments": {}
+      },
+      "required": [
+        "GameName",
+        "GameDescription",
+        "ReleaseDate",
+        "CategoryID"
+      ]
+    },
+    "WadListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "01a1da2e-742a-70c8-95a4-d93b27b117ba"
+        },
+        "WadName": {
+          "type": "string",
+          "example": "1squares.wad"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "01a17d83-59cc-74da-9241-360eb490ed56"
+        },
+        "UserName": {
+          "type": "string",
+          "example": "newell"
+        },
+        "PasswordHash": {
+          "type": "string",
+          "example": "$2b$10$9BAcw3rT9Uw0gtfXpyJJheh4VKMxxQjJV49loyNA9UpLAYtkgI3.O"
+        },
+        "SignupDate": {
+          "type": "string",
+          "example": "2026-10-27"
+        },
+        "UserStatus": {
+          "type": "string",
+          "example": "unverified"
+        },
+        "OwnershipID": {},
+        "CommentListID": {},
+        "ProfileID": {},
+        "EmailAddress": {
+          "type": "string",
+          "example": "a@a.a"
+        },
+        "CredentialID": {},
+        "createdAt": {
+          "type": "string",
+          "example": "2026-10-27 13:18:42"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2026-10-27 13:18:42"
+        }
+      }
+    },
+    "NewUser": {
+      "type": "object",
+      "properties": {
+        "UserName": {
+          "type": "string",
+          "example": "newell"
+        },
+        "Password": {
+          "type": "string",
+          "example": "MoolyFTW"
+        },
+        "PasswordConfirmation": {
+          "type": "string",
+          "example": "MoolyFTW"
+        },
+        "EmailAddress": {
+          "type": "string",
+          "example": "a@a.a"
+        },
+        "UserStatus": {
+          "type": "string",
+          "example": "unverified"
+        },
+        "OwnershipID": {},
+        "CommentListID": {},
+        "ProfileID": {},
+        "CredentialID": {}
+      },
+      "required": [
+        "UserName",
+        "Password",
+        "PasswordConfirmation",
+        "EmailAddress"
+      ]
+    },
+    "UserListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "01a17d83-59cc-74da-9241-360eb490ed56"
+        },
+        "UserName": {
+          "type": "string",
+          "example": "newell"
+        },
+        "UserStatus": {
+          "type": "string",
+          "example": "unverified"
+        },
+        "EmailAddress": {
+          "type": "string",
+          "example": "a@a.a"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "01a1883a-4b43-7569-ad6f-a93b014340d6"
+        },
+        "CategoryName": {
+          "type": "string",
+          "example": "Doom 1"
+        },
+        "CategoryDescription": {
+          "type": "string",
+          "example": "Dooooooom 1"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2026-10-28 14:57:13"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2026-10-28 14:57:13"
+        }
+      }
+    },
+    "NewCategory": {
+      "type": "object",
+      "properties": {
+        "CategoryName": {
+          "type": "string",
+          "example": "Doom 1"
+        },
+        "CategoryDescription": {
+          "type": "string",
+          "example": "Dooooooom 1"
+        }
+      },
+      "required": [
+        "CategoryName",
+        "CategoryDescription"
+      ]
+    },
+    "CategoryListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "01a1883a-4b43-7569-ad6f-a93b014340d6"
+        },
+        "CategoryName": {
+          "type": "string",
+          "example": "Doom 1"
+        },
+        "CategoryDescription": {
+          "type": "string",
+          "example": "Dooooooom 1"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "example": "Error message"
+        }
+      }
+    }
+  }
+}

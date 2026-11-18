@@ -7,10 +7,13 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "start": "node dist/src/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "tsc --version",
+    "start": "node dist/server.js ",
     "dev": "nodemon src/index.ts",
+    "swagger": "node src/swagger/swagger.js",
+    "debug:router": "cross-env DEBUG=router:route nodemon src/index.ts",
     "watch": "tsc -w"
   },
   "keywords": [],
@@ -24,18 +27,21 @@
     "@types/node": "^26.6.3",
     "@types/swagger-ui-express": "^4.1.8",
     "nodemon": "^3.1.14",
+    "swagger-autogen": "^2.23.7",
     "ts-node": "^10.9.2",
     "typescript": "^7.0.2"
   },
   "dependencies": {
     "@sequelize/mariadb": "^7.0.0-alpha.48",
-    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^18.0.9",
     "express": "^5.3.0",
     "mariadb": "^3.5.4",
+    "npm": "^12.2.3",
     "sequelize": "^6.37.8",
     "swagger-ui-express": "^5.0.1",
-    "uuid": "^14.0.3"
+    "uuid": "^14.0.3",
+    "vitest": "^5.1.0"
   }
 }

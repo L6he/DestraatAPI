@@ -39,7 +39,7 @@ const CredentialsController = {
 
     async getAll(req: express.Request, res: express.Response) {
         const credentials = await db.credentials.findAll();
-        console.log("getAll: " + credentials);
+        console.log("getAll: ", credentials);
         return res.status(200)
         .send(
             credentials.map(
