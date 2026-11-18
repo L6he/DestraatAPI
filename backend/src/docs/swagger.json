@@ -340,19 +340,33 @@
       ]
     },
     "/categories": {
-      "summary": "categories, no id",
+      "summary": "categories endpoint",
+      "description": "Endpoint for categories",
       "get": {
+        "tags": [
+          "Categories"
+        ],
         "summary": "getAll",
         "description": "Get a list of categories",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryListItem"
+                }
+              }
+            }
           }
         }
       },
       "post": {
+        "tags": [
+          "Categories"
+        ],
         "summary": "Create",
-        "description": "Create a category",
+        "description": "Creates a category",
         "requestBody": {
           "content": {
             "application/json": {
@@ -365,16 +379,33 @@
         },
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "headers": {
+              "location": {
+                "description": "URL of created Category details endpoint",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {}
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
           }
         }
       }
     },
     "/categories/{id}": {
       "get": {
+        "tags": [
+          "Categories"
+        ],
         "summary": "GetByID",
         "description": "Get  category specified by Id",
         "responses": {
@@ -384,6 +415,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Categories"
+        ],
         "summary": "ModifyByID",
         "description": "Modify the Category specified by ID",
         "requestBody": {
@@ -398,17 +432,37 @@
         },
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "headers": {
+              "location": {
+                "description": "URL of created Category details endpoint",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {}
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found",
+            "content": {
+              "application/json": {}
+            }
           }
         }
       },
       "delete": {
+        "tags": [
+          "Categories"
+        ],
         "summary": "DeleteByID",
         "description": "Delete category specified by ID",
         "responses": {
@@ -430,9 +484,6 @@
       ]
     }
   },
-  
-  
-  
   "components": {
     "schemas": {
       "WadsListItem": {
