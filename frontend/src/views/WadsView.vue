@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import WadsList from '../components/WadsList.vue';
-import WadDetails from '../components/WadDetails.vue';
-import WadForm from "../components/WadForm.vue";
+import WadsList from '../components/wad/WadsList.vue';
+import WadDetails from '../components/wad/WadDetails.vue';
+import WadForm from "../components/wad/WadForm.vue";
 import { wadsServices } from "../services/wadsServices.ts";
 
 const selectedWadId = ref<string | null>(null);

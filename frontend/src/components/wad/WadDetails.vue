@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref, watch} from "vue";
 import { wadsServices } from "@/services/wadsServices";
-import type {Wad} from "../types/Wad";
+import type {Wad} from "../../types/Wad";
 
 const props = defineProps<{
     wadId: string

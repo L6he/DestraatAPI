@@ -1,8 +1,8 @@
 <!-- It's like createUpdate but different -->
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-import { wadsServices } from "@/services/wadsServices";
-import type { WadInput, Category } from "../types/Wad";
+import { wadsServices } from "../../services/wadsServices";
+import type { WadInput, Category } from "../../types/Wad";
 
 const props = defineProps<{
     wadId?: string | null

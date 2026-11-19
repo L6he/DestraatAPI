@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { wadsServices } from '../services/wadsServices';
-import type { WadSummary } from '../types/Wad';
+import { wadsServices } from '../../services/wadsServices';
+import type { WadSummary } from '../../types/Wad';
 
 const wads = ref<WadSummary[]>([]);
 const loading = ref(false);

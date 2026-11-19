@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 import WadsView from "../views/WadsView.vue";
+import RegisterView from "../views/RegisterView.vue";
 // teiste vaadete impordid käivad siia ka
 const router = createRouter({
   history: createWebHistory(),
@@ -16,7 +17,12 @@ const router = createRouter({
       path: "/wads",
       name: "wads",
       component: WadsView
-    }
+    },
+    {
+        path: "/users",
+        name: "users",
+        component: RegisterView
+      }
   ]
 });
 
