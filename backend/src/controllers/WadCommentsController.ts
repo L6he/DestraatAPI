@@ -94,7 +94,7 @@ const WadCommentsController = {
     
     
     async deleteByID(req: express.Request, res: express.Response) {
-        const wadCommentToBeDeleted = await this.getByID(req, res);
+        const wadCommentToBeDeleted = await WadCommentsController.getWadComment(req, res);
         if (!wadCommentToBeDeleted) {
             return;
         }
