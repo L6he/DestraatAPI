@@ -14,7 +14,7 @@ import WadsView from "./views/WadsView.vue";
       <nav>
         <!-- validate that user is logged in here, block off any routerlinks that unlogged in user shouldn't have access to -->
         <RouterLink to="/wads">Wads</RouterLink><br>
-        <RouterLink to="/users">Users</RouterLink>
+        <RouterLink to="/register">Users</RouterLink>
       </nav>
     </header>
 

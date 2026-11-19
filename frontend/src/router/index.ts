@@ -19,7 +19,7 @@ const router = createRouter({
       component: WadsView
     },
     {
-        path: "/users",
+        path: "/register",
         name: "users",
         component: RegisterView
       }

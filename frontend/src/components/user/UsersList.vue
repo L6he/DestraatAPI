@@ -39,8 +39,8 @@ onMounted(loadUsers);
         <ul v-else>
             <li v-for="user in users" :key="user.id">
                 <button @click="emit('select', user.id)">{{ user.UserName }}</button>
-                <span>{{ user.EmailAddress }}</span>
-                <span>{{ user.UserStatus }}</span>
+                <span>{{ user.EmailAddress }}</span><br>
+                <span>{{ user.UserStatus }}</span><br>
                 <span>{{ user.id }}</span>
             </li>
         </ul>
