@@ -45,8 +45,8 @@ async function loadWad() {
         form.value = {
             WadName: wad.WadName,
             WadDescription: wad.WadDescription,
-            ReleaseDate: wad.ReleaseDate,
-            CategoryID: "01a18303-e795-76bf-bfcd-abb1f34603ae", //dummy
+            ReleaseDate: wad.ReleaseDate ? String(wad.ReleaseDate).slice(0, 10) : "",
+            CategoryID: wad.CategoryID,
             ImageURL: wad.ImageURL,
         }
     } catch (err) {
@@ -71,7 +71,11 @@ async function saveWad() {
         if (props.wadId) {form.value=emptyWad()}
     } catch (err) {
         error.value = "Saving failed.";
-        console.error(err)
+        if (err instanceof Error) {
+            console.error(err.message);
+        } else {
+            console.error('An unknown error occurred:', err);
+        }
     } finally {
         saving.value = false;
     }

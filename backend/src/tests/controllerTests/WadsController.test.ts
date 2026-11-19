@@ -187,7 +187,7 @@ describe("WadsController", () => {
         expect(mocks.findByPk).toHaveBeenCalledWith(wad.id);
         expect(mocks.update).toHaveBeenCalledOnce();
 
-        const updatedWad = mocks.update.mock.calls[0][0]; // if it works, it works
+        const updatedWad = mocks.update.mock.calls[0]?.[0]; // if it works, it works
         console.log("updatedWad", updatedWad);
         expect(updatedWad.WadName).toBe(req.body.WadName);
         expect(updatedWad.WadDescription).toBe(req.body.WadDescription);
@@ -198,7 +198,7 @@ describe("WadsController", () => {
         expect(updatedWad.Comments).toBe(req.body.Comments);
         expect(updatedWad.createdAt).toBe(undefined);
         expect(updatedWad.updatedAt).toBeInstanceOf(Date);
-        expect(mocks.update.mock.calls[0][1]).toEqual({ 
+        expect(mocks.update.mock.calls[0]?.[1]).toEqual({ 
             where: { 
                 id: wad.id 
             } 

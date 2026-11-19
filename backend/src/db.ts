@@ -17,7 +17,7 @@ const sequelize = new Sequelize({
     user: process.env.DB_USERNAME!,
     password: process.env.DB_PASSWORD!,
     host: process.env.DB_HOSTNAME!,
-    logging: console.log,
+    logging: process.env.DB_LOGGING === "false" ? false : console.log,
 });
 
 //ühendusmeetod
