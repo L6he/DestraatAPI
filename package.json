@@ -1,16 +1,13 @@
 {
-  "dependencies": {
-    "concurrently": "^10.0.7",
-    "nodemon": "^3.1.14"
-  },
   "name": "destraatapi",
   "version": "1.0.0",
   "description": "HTML/CSS/TS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"cd backend && nodemon .\" \"cd frontend && npm run dev\"",
-    "devstart": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\""
+    "build": "npm run build --workspaces --if-present",
+    "start": "concurrently \"node backend/.dist/server.js\" \"npm run start --workspace=frontend\"",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\""
   },
   "repository": {
     "type": "git",
@@ -19,8 +16,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/L6he/DestraatAPI/issues"
-  },
-  "homepage": "https://github.com/L6he/DestraatAPI#readme"
+  "type": "commonjs",
+  "dependencies": {
+    "concurrently": "^10.0.7",
+    "nodemon": "^3.1.14"
+  }
 }
