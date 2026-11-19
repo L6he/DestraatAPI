@@ -31,13 +31,13 @@ onMounted(loadWads);
     <section>
         <!--Html-i ja vue süntaks segamisi-->
         <h2>Wads</h2>
-        <button @click="loadWads">Refresh</button>
+        <button @click="loadWads" class="btn btn-info">Refresh</button>
          <p v-if="loading">Loading games...</p> <!-- here we go again, v for vue -->
          <p v-else-if="error">{{ error }}</p>
          <p v-else-if="wads.length === 0">No wads found</p>
          <ul v-else> 
             <li v-for="wad in wads" :key="wad.id">
-                <button @click="emit('select', wad.id) ">{{ wad.WadName }}</button> ( {{ wad.id }} )
+                <button @click="emit('select', wad.id) " class="btn btn-info">{{ wad.WadName }}</button> ( {{ wad.id }} )
             </li>
          </ul>
     </section>
