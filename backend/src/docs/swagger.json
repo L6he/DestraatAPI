@@ -482,6 +482,68 @@
           }
         }
       ]
+    },
+    "/wadcomments": {
+      "summary": "Wadcomments endpoint",
+      "description": "endpoint for Wadcomments",
+      "get": {
+        "tags": [
+          "Wadcomments"
+        ],
+        "summary": "GetAll",
+        "description": "get a list of wadcomments",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WadcommentsListItem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Wadcomments"
+        ],
+        "summary": "Create",
+        "description": "creates/adds a wadcomments",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WadcommentsCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "location": {
+                "description": "URL of created Wadcomment details endpoint",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -514,6 +576,16 @@
       "CategoryListItem": {
         "title": "Category List Item",
         "description": "{\n\"id\": \"01a1883a-4b43-7569-ad6f-a93b014340d6\",\n    \"CategoryName\": \"Doom 1\",\n    \"CategoryDescription\": \"Dooooooom 1\"\n}",
+        "type": "object"
+      },
+      "WadcommentsListItem": {
+        "title": "Wadcomments List Item",
+        "description": "{\n            \"WadCommentsTitle\": \"title for wadcomment Changed1\",\n            \"WadCommentsContent\": \"optional text content 2545454545 i changed it\",\n            \"WadID\": \"01a1a598-7f37-77e0-b4fc-20cfa6f3503d\",\n\t    \"UserID\": \"01a187cf-b594-7670-abf9-5db6af95f342\"         \n}",
+        "type": "object"
+      },
+      "WadcommentsCreate": {
+        "title": "create wadcomments",
+        "description": "{\n            \"WadCommentsTitle\": \"title for wadcomment Changed1\",\n            \"WadCommentsContent\": \"optional text content 2545454545 i changed it\",\n            \"WadID\": \"01a1a598-7f37-77e0-b4fc-20cfa6f3503d\",\n\t    \"UserID\": \"01a187cf-b594-7670-abf9-5db6af95f342\"         \n}",
         "type": "object"
       }
     }
