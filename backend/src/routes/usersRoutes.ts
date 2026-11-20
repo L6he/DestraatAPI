@@ -1,5 +1,6 @@
 import express from "express";
 import checkRequestBody from "../controllers/middleware/checkRequestBody.ts";
+import jwtAuth from "../controllers/middleware/jwtAuth.ts";
 import UsersController from "../controllers/UsersController.ts";
 
 const router = express.Router();
@@ -10,7 +11,7 @@ router.get("/", (req, res, next) => {
         schema: [{ $ref: '#/definitions/UserListItem' }]    
     } */
    next();
-}, UsersController.getAll);
+}, jwtAuth, UsersController.getAll); 
 
 router.post("/", (req, res, next) => {
     /* #swagger.parameters['body'] = {
@@ -39,7 +40,7 @@ router.get("/:id", (req, res, next) => {
         schema: { $ref: '#/definitions/ErrorResponse' }
     } */
     next();
-}, UsersController.getByID);
+}, jwtAuth, UsersController.getByID);
 
 router.put("/:id", (req, res, next) => {
     /* #swagger.parameters['body'] = {
@@ -60,7 +61,7 @@ router.put("/:id", (req, res, next) => {
         schema: { $ref: '#/definitions/ErrorResponse' }
     } */
     next();
-}, checkRequestBody, UsersController.modifyByID);
+}, jwtAuth, checkRequestBody, UsersController.modifyByID);
 
 router.delete("/:id",(req, res, next) => {
     /* #swagger.responses[204] = {
@@ -71,6 +72,6 @@ router.delete("/:id",(req, res, next) => {
         schema: { $ref: '#/definitions/ErrorResponse' }
     } */
     next();
-}, UsersController.deleteByID);
+}, jwtAuth, UsersController.deleteByID);
 
 export default router;
