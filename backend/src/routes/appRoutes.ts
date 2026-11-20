@@ -3,6 +3,7 @@
 import express from "express";
 import wadsRoutes from "./wadsRoutes.ts";
 import usersRoutes from "./usersRoutes.ts";
+import authRoutes from "./authRoutes.ts";
 import categoriesRoutes from "./categoriesRoutes.ts";
 import CredentialsController from "../controllers/CredentialsController.ts";
 import OwnershipsController from "../controllers/OwnershipsController.ts";
@@ -37,6 +38,12 @@ export default (app: express.Express): void => {
         // #swagger.tags = ['Categories']
         next();
     }, categoriesRoutes);
+
+    //Authentication
+    app.use("/authentication", (req, res, next) => {
+        // #swagger.tags = ['Authentication']
+        next();
+    }, authRoutes);
 
     //Credentials
     app.route("/credentials")
