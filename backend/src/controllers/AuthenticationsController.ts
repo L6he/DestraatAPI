@@ -86,6 +86,21 @@ const AuthenticationsController = {
                 UserStatus: user.UserStatus
             }
         });
+    },
+
+    async refreshToken(req: express.Request, res: express.Response) {
+        const user = await db.users.findByPk(res.locals.userID);
+        if (!user) {
+            return res.status(401).send({
+                error: "User who this session belonged to no longer exists."
+            });
+        }
+        return res.status(200).send({
+            id: user.id,
+            UserName: user.UserName,
+            EmailAddress: user.EmailAddress,
+            UserStatus: user.UserStatus
+        });
     }
 }
 
