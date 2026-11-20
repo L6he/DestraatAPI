@@ -100,9 +100,15 @@ const UsersController = {
         ));
     },
     async getByID(req: express.Request, res: express.Response) {
-        if (req.params.id !== res.locals.userID) {
+        //kas küpsis on olemas
+        if (!res.locals.userID) {
             return res.status(403).send({error: "Access denied."});
-        } // no snooping
+        }
+        const handler = await db.users.findByPk(res.locals.userID); //küpsise kasutaja
+        //kas küpsise kasutaja on admin
+        if (handler?.UserStatus !== "admin" || !handler) {
+            return res.status(403).send({error:"Access denied."});
+        } //no snooping
         const user = await UsersController.getUser(req, res);
         if (!user) {
             return;
@@ -111,11 +117,13 @@ const UsersController = {
     },
 
     async deleteByID(req: express.Request, res: express.Response) {
+        //kas küpsis on olemas
         if (!res.locals.userID) {
             return res.status(403).send({error: "Access denied."});
         }
-        const handler = await db.users.findByPk(res.locals.userID);
-        if (handler?.UserStatus !== "admin" || !handler) {
+        const handler = await db.users.findByPk(res.locals.userID); //küpsise kasutaja
+        //kas küpsise kasutaja on admin või kasutaja ise
+        if (handler?.UserStatus !== "admin") {
             return res.status(403).send({error:"Access denied."});
         }
         const userToBeDeleted = await UsersController.getUser(req, res);
