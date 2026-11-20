@@ -70,7 +70,7 @@ async function register() {
 
             <p v-if="error">{{ error }}</p>
 
-            <button type="submit" :disabled="saving">{{ saving ? "Registering..." : "Register" }}</button><br><br> 
+            <button class="btn btn-lg btn-primary" type="submit" :disabled="saving">{{ saving ? "Registering..." : "Register" }}</button><br><br> 
             <!-- disabled kuvab nuppu ainult kui saving on false -->
         </form>
     </section>

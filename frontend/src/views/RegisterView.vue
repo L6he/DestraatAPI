@@ -13,6 +13,6 @@ const selectedUserId = ref<string | null>(null);
 <template>
     <div>
         <h1 class="h1 mb-3 font-weight-normal">Sign up for user</h1>
-        <RegisterForm />
+        <RegisterForm class="text-center"/>
     </div>
 </template>
