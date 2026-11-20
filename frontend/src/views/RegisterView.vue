@@ -1,8 +1,7 @@
 <script setup lang="ts">
 
 import { ref } from "vue";
-import UsersList from "@/components/user/UsersList.vue";
-import UserDetails from "@/components/user/UserDetails.vue";
+import RegisterForm from "@/components/user/RegisterForm.vue";
 
 const selectedUserId = ref<string | null>(null);
 
@@ -13,9 +12,7 @@ const selectedUserId = ref<string | null>(null);
 
 <template>
     <div>
-        <h1>See all users</h1>
-        <UsersList @select="selectUser" />
-
-        <UserDetails v-if="selectedUserId" :user-id="selectedUserId" />
+        <h1 class="h1 mb-3 font-weight-normal">Sign up for user</h1>
+        <RegisterForm />
     </div>
 </template>

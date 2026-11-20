@@ -1,9 +1,9 @@
-import type { User, UserSummary } from "../types/User";
+import type { User, UserRegister, UserSummary } from "../types/User";
 
 const API_URL = import.meta.env.VITE_BACKEND_URL;
 
-async function request<T>(endpoint: string): Promise<T> { //kirjutame ühe template-i, mida saame mitu korda kasutada
-    const response = await fetch(API_URL + endpoint);
+async function request<T>(endpoint: string, options?: RequestInit): Promise<T> { //kirjutame ühe template-i, mida saame mitu korda kasutada
+    const response = await fetch(API_URL + endpoint, options);
     if (!response.ok) {
         throw new Error(
             `Request has failed, status: ${response.status}`
@@ -18,5 +18,14 @@ export const usersServices = {
     },
     getByID(id: string): Promise<User> {
         return request<User>(`/users/${id}`)
+    },
+    register(user: UserRegister): Promise<void> {
+        return request<void>("/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
     }
 }

@@ -36,8 +36,7 @@ const UsersController = {
             PasswordHash: passwordHash
         });
 
-        return res.location(`${Utilities.getBaseURL(req)}/users/${result.id}`)
-        .sendStatus(201);
+        return res.location(`${Utilities.getBaseURL(req)}/users/${result.id}`).send({"OK":"OK"}).status(201);
     },
     async modifyByID(req: express.Request, res: express.Response) {
         // #swagger.tags = ['Users']
