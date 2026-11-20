@@ -39,12 +39,16 @@ const UsersController = {
         return res.location(`${Utilities.getBaseURL(req)}/users/${result.id}`).send({"OK":"OK"}).status(201);
     },
     async modifyByID(req: express.Request, res: express.Response) {
-        // #swagger.tags = ['Users']
         if (!req.params.id) {
             return res.status(400).send({
                 error: "Missing parameters, please review data"
-            })
+            });
         }
+        if (req.params.id !== res.locals.userID) {
+            return res.status(403).send({
+                error: "You do not have access to this user."
+            });
+        } //kaitse
         const userToBeModified = await UsersController.getUser(req, res) as User;
 
         const modifiedUser = {
@@ -82,7 +86,13 @@ const UsersController = {
         .send(modifiedUser);
     },
     async getAll(req: express.Request, res: express.Response) {
-        // #swagger.tags = ['Users']
+        if (!res.locals.userID) {
+            return res.status(403).send({error: "Access denied."});
+        }
+        const handler = await db.users.findByPk(res.locals.userID);
+        if (handler?.UserStatus !== "admin" || !handler) {
+            return res.status(403).send({error:"Access denied."});
+        }
         const users = await db.users.findAll();
         console.log("getAll: ", users);
         return res.status(200).send(users.map(
@@ -90,15 +100,24 @@ const UsersController = {
         ));
     },
     async getByID(req: express.Request, res: express.Response) {
-        // #swagger.tags = ['Users']
+        if (req.params.id !== res.locals.userID) {
+            return res.status(403).send({error: "Access denied."});
+        } // no snooping
         const user = await UsersController.getUser(req, res);
         if (!user) {
             return;
         }
         return res.status(200).send(user);
     },
+
     async deleteByID(req: express.Request, res: express.Response) {
-        // #swagger.tags = ['Users']
+        if (!res.locals.userID) {
+            return res.status(403).send({error: "Access denied."});
+        }
+        const handler = await db.users.findByPk(res.locals.userID);
+        if (handler?.UserStatus !== "admin" || !handler) {
+            return res.status(403).send({error:"Access denied."});
+        }
         const userToBeDeleted = await UsersController.getUser(req, res);
         if (!userToBeDeleted) {
             return;     
