@@ -10,7 +10,6 @@ import WadsView from "./views/WadsView.vue";
 <template>
   <div>
     <header>
-      <h1>WADAPP</h1>
       <nav class="navbar navbar-expand navbar-dark bg-dark">
         <a class="navbar brand text-light" href="">Destraat</a>
         <!-- validate that user is logged in here, block off any routerlinks that unlogged in user shouldn't have access to -->
