@@ -2,7 +2,7 @@ import type { Wad, WadSummary, WadInput, Category } from "../types/Wad";
 const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {//T for template?
-    const response = await fetch(API_URL + endpoint, options);
+    const response = await fetch(API_URL + endpoint, {...options, credentials: "include"});
 
     if (!response.ok) {
         throw new Error(
