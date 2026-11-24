@@ -1,19 +1,23 @@
 <script setup lang="ts">
+import router from "@/router";
 import { authenticationsServices } from "@/services/authenticationsServices";
 import { ref } from "vue";
-import router from "@/router";
+import { useRoute } from "vue-router";
 
 const error = ref("");
 const emailAddress = ref("");
 const password = ref("");
 const saving = ref(false);
+const route = useRoute();
 
 const handleLogin = async () => {
     try {
         await authenticationsServices.login(emailAddress.value, password.value);
-        router.push("/users");
+        const redirectPath = (route.query.redirect as string) || "/users";
+        router.push(redirectPath);
     } catch (err) {
         if (err instanceof Error) {
+            error.value = "Invalid email or password.";
             console.error(err.message);
         } else {
             console.error('An unknown error occurred: ', err);
