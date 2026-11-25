@@ -236,12 +236,13 @@ describe("CategoriesController", () => {
 
     //The rest of the tests are in the main test branch... sorry...
     /* https://github.com/L6he/DestraatAPI/tree/backend-test */
-    
+
     //But anyway...
 
 //3 uniikalset testi...
 
-    //Test proovib luua Kategooriat, ilma vajaminevate osadeta
+    //Test proovib luua Kategooriat, ilma vajaminevate osadeta, soovitud tulemus et kategooriat 
+    //ei saa luua puuduvate(puuduva) parameetrite tõttu
     test("Return_BadRequestWhenCreatingCategoryWithoutRequiredFields_With400Status", async () => {
         const req = {
             body: {
@@ -267,7 +268,8 @@ describe("CategoriesController", () => {
         });
     });
 
-    //Test ei leia otsitavat kategooriat
+    //Test proovib leida kategooriat ID abil, kuid kuna kategooria puudub tuleb vasteks 404 e kategooria puudub. 
+    //oodatud tulemus on error 404, ja sõnum et katgooriat ei eksisteeri
     test("Return_NotFoundWhenCategoryDoesNotExist_With404Status", async () => {
         const thisId = "5f26e8c6-20e4-4e4d-a77b-4de7e77302b9";
     
@@ -295,7 +297,8 @@ describe("CategoriesController", () => {
         });
     });
 
-    //Test annab badrequesti kui uuendada kategooriat
+    //Test proovib uuendada kategooriat, kuid kuna kategooria parameetrid puuduvad, tuleb vasteks 400. 
+    //oodatav tulemus error 400 j sõnum et parameetrid on puudu
     test("Return_BadRequestWhenModifyingCategoryWithoutRequiredFields_With400Status", async () => {
         const thisId = "73deb785-3471-43af-bb31-a146edb10bcc";
     
