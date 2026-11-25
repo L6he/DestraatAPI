@@ -110,7 +110,7 @@ const UsersController = {
             return res.status(403).send({error: "Access denied."});
         }
         const handler = await db.users.findByPk(res.locals.userID); //küpsise kasutaja
-        if (handler?.id === res.locals.userID) {
+        if (handler?.UserStatus !== "admin" && handler?.id === res.locals.userID) {
             const user = await UsersController.getUser(req, res);
             if (!user) {
                 return;
