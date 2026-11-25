@@ -73,6 +73,8 @@ async function register() {
 
             <p v-if="error">{{ error }}</p>
 
+            <RouterLink class="nav-link" to="/login">Log in instead.</RouterLink>
+
             <button class="btn btn-lg btn-primary" type="submit" :disabled="saving">{{ saving ? "Registering..." : "Register" }}</button><br><br> 
             <!-- disabled kuvab nuppu ainult kui saving on false -->
         </form>

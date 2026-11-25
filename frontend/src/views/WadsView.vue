@@ -53,7 +53,7 @@ async function deleteWad() {
         <WadsList
           :key="listVersion" 
           @select="selectWad" />
-  
+
           <section v-if="selectedWadId && !editing">
             <WadDetails 
             :key="`${selectedWadId}-${detailsVersion}`" 
@@ -68,10 +68,8 @@ async function deleteWad() {
               @saved="wadSaved"/>
           </section>
       </p>
-      <hr>
-      <p>
-        Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-        documentation
-      </p>
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <p class="fg-secondary">Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the documentation</p> 
+      </footer>
     </main>
   </template>

@@ -30,18 +30,20 @@ const handleLogin = async () => {
 <template>
     <section>
         <h2 class="h3 mb-3 font-weight-normal">Log in</h2>
-        <form class="form-signin" @submit.prevent="handleLogin">
-            <label for="emailAddress">Email address <span class="text-danger">*</span></label><br>
-            <input id="emailAddress" v-model="emailAddress" required/><br><br>
-
+        <form class="form-signin w-100 m-auto" @submit.prevent="handleLogin">
+            <div class="form-floating">
+                <label for="emailAddress">Email address <span class="text-danger">*</span></label><br>
+                <input id="emailAddress" v-model="emailAddress" required/><br><br>
+            </div>
+            
             <label for="Password">Password <span class="text-danger">*</span></label><br>
             <input type="password" id="Password" v-model="password" required/><br><br>
 
             <span class="text-danger">Fields with an * (asterisk) must be filled.</span><br><br>
+            
+            <p v-if="error" class="text-danger">{{ error }}</p>
 
             <RouterLink class="nav-link" to="/register">Create an account instead.</RouterLink>
-
-            <p v-if="error">{{ error }}</p>
 
             <button class="btn btn-lg btn-primary" type="submit" :disabled="saving">{{ saving ? "Logging in..." : "Log in" }}</button><br><br> 
             <!-- disabled kuvab nuppu ainult kui saving on false -->
