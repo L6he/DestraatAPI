@@ -39,9 +39,9 @@ const handleLogin = async () => {
             <label for="Password">Password <span class="text-danger">*</span></label><br>
             <input type="password" id="Password" v-model="password" required/><br><br>
 
-            <span class="text-danger">Fields with an * (asterisk) must be filled.</span><br><br>
+            <span class="text-danger">Fields with an * (asterisk) must be filled.</span><br>
             
-            <p v-if="error" class="text-danger">{{ error }}</p>
+            <p v-if="error" class="text-danger"><br>{{ error }}</p>
 
             <RouterLink class="nav-link" to="/register">Create an account instead.</RouterLink>
 

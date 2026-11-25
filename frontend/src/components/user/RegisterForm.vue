@@ -69,9 +69,9 @@ async function register() {
             <label for="PasswordConfirmation">Confirm Password <span class="text-danger">*</span></label><br>
             <input type="password" id="PasswordConfirmation" v-model="form.PasswordConfirmation" required/><br><br>
 
-            <span class="text-danger">Fields with an * (asterisk) must be filled.</span><br><br>
+            <span class="text-danger">Fields with an * (asterisk) must be filled.</span><br>
 
-            <p v-if="error">{{ error }}</p>
+            <p v-if="error"><br>{{ error }}</p>
 
             <RouterLink class="nav-link" to="/login">Log in instead.</RouterLink>
 

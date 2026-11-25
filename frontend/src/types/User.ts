@@ -1,5 +1,5 @@
 export interface UserSummary {
-    id: string | null
+    id: string
     UserName: string
     EmailAddress: string
     UserStatus: string | null
