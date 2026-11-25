@@ -34,12 +34,13 @@ import _CategoriesController from "../../controllers/CategoriesController.ts";
 import CategoriesController from "../../controllers/CategoriesController.ts";
 import type { Category } from "../../models/Category.ts";
 
-//describe the test set for WadsController
+//describe the test set for CategoriesController
 describe("CategoriesController", () => {
     beforeEach(() => {
         vi.clearAllMocks();
     });
 
+    //Kuavb kõik kategooriad 
     test("Return_AllCategories_With200Status", async () => {
         //setup
         mocks.findAll.mockResolvedValue(
@@ -96,6 +97,7 @@ describe("CategoriesController", () => {
         ]);
     });
 
+    //Kuvab kategooria valitud id-ga
     test("Return_OneCategoryById_With200Status", async() =>{
         const category = 
         { 
@@ -125,6 +127,7 @@ describe("CategoriesController", () => {
         expect(res.send).toHaveBeenCalledWith(category);
     });
 
+    //Test vastab Created kui luua kategooria
     test("Return_CreatedCategory_With201Status", async () => {
         const id = "4f5edb70-29de-4e38-8205-dc7d7591ad88";
         mocks.create.mockResolvedValue({ id: id });
@@ -152,6 +155,7 @@ describe("CategoriesController", () => {
         expect(res.sendStatus).toHaveBeenCalledWith(201);
     });
 
+    //
     test("Return_ModifiedCategoryById_With201Status", async () => {
         mocks.findByPk.mockResolvedValue({ id: "73deb785-3471-43af-bb31-a146edb10bcc" });
         const category = {
@@ -229,4 +233,99 @@ describe("CategoriesController", () => {
         expect(category.destroy).toHaveBeenCalledOnce();
         expect(res.status).toHaveBeenCalledWith(204);
     });
+
+    //The rest of the tests are in the main test branch... sorry...
+    /* https://github.com/L6he/DestraatAPI/tree/backend-test */
+    
+    //But anyway...
+
+//3 uniikalset testi...
+
+    //Test proovib luua Kategooriat, ilma vajaminevate osadeta
+    test("Return_BadRequestWhenCreatingCategoryWithoutRequiredFields_With400Status", async () => {
+        const req = {
+            body: {
+                CategoryName: "vi-category-test6"
+                // CategoryDescription puudub
+            }
+        } as unknown as Request;
+    
+        const res = {
+            status: vi.fn().mockReturnThis(),
+            send: vi.fn().mockReturnThis()
+        } as unknown as Response;
+
+        //actions
+        await _CategoriesController.create(req, res);
+    
+        //checks
+        expect(mocks.create).not.toHaveBeenCalled();
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.send).toHaveBeenCalledWith({
+            error: "Missing parameters, please review data.",
+            missing: ["CategoryDescription"]
+        });
+    });
+
+    //Test ei leia otsitavat kategooriat
+    test("Return_NotFoundWhenCategoryDoesNotExist_With404Status", async () => {
+        const thisId = "5f26e8c6-20e4-4e4d-a77b-4de7e77302b9";
+    
+        mocks.findByPk.mockResolvedValue(null);
+    
+        const req = {
+            params: {
+                id: thisId
+            }
+        } as unknown as Request;
+    
+        const res = {
+            status: vi.fn().mockReturnThis(),
+            send: vi.fn().mockReturnThis()
+        } as unknown as Response;
+    
+        //actions
+        await _CategoriesController.getByID(req, res);
+        
+        //checks
+        expect(mocks.findByPk).toHaveBeenCalledWith(thisId);
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.send).toHaveBeenCalledWith({
+            error: `Category with this ID is not found. ${thisId}`
+        });
+    });
+
+    //Test annab badrequesti kui uuendada kategooriat
+    test("Return_BadRequestWhenModifyingCategoryWithoutRequiredFields_With400Status", async () => {
+        const thisId = "73deb785-3471-43af-bb31-a146edb10bcc";
+    
+        const req = {
+            params: {
+                id: thisId
+            },
+            body: {
+                CategoryName: "vi-category-test6-updated"
+                // CategoryDescription is missing
+            }
+        } as unknown as Request;
+    
+        const res = {
+            status: vi.fn().mockReturnThis(),
+            send: vi.fn().mockReturnThis()
+        } as unknown as Response;
+    
+        //actions
+        await _CategoriesController.modifyByID(req, res);
+    
+        //checks
+        expect(mocks.findByPk).not.toHaveBeenCalled();
+        expect(mocks.update).not.toHaveBeenCalled();
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.send).toHaveBeenCalledWith({
+            error: "Missing parameters, please check it before you wreck it", //why did i leave it like this?
+            missing: ["CategoryDescription"]
+        });
+    });
+
+    
 });
