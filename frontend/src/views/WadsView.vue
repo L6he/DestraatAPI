@@ -64,8 +64,8 @@ async function deleteWad() {
           <section v-if="editing">
             <button @click="editing = false">Cancel edit</button>
             <WadForm
-              :wad-id="selectedWadId"
-              @saved="wadSaved"/>
+            :wad-id="selectedWadId"
+            @saved="wadSaved"/>
           </section>
       </p>
       <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

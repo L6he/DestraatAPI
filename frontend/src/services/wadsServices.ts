@@ -1,30 +1,16 @@
+import { apiFetch } from "@/api/client";
 import type { Wad, WadSummary, WadInput, Category } from "../types/Wad";
 const API_URL = import.meta.env.VITE_BACKEND_URL;
 
-async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {//T for template?
-    const response = await fetch(API_URL + endpoint, {...options, credentials: "include"});
-
-    if (!response.ok) {
-        throw new Error(
-            `Request has failed, status: ${response.status}`
-        );
-    }
-    if (response.status === 204) {
-        return undefined as T;
-    }
-    return response.json() as Promise<T>;
-}
-//service
-
 export const wadsServices = {
     getAll(): Promise<WadSummary[]> {
-        return request<WadSummary[]>("/wads")
+        return apiFetch<WadSummary[]>("/wads")
     },
     getByID(id: string): Promise<Wad> {
-        return request<Wad>(`/wads/${id}`);
+        return apiFetch<Wad>(`/wads/${id}`);
     },
     create(wad:WadInput): Promise<void> {
-        return request<void>("/wads", {
+        return apiFetch<void>("/wads", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -33,7 +19,7 @@ export const wadsServices = {
         });
     },
     update(id: string, wad: WadInput): Promise<void> {
-        return request<void>(`/wads/${id}`, {
+        return apiFetch<void>(`/wads/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -42,7 +28,7 @@ export const wadsServices = {
         });
     },
     delete(id: string): Promise<void> {
-        return request<void>(`/wads/${id}`, {
+        return apiFetch<void>(`/wads/${id}`, {
             method: "DELETE"
         });
     }

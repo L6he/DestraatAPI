@@ -2,7 +2,7 @@ export interface UserSummary {
     id: string
     UserName: string
     EmailAddress: string
-    UserStatus: string | null
+    UserStatus: string
 }
 export interface User extends UserSummary {
     SignupDate: string
