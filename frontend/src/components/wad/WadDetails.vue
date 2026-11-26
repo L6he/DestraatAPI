@@ -36,13 +36,13 @@ watch( () => props.wadId, loadWad, {immediate: true});
         <p v-if="loading">Loading wad info...</p>
         <p v-else-if="error">{{ error }}</p>
         <div v-else-if="wad">
-            <h3>{{ wad.WadName }}</h3>
-            <p>{{ wad.WadDescription }}</p>
-            <p>Released {{ wad.ReleaseDate }}</p>
+            <h3 id="wadNameDetail">{{ wad.WadName }}</h3>
+            <p id="wadDescriptionDetail">{{ wad.WadDescription }}</p>
+            <p id="wadReleaseDateDetail">Released {{ wad.ReleaseDate }}</p>
             <!-- <p><img src="{{ wad.imageURL }}" alt=""></p> -->
-            <p>Category {{ wad.CategoryID }}</p>
-            <p>{{ wad.Downloads }} downloads</p>
-            <p>{{ wad.Comments }}</p>
+            <p id="wadCategoryDetail">Category {{ wad.CategoryID }}</p>
+            <p id="wadDownloadDetail">{{ wad.Downloads }} downloads</p>
+            <!-- <p>{{ wad.Comments }}</p> -->
         </div>
     </section>
 </template>

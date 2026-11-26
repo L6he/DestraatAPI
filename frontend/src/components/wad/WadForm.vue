@@ -99,7 +99,8 @@ watch( () => props.wadId, loadWad, {immediate: true} ); //vaata, et miski muutuk
             <input id="wadDescription" v-model="form.WadDescription" required /><br><br>
 
             <label for="releaseDate">Release Date</label><br>
-            <input id="releaseDate" type="date" v-model="form.ReleaseDate" required /><br><br>
+            <input id="releaseDate" v-model="form.ReleaseDate" required /><br><br>
+            <!-- add type="date" back later when smarter -->
 
             <!-- proper implementation of category needed-->
             <label for="category">Category ID</label><br>
@@ -110,7 +111,7 @@ watch( () => props.wadId, loadWad, {immediate: true} ); //vaata, et miski muutuk
 
             <p v-if="error">{{ error }}</p>
 
-            <button type="submit" :disabled="saving">
+            <button id="saveWad" type="submit" :disabled="saving">
                 {{ saving ? "Saving wad": "Save Wad" }}
             </button>
         </form>

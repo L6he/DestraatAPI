@@ -37,7 +37,8 @@ onMounted(loadWads);
          <p v-else-if="wads.length === 0">No wads found</p>
          <ul v-else> 
             <li v-for="wad in wads" :key="wad.id">
-                <button @click="emit('select', wad.id) " class="btn btn-info">{{ wad.WadName }}</button> ( {{ wad.id }} )
+                <button :id="wad.id" @click="emit('select', wad.id) " class="btn btn-info">{{ wad.WadName }}</button> ( {{ wad.id }} )
+                <!-- hooh -->
             </li>
          </ul>
     </section>
