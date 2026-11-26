@@ -47,7 +47,7 @@ router.put("/:id", (req, res, next) => {
         required: true,
         schema: { $ref: '#/definitions/NewWad' }
     } */
-    /* #swagger.responses[200] = {
+    /* #swagger.responses[201] = {
         description: 'Wad updated',
         schema: { $ref: '#/definitions/Wad' }
     } */

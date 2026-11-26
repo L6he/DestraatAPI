@@ -8,7 +8,7 @@ const doc = {
         description: "This is a description",
         version: "1.0.0"
     },
-    host: process.env.HOST+':'+process.env.PORT,
+    host: process.env.HOST || "localhost" + ':'+process.env.PORT,
     tags: [
         {name: 'WADs'}, 
         {name: 'Users'},
@@ -20,21 +20,21 @@ const doc = {
             WadName: "1squares.wad",
             WadDescription: "A one-map DOOM WAD released like 30 years ago. Slaughter map, I think?",
             ReleaseDate: "2026-11-14",
-            ImageURL: null,
-            Downloads: 0,
-            Comments: null,
+            ImageURL: "https://google.com",
+            Downloads: 173,
+            Comments: {"Comments":"Ghosts, spirits, shades, spectres, apparitions; There is not a corner of the world they do not inhabit."},
             CategoryID: "099",
             createdAt: "2026-11-14 13:10:39",
             updatedAt: "2026-11-14 13:10:39"
         },
         NewWad: {
-            $GameName: "1squares.wad",
-            $GameDescription: "A one-map DOOM WAD released like 30 years ago. Slaughter map, I think?",
+            $WadName: "1squares.wad",
+            $WadDescription: "A one-map DOOM WAD released like 30 years ago. Slaughter map, I think?",
             $ReleaseDate: "2026-11-14",
             $CategoryID: "099",
-            ImageURL: null,
+            ImageURL: "https://google.com",
             Downloads: 0,
-            Comments: null
+            Comments: {"Comments":"Ghosts, spirits, shades, spectres, apparitions; There is not a corner of the world they do not inhabit."}
         },
         WadListItem: {
             id: "01a1da2e-742a-70c8-95a4-d93b27b117ba",

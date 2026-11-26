@@ -124,12 +124,12 @@ const WadsController = {
             });
             return null;
         }
-        if (validate(req.params.id) === false) {
+        /*if (validate(req.params.id) === false) {
             console.log("Invalid UUID");
             return res.status(500).send({
                 error: `${req.params.id} is not a valid UUID` // Allikas: https://stackoverflow.com/questions/7905929/how-to-test-valid-uuid-guid
             });
-        }
+        }*/
         return wad;
     }
 }

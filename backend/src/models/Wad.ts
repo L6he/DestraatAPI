@@ -1,4 +1,4 @@
-import { DataTypes, Model } from "@sequelize/core";
+import { DataTypes, Model, sql } from "@sequelize/core";
 //npm install sequelize        //i on shorthand install-iks
 import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize } from "@sequelize/core";
 import type { Json } from "sequelize/lib/utils";
@@ -25,7 +25,7 @@ export default function initWadModel(sequelize: Sequelize) {
         {
             id: {
                 type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4,
+                defaultValue: sql.uuidV4, // `DeprecationWarning: Do not use DataTypes.UUIDV1 or DataTypes.UUIDV4. Use sql.uuidV1 or sql.uuidV4 instead.` Oops...
                 primaryKey: true
             },
             WadName: {
