@@ -47,7 +47,7 @@ async function deleteWad() {
 <template>
     <main>
       <h1>Waddle dee!</h1>
-      <button @click="createWad">Add Wad</button>
+      <button id="createWad" @click="createWad">Add Wad</button>
       <p v-if="error">{{ error }}</p>
       <p>
         <WadsList
